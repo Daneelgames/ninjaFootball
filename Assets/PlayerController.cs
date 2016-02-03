@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SimplePlatformController : MonoBehaviour {
+public class PlayerController : MonoBehaviour {
 	
 	[HideInInspector] public bool facingRight = true;
 	[HideInInspector] public bool jump = false;
@@ -73,5 +73,10 @@ public class SimplePlatformController : MonoBehaviour {
 		Vector3 theScale = transform.localScale;
 		theScale.x *= -1;
 		transform.localScale = theScale;
+	}
+	
+	public void Hide()
+	{
+		Destroy(gameObject);
 	}
 }

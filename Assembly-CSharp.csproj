@@ -47,7 +47,7 @@
   <ItemGroup>
      <Compile Include="Assets\BallController.cs" />
      <Compile Include="Assets\BallCursorController.cs" />
-     <Compile Include="Assets\SimplePlatformController.cs" />
+     <Compile Include="Assets\PlayerController.cs" />
  <Reference Include="UnityEngine.Advertisements">
  <HintPath>C:/Program Files/Unity5/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
  </Reference>

@@ -23,7 +23,7 @@ public class BallCursorController : MonoBehaviour
         }
 
 
-		angle = Mathf.SmoothDampAngle(angle, targetAngle, ref velocity, Mathf.Abs(angle - targetAngle)*0.1f);
+		angle = Mathf.SmoothDampAngle(angle, targetAngle, ref velocity, Mathf.Abs(angle - targetAngle)*0.05f);
 
         transform.localPosition = new Vector3(Mathf.Cos(angle) * radius, Mathf.Sin(angle) * radius, 0);
     }
