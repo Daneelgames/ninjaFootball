@@ -12,18 +12,12 @@ public class BallCursorController : MonoBehaviour
 
     public float speed = 10;
     float velocity = 0;
-    GameObject ball;
-
-    void Start()
-    {
-        ball = GameObject.Find("Ball");
-    }
 
     // Update is called once per frame 
     void Update()
     {
 
-        if (Input.anyKey)
+		if ((Input.GetAxisRaw("Vertical") != 0) || (Input.GetAxisRaw("Horizontal") != 0) )
         {
             targetAngle = Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"));
 
@@ -32,9 +26,8 @@ public class BallCursorController : MonoBehaviour
         }
 
 
-        angle = Mathf.SmoothDampAngle(angle, targetAngle, ref velocity, 0.01f, 20f);
+		angle = Mathf.SmoothDampAngle(angle, targetAngle, ref velocity, Mathf.Abs(angle - targetAngle)*0.1f);
 
-        //transform.position = new Vector3(Mathf.Cos(angle) * radius, Mathf.Sin(angle) * radius, 0);
-        transform.position = new Vector3(ball.transform.position.x * radius, ball.transform.position.y * radius, 0);
+        transform.localPosition = new Vector3(Mathf.Cos(angle) * radius, Mathf.Sin(angle) * radius, 0);
     }
 }
