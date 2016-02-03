@@ -12,10 +12,11 @@ public class BallCursorController : MonoBehaviour
 
     public float speed = 10;
     float velocity = 0;
+    GameObject ball;
 
     void Start()
     {
-
+        ball = GameObject.Find("Ball");
     }
 
     // Update is called once per frame 
@@ -33,6 +34,7 @@ public class BallCursorController : MonoBehaviour
 
         angle = Mathf.SmoothDampAngle(angle, targetAngle, ref velocity, 0.01f, 20f);
 
-        transform.position = new Vector3(Mathf.Cos(angle) * radius, Mathf.Sin(angle) * radius, 0);
+        //transform.position = new Vector3(Mathf.Cos(angle) * radius, Mathf.Sin(angle) * radius, 0);
+        transform.position = new Vector3(ball.transform.position.x * radius, ball.transform.position.y * radius, 0);
     }
 }
