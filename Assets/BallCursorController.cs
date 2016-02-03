@@ -6,14 +6,11 @@ public class BallCursorController : MonoBehaviour
 
     public float radius = 2;
     public float angle = 0;
-
     public float targetAngle = 0;
-
-
     public float speed = 10;
+	
     float velocity = 0;
 
-    // Update is called once per frame 
     void Update()
     {
 

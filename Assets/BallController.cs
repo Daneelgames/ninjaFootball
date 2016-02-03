@@ -8,19 +8,19 @@ public class BallController : MonoBehaviour {
 
 	private GameObject playerGO;
 	private CircleCollider2D cCollider;
+	private GameObject ballCursor;
 
 	void Start() {
+		ballCursor = GameObject.Find("BallCursor");
 		cCollider = GetComponent<CircleCollider2D> ();
 		SpawnPlayer ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
 		if (inControl) {
-			if (playerGO != null){
-				transform.position = new Vector2(playerGO.transform.position.x, playerGO.transform.position.y-0.25f);
-			}
+					transform.position = new Vector2(playerGO.transform.position.x, playerGO.transform.position.y-0.25f);
+			
 		}
 
 	}
