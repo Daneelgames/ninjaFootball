@@ -3,34 +3,43 @@ using System.Collections;
 
 public class Weapon : MonoBehaviour {
 
-    public GameObject bullet;
     public int maxBullets = 3;
     public float reloadTimeMax = 0.5f;
-    [HideInInspector] public int bulletCount;
+    [ReadOnly]
+    public int bulletCount;
+    [ReadOnly]
+    public GameObject bullet;
+    [ReadOnly]
+    public GameObject shotPosition;
+    [ReadOnly]
+    public PlayerSounds playerSound;
 
     private PlayerMovement playerMovement;
     private float reloadTimeCur = 0;
-    private float height;
 
 	// Use this for initialization
 	void Start () {
         playerMovement = GetComponent<PlayerMovement>();
-        height = gameObject.transform.localScale.y;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        Shooting();
-        Reload();
+        if (playerMovement.playerLives > 0)
+        {
+            Shooting();
+            Reload();
+        }
 	}
 
     void Shooting()
     {
         if (Input.GetButtonDown("Fire1") && bulletCount < maxBullets && reloadTimeCur == 0)
         {
-            var tBullet = Instantiate(bullet, new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + height / 2), gameObject.transform.rotation) as GameObject;
+            playerMovement.shoot = true;
+            var tBullet = Instantiate(bullet, new Vector2(shotPosition.transform.position.x, shotPosition.transform.position.y), gameObject.transform.rotation) as GameObject;
             tBullet.GetComponent<Bullet>().bulletDirection = playerMovement.PlayerDirection;
             reloadTimeCur = reloadTimeMax;
+            playerSound.PlaySound(1);
         }
     }
 
