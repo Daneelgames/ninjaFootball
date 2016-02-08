@@ -7,6 +7,9 @@ public class Bullet : MonoBehaviour {
     public int damage = 5;
     [ReadOnly]
     public GameObject bulletParticles;
+    [ReadOnly]
+    public Collider2D playerActiveZone;
+
     [HideInInspector]
     public Direction bulletDirection = Direction.RIGHT;
 
@@ -16,6 +19,7 @@ public class Bullet : MonoBehaviour {
     private float hSpeed;
 
     void Start () {
+        playerActiveZone = GameObject.Find("Player").GetComponent<ActiveZone>().activeZone.GetComponent<Collider2D>() as Collider2D;
         hSpeed = Random.Range(-.5f, .5f);
         _transform = transform;
         weapon = GameObject.Find("Player").GetComponent<Weapon>();
@@ -25,7 +29,6 @@ public class Bullet : MonoBehaviour {
 	
 	void Update () {
         MoveBullet();
-        CheckScreenPosition();
 	}
 
     void MoveBullet()
@@ -53,10 +56,15 @@ public class Bullet : MonoBehaviour {
         BulletDestroy();
     }
 
-    void CheckScreenPosition()
+    void OnTriggerStay2D(Collider2D zone)
     {
-        if (bulletRenderer.isVisible == false)
-            BulletDestroy();
+        if (zone.tag == "Zone")
+        {
+            if (zone != playerActiveZone)
+                BulletDestroy();
+        }
+        else
+        { }
     }
 
     void BulletDestroy()

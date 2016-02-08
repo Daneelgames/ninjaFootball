@@ -20,6 +20,7 @@ public class Weapon : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         playerMovement = GetComponent<PlayerMovement>();
+        bulletCount = 0;
 	}
 	
 	// Update is called once per frame

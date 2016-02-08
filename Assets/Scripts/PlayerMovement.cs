@@ -9,7 +9,8 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public bool shoot = false;
 
     public float speed = 2f;
-    [ReadOnly] public int playerLives = 3;
+    public int playerLives = 4;
+
     [ReadOnly] public float maxVelocity = 5f;
     [ReadOnly] public float minVelocity = -5f;
     [ReadOnly] public Animator _animator;
@@ -23,6 +24,9 @@ public class PlayerMovement : MonoBehaviour
     private Direction playerDirection = Direction.RIGHT;
     private float translate;
     private bool hurt = false;
+    private bool dialog = false;
+    private Weapon weapon;
+    private bool canLand = true;
 
     public Direction PlayerDirection
     {
@@ -34,16 +38,20 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         _rigidbody = GetComponent(typeof(Rigidbody2D)) as Rigidbody2D;
+        weapon = GetComponent<Weapon>() as Weapon;
     }
 
     void Update()
     {
-        if (playerLives > 0)
+        if (playerLives > 0 && !dialog)
         {
             MovePlayer();
             Jump();
-            GroundRaycast();
         }
+        else
+            translate = 0;
+
+        GroundRaycast();
         Animator();
     }
 
@@ -65,8 +73,16 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D hit2 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + 0.9f), new Vector2(Input.GetAxisRaw("Horizontal"), 0), 0.35f, 1 << 8);
         if (hit0.collider == null && hit1.collider == null && hit2.collider == null)
         {
-            if(isOnGround)
+            if (isOnGround)
+            {
+                if (canLand)
+                {
+                    playerSound.PlaySound(3);
+                    canLand = false;
+                }
+
                 transform.Translate(translate, 0, 0);
+            }
             else
             {
                 if (Input.GetAxisRaw("Horizontal") != 0)
@@ -132,8 +148,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (!isOnGround)
         {
+            if (!canLand)
+                canLand = true;
+
             if (tJump > 0)
                 tJump -= 10 * Time.deltaTime;
+
             else if (tJump < 0)
                 tJump = 0;
 
@@ -148,6 +168,17 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(Damage(0.5F));
             StartCoroutine(Blinking(.1F));
         }
+    }
+    public void DialogStart()
+    {
+        dialog = true;
+        weapon.enabled = false;
+    }
+
+    public void DialogOver()
+    {
+        dialog = false;
+        weapon.enabled = true;
     }
 
     IEnumerator Damage(float waitTime)
