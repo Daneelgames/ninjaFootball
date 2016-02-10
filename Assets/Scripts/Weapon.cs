@@ -30,6 +30,10 @@ public class Weapon : MonoBehaviour {
             Shooting();
             Reload();
         }
+
+        // reset bullets
+        if (bulletCount < 0)
+            bulletCount = 0;
 	}
 
     void Shooting()

@@ -15,16 +15,14 @@ public class Bullet : MonoBehaviour {
 
     private Transform _transform;
     private Weapon weapon;
-    private SpriteRenderer bulletRenderer;
     private float hSpeed;
 
-    void Start () {
-        playerActiveZone = GameObject.Find("Player").GetComponent<ActiveZone>().activeZone.GetComponent<Collider2D>() as Collider2D;
+    void Start ()
+    {
+        weapon = GameObject.Find("Player").GetComponent<Weapon>();
+        weapon.bulletCount += 1;
         hSpeed = Random.Range(-.5f, .5f);
         _transform = transform;
-        weapon = GameObject.Find("Player").GetComponent<Weapon>();
-        bulletRenderer = GetComponent<SpriteRenderer>();
-        weapon.bulletCount += 1;
 	}
 	
 	void Update () {
@@ -51,20 +49,26 @@ public class Bullet : MonoBehaviour {
         if (other.collider.tag == "Enemy")
         {
             other.collider.gameObject.GetComponent<Enemy>().Damage(damage);
+            Instantiate(bulletParticles, transform.position, transform.rotation);
+            BulletDestroy();
         }
-        Instantiate(bulletParticles, transform.position, transform.rotation);
-        BulletDestroy();
     }
 
     void OnTriggerStay2D(Collider2D zone)
     {
-        if (zone.tag == "Zone")
+        playerActiveZone = GameObject.Find("Player").GetComponent<ActiveZone>().activeZone.GetComponent<Collider2D>() as Collider2D;
+        if (zone.tag == "Zone" && zone != playerActiveZone)
         {
-            if (zone != playerActiveZone)
                 BulletDestroy();
         }
-        else
-        { }
+    }
+    void OnTriggerExit2D(Collider2D zone)
+    {
+        playerActiveZone = GameObject.Find("Player").GetComponent<ActiveZone>().activeZone.GetComponent<Collider2D>() as Collider2D;
+        if (zone.tag == "Zone" && zone == playerActiveZone)
+        {
+                BulletDestroy();
+        }
     }
 
     void BulletDestroy()
