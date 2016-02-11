@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public bool shoot = false;
 
     public float speed = 2f;
-    public int playerLives = 4;
+    public int playerLives = 1;
 
     [ReadOnly] public float maxVelocity = 5f;
     [ReadOnly] public float minVelocity = -5f;
@@ -83,14 +83,13 @@ public class PlayerMovement : MonoBehaviour
 
                 transform.Translate(translate, 0, 0);
             }
-            else
-            {
-                if (Input.GetAxisRaw("Horizontal") != 0)
+            else if (Input.GetAxisRaw("Horizontal") != 0)
                 {
                     jumpDirection = Input.GetAxisRaw("Horizontal") * speed * Time.deltaTime;
+                    transform.Translate(jumpDirection, 0, 0);
                 }
-                transform.Translate(jumpDirection, 0, 0);
-            }
+            else if (Input.GetAxisRaw("Horizontal") == 0)
+                transform.Translate(jumpDirection / 4, 0, 0);
         }
         //else if (hit0.collider.tag != "Ground" && hit1.collider.tag != "Ground" && hit2.collider.tag != "Ground")
 

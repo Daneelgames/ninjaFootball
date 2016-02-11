@@ -48,7 +48,7 @@ public class Bullet : MonoBehaviour {
     {
         if (other.collider.tag == "Enemy")
         {
-            other.collider.gameObject.GetComponent<Enemy>().Damage(damage);
+            other.collider.gameObject.GetComponent<EnemyHealth  >().Damage(damage);
             Instantiate(bulletParticles, transform.position, transform.rotation);
             BulletDestroy();
         }
