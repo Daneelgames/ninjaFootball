@@ -17,14 +17,15 @@ public class EnemyMoveToPlayer : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-        if (player.transform.position.x > transform.position.x)
+        if (player.transform.position.x - 1f > transform.position.x)
             hDir = 1.0f;
-        else
-            hDir = -1.0f;
+        else if
+            (player.transform.position.x + 1f < transform.position.x)
+                hDir = -1.0f;
 	}
 
     void FixedUpdate()
     {
-        _rb.AddForce(new Vector2(hDir, 0) * speed);
+        _rb.velocity = new Vector2(hDir, 0) * speed;
     }
 }
