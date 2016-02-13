@@ -11,21 +11,34 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 2f;
     public int playerLives = 1;
 
-    [ReadOnly] public float maxVelocity = 5f;
-    [ReadOnly] public float minVelocity = -5f;
-    [ReadOnly] public Animator _animator;
-    [ReadOnly] public GameObject playerSprite;
-    [ReadOnly] public PlayerSounds playerSound;
-    [ReadOnly] public new SpriteRenderer renderer;
-    [ReadOnly] public bool isOnGround = false;
+    [ReadOnly]
+    public GameObject explosionParticles;
+    [ReadOnly]
+    public GameObject playerSprite;
 
+    [ReadOnly]
+    public float maxVelocity = 5f;
+    [ReadOnly]
+    public float minVelocity = -5f;
+    [ReadOnly]
+    public new SpriteRenderer renderer;
+    [ReadOnly]
+    public bool isOnGround = false;
+    [ReadOnly]
+    public Animator _animator;
+    [ReadOnly]
+    public PlayerSounds playerSound;
+    [ReadOnly]
+    public Transform activeCheckpoint;
+
+    private TimeScale timeScaleScript;
     private Rigidbody2D _rigidbody;
-    private float jumpDirection = 0.0f;
     private Direction playerDirection = Direction.RIGHT;
+    private Weapon weapon;
+    private float jumpDirection = 0.0f;
     private float translate;
     private bool hurt = false;
     private bool dialog = false;
-    private Weapon weapon;
     private bool canLand = true;
 
     public Direction PlayerDirection
@@ -37,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        timeScaleScript = GetComponent<TimeScale>();
         _rigidbody = GetComponent(typeof(Rigidbody2D)) as Rigidbody2D;
         weapon = GetComponent<Weapon>() as Weapon;
     }
@@ -168,28 +182,22 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(Blinking(.1F));
         }
     }
-    public void DialogStart()
-    {
-        dialog = true;
-        weapon.enabled = false;
-    }
-
-    public void DialogOver()
-    {
-        dialog = false;
-        weapon.enabled = true;
-    }
 
     IEnumerator Damage(float waitTime)
     {
+        Instantiate(explosionParticles, new Vector3(transform.position.x, transform.position.y, 0), transform.rotation);
+        _rigidbody.AddForce(new Vector2(0, jumpPower), ForceMode2D.Impulse);
+        timeScaleScript.PlayerDead();
         Physics2D.IgnoreLayerCollision(10, 11, true);
         hurt = true;
-        playerLives -= 1;
+        playerLives = 0;
         yield return new WaitForSeconds(waitTime + waitTime/2);
         hurt = false;
         if (!renderer.enabled)
             renderer.enabled = true;
         yield return new WaitForSeconds(waitTime/2);
+        transform.position = activeCheckpoint.position;
+        playerLives = 1;
         Physics2D.IgnoreLayerCollision(10, 11, false);
 
     }
@@ -206,10 +214,30 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    void OnTriggerEnter2D(Collider2D coll)
+    {
+        if (coll.tag == "Checkpoint" && activeCheckpoint != coll.gameObject.transform)
+        {
+            activeCheckpoint = coll.gameObject.transform;
+            coll.GetComponent<AudioSource>().Play();
+        }
+    }
+
+    public void DialogStart()
+    {
+        dialog = true;
+        weapon.enabled = false;
+    }
+
+    public void DialogOver()
+    {
+        dialog = false;
+        weapon.enabled = true;
+    }
+
     public void Animator()
     {
-        if (playerLives == 0)
-            _animator.SetTrigger("Dead");
+        _animator.SetInteger("Lives", playerLives);
 
         if (shoot)
         {

@@ -14,11 +14,14 @@ public class Weapon : MonoBehaviour {
     [ReadOnly]
     public PlayerSounds playerSound;
 
+    private TimeScale timeScaleScript;
     private PlayerMovement playerMovement;
     private float reloadTimeCur = 0;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
+        timeScaleScript = GetComponent<TimeScale>();
         playerMovement = GetComponent<PlayerMovement>();
         bulletCount = 0;
 	}
@@ -40,9 +43,12 @@ public class Weapon : MonoBehaviour {
     {
         if (Input.GetButtonDown("Fire1") && bulletCount < maxBullets && reloadTimeCur == 0)
         {
+            timeScaleScript.Pause();
             playerMovement.shoot = true;
-            var tBullet = Instantiate(bullet, new Vector2(shotPosition.transform.position.x, shotPosition.transform.position.y), gameObject.transform.rotation) as GameObject;
-            tBullet.GetComponent<Bullet>().bulletDirection = playerMovement.PlayerDirection;
+            var tBullet1 = Instantiate(bullet, new Vector2(shotPosition.transform.position.x, shotPosition.transform.position.y + 0.25f), gameObject.transform.rotation) as GameObject;
+            var tBullet2 = Instantiate(bullet, new Vector2(shotPosition.transform.position.x, shotPosition.transform.position.y - 0.25f), gameObject.transform.rotation) as GameObject;
+            tBullet1.GetComponent<Bullet>().bulletDirection = playerMovement.PlayerDirection;
+            tBullet2.GetComponent<Bullet>().bulletDirection = playerMovement.PlayerDirection;
             reloadTimeCur = reloadTimeMax;
             playerSound.PlaySound(1);
         }

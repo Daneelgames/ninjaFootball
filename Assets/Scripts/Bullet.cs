@@ -16,12 +16,13 @@ public class Bullet : MonoBehaviour {
     private Transform _transform;
     private Weapon weapon;
     private float hSpeed;
+    private float translate;
 
     void Start ()
     {
         weapon = GameObject.Find("Player").GetComponent<Weapon>();
         weapon.bulletCount += 1;
-        hSpeed = Random.Range(-.5f, .5f);
+        hSpeed = Random.Range(-5f, 5f);
         _transform = transform;
 	}
 	
@@ -33,7 +34,7 @@ public class Bullet : MonoBehaviour {
     {
         int moveDirection = bulletDirection == Direction.LEFT ? -1 : 1;
 
-        float translate = moveDirection * speed * Time.deltaTime;
+        translate = moveDirection * speed * Time.deltaTime;
         _transform.Translate(translate, hSpeed * Time.deltaTime, 0);
 
         //Flip sprite
@@ -48,10 +49,10 @@ public class Bullet : MonoBehaviour {
     {
         if (other.collider.tag == "Enemy")
         {
-            other.collider.gameObject.GetComponent<EnemyHealth  >().Damage(damage);
-            Instantiate(bulletParticles, transform.position, transform.rotation);
-            BulletDestroy();
+            other.collider.gameObject.GetComponent<EnemyHealth>().Damage(damage);
         }
+        BulletDestroy();
+
     }
 
     void OnTriggerStay2D(Collider2D zone)
@@ -74,6 +75,7 @@ public class Bullet : MonoBehaviour {
     void BulletDestroy()
     {
         weapon.bulletCount -= 1;
+        Instantiate(bulletParticles, transform.position, transform.rotation);
         Destroy(gameObject);
     }
 }

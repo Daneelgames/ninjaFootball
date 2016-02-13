@@ -21,7 +21,6 @@ public class EnemySpawner : MonoBehaviour {
 
     void OnTriggerEnter2D (Collider2D coll)
     {
-        print(coll);
         if (coll.tag == "Zone")
             zone = coll;
     }
