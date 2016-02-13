@@ -20,6 +20,7 @@ public class Bullet : MonoBehaviour {
 
     void Start ()
     {
+        playerActiveZone = GameObject.Find("Zone").GetComponent<Collider2D>();
         weapon = GameObject.Find("Player").GetComponent<Weapon>();
         weapon.bulletCount += 1;
         hSpeed = Random.Range(-5f, 5f);
@@ -54,19 +55,9 @@ public class Bullet : MonoBehaviour {
         BulletDestroy();
 
     }
-
-    void OnTriggerStay2D(Collider2D zone)
-    {
-        playerActiveZone = GameObject.Find("Player").GetComponent<ActiveZone>().activeZone.GetComponent<Collider2D>() as Collider2D;
-        if (zone.tag == "Zone" && zone != playerActiveZone)
-        {
-                BulletDestroy();
-        }
-    }
     void OnTriggerExit2D(Collider2D zone)
     {
-        playerActiveZone = GameObject.Find("Player").GetComponent<ActiveZone>().activeZone.GetComponent<Collider2D>() as Collider2D;
-        if (zone.tag == "Zone" && zone == playerActiveZone)
+        if (zone.tag == "Zone")
         {
                 BulletDestroy();
         }

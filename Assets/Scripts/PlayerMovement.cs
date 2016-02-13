@@ -180,6 +180,7 @@ public class PlayerMovement : MonoBehaviour
             playerSound.PlaySound(2);
             StartCoroutine(Damage(0.5F));
             StartCoroutine(Blinking(.1F));
+            Destroy(enemy.gameObject);
         }
     }
 

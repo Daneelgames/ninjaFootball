@@ -4,53 +4,32 @@ using System.Collections;
 public class EnemySpawner : MonoBehaviour {
 
     public GameObject enemy;
-    public bool canSpawn;
-
     [ReadOnly]
-    public Collider2D zone;
+    public bool canSpawn = true;
+
     [ReadOnly]
     public Collider2D playerActiveZone;
 
-    private ActiveZone player;
-    private GameObject instanceEnemy;
-
     void Start()
     {
-        player = GameObject.Find("Player").GetComponent<ActiveZone>() as ActiveZone;
+        playerActiveZone = GameObject.Find("Zone").GetComponent<Collider2D>() as Collider2D;
     }
 
-    void OnTriggerEnter2D (Collider2D coll)
+    void OnTriggerStay2D (Collider2D coll)
     {
-        if (coll.tag == "Zone")
-            zone = coll;
-    }
-	
-	// Update is called once per frame
-	void Update ()
-    {
-        playerActiveZone = player.activeZone.GetComponent<Collider2D>() as Collider2D;
-        if (canSpawn)
+        if (coll == playerActiveZone && canSpawn)
         {
-            if (zone == playerActiveZone)
-            {
-                Spawn();
-                canSpawn = false;
-            }
-        }
-        else
-        {
-            if (zone != playerActiveZone)
-            {
-                canSpawn = true;
-
-                if (instanceEnemy != null)
-                    Destroy(instanceEnemy);
-            }
+            Instantiate(enemy, transform.position, transform.rotation);
+            canSpawn = false;
         }
     }
 
-    void Spawn()
+    void OnTriggerExit2D(Collider2D coll)
     {
-        instanceEnemy = GameObject.Instantiate(enemy, transform.position, transform.rotation) as GameObject;
+        if (coll == playerActiveZone)
+        {
+            canSpawn = true;
+        }
     }
+
 }

@@ -38,6 +38,14 @@ public class EnemyHealth : MonoBehaviour {
         spriteRednerer.material.color = Color.white;
     }
 
+    void OnTriggerExit2D(Collider2D coll)
+    {
+        if (coll.tag == "Zone")
+        {
+            OnDestroy();
+        }
+    }
+
     void OnDestroy()
     {
         if (health <= 0)

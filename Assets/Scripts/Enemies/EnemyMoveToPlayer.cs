@@ -26,6 +26,6 @@ public class EnemyMoveToPlayer : MonoBehaviour
 
     void FixedUpdate()
     {
-        _rb.velocity = new Vector2(hDir, 0) * speed;
+        _rb.velocity = new Vector2(hDir, -1f) * speed;
     }
 }

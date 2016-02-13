@@ -6,7 +6,7 @@ public class TimeScale : MonoBehaviour {
     [ReadOnly]
     public GameObject _camera;
     [ReadOnly]
-    public bool shake = false;
+    public Camera mainCamera;
 
     public float pauseScale = 0.1f;
     public float pauseWait = 0.075f;
@@ -14,16 +14,15 @@ public class TimeScale : MonoBehaviour {
     public float deadScale = .2f;
     public float deadWait = 1f;
 
+    public float shakeAmt = .05f;
+
+    private Vector3 originalCameraPosition;
 
     void Start()
     {
         _camera = GameObject.Find("Camera") as GameObject;
+        mainCamera = _camera.GetComponent<Camera>();
     }
-
-    void Update()
-    {
-    }
-
 
     public void Pause()
     {
@@ -32,14 +31,13 @@ public class TimeScale : MonoBehaviour {
 
     IEnumerator PauseForTime()
     {
+        Shake();
         Time.timeScale = pauseScale;
-        shake = true;
         float pauseEndTime = Time.realtimeSinceStartup + pauseWait;
         while (Time.realtimeSinceStartup < pauseEndTime)
         {
             yield return 0;
         }
-        shake = false;
         Time.timeScale = 1;
     }
 
@@ -50,15 +48,38 @@ public class TimeScale : MonoBehaviour {
 
     IEnumerator DeadForTime()
     {
+        Shake();
         Time.timeScale = deadScale;
-        shake = true;
         float pauseEndTime = Time.realtimeSinceStartup + deadWait;
         while (Time.realtimeSinceStartup < pauseEndTime)
         {
             yield return 0;
         }
         Time.timeScale = 1;
-        shake = false;
     }
 
+    void Shake()
+
+    {
+        InvokeRepeating("CameraShake", 0, .01f);
+        Invoke("StopShaking", 0.2f);
+    }
+
+    void CameraShake()
+    {
+        if (shakeAmt > 0)
+        {
+            originalCameraPosition = mainCamera.transform.position;
+            float quakeAmt = Random.value * shakeAmt * 2 - shakeAmt;
+            Vector3 pp = mainCamera.transform.position;
+            pp.y += quakeAmt; // can also add to x and/or z
+            mainCamera.transform.position = pp;
+        }
+    }
+
+    void StopShaking()
+    {
+        CancelInvoke("CameraShake");
+        mainCamera.transform.position = originalCameraPosition;
+    }
 }
