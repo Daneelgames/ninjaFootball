@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ninjaFootball.CSharp.Plugins", "ninjaFootball.CSharp.Plugins.csproj", "{5DAC29D2-8A74-300F-4EC6-D058AFA96DAE}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ninjaFootball.CSharp", "ninjaFootball.CSharp.csproj", "{3D51BA67-8180-5D5A-A12A-3A9CEAF47AE0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ninjaFootball.CSharp.Editor", "ninjaFootball.CSharp.Editor.csproj", "{664A0E7C-FDF0-6452-0640-F5B114007CCD}"
@@ -11,6 +13,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5DAC29D2-8A74-300F-4EC6-D058AFA96DAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DAC29D2-8A74-300F-4EC6-D058AFA96DAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DAC29D2-8A74-300F-4EC6-D058AFA96DAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DAC29D2-8A74-300F-4EC6-D058AFA96DAE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3D51BA67-8180-5D5A-A12A-3A9CEAF47AE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3D51BA67-8180-5D5A-A12A-3A9CEAF47AE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D51BA67-8180-5D5A-A12A-3A9CEAF47AE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
