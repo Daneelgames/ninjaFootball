@@ -68,10 +68,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\GetRightTopCorner.cs" />
     <Compile Include="Assets\Scripts\ActiveRoom.cs" />
     <Compile Include="Assets\Scripts\AnimateOffset.cs" />
     <Compile Include="Assets\Scripts\Bullet.cs" />
+    <Compile Include="Assets\Scripts\CameraRotateZ.cs" />
     <Compile Include="Assets\Scripts\CheckpointController.cs" />
     <Compile Include="Assets\Scripts\DestroyOnTime.cs" />
     <Compile Include="Assets\Scripts\Dev\ReadOnlyAttribute.cs" />
@@ -80,7 +80,9 @@
     <Compile Include="Assets\Scripts\Enemies\EnemySpawner.cs" />
     <Compile Include="Assets\Scripts\FlipTowardsPlayer.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\GetRightTopCorner.cs" />
     <Compile Include="Assets\Scripts\HUDConttroller.cs" />
+    <Compile Include="Assets\Scripts\Parallaxing.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\PlayerSounds.cs" />
     <Compile Include="Assets\Scripts\RandomizePitchOnStart.cs" />

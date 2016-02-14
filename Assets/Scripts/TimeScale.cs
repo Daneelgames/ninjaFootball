@@ -20,7 +20,7 @@ public class TimeScale : MonoBehaviour {
 
     void Start()
     {
-        _camera = GameObject.Find("Camera") as GameObject;
+        _camera = GameObject.Find("_Camera") as GameObject;
         mainCamera = _camera.GetComponent<Camera>();
     }
 

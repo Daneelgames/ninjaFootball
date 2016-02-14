@@ -1,0 +1,246 @@
+fileFormatVersion: 2
+guid: d70af0efa4f9bbf4cbcb81f0e3ab1dbf
+timeCreated: 1455451161
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: RedSoilProps_2_00001_0
+    21300002: RedSoilProps_2_00001_1
+    21300004: RedSoilProps_2_00001_2
+    21300006: RedSoilProps_2_00001_3
+    21300008: RedSoilProps_2_00001_4
+    21300010: RedSoilProps_2_00001_5
+    21300012: RedSoilProps_2_00001_6
+    21300014: RedSoilProps_2_00001_7
+    21300016: RedSoilProps_2_00001_8
+    21300018: RedSoilProps_2_00001_9
+    21300020: RedSoilProps_2_00001_10
+    21300022: RedSoilProps_2_00001_11
+    21300024: RedSoilProps_2_00001_12
+    21300026: RedSoilProps_2_00001_13
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 50
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: RedSoilProps_2_00001_0
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 171
+        width: 43
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -9.5, y: 16}
+        - {x: -21.5, y: 2}
+        - {x: -21.5, y: -15}
+        - {x: -20.5, y: -17}
+        - {x: 13.5, y: -17}
+        - {x: 21.5, y: -15}
+        - {x: 21.5, y: -4}
+        - {x: 5.5, y: 16}
+      - - {x: 5.5, y: 7}
+        - {x: 8.5, y: 8}
+        - {x: 9.5, y: 17}
+        - {x: 4.5, y: 17}
+        - {x: 3.5, y: 9}
+    - name: RedSoilProps_2_00001_1
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 171
+        width: 53
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -17.5, y: 21}
+        - {x: -26.5, y: 2}
+        - {x: -26.5, y: -15}
+        - {x: -9.5, y: -21}
+        - {x: 17.5, y: -21}
+        - {x: 26.5, y: -13}
+        - {x: 26.5, y: 10}
+        - {x: 15.5, y: 21}
+    - name: RedSoilProps_2_00001_2
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 116
+        width: 21
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: RedSoilProps_2_00001_3
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 119
+        width: 26
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: RedSoilProps_2_00001_4
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 119
+        width: 25
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: RedSoilProps_2_00001_5
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 121
+        width: 21
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: RedSoilProps_2_00001_6
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 87
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: RedSoilProps_2_00001_7
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 85
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: RedSoilProps_2_00001_8
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 89
+        width: 64
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: RedSoilProps_2_00001_9
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 69
+        width: 23
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: RedSoilProps_2_00001_10
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 57
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: RedSoilProps_2_00001_11
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 53
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: RedSoilProps_2_00001_12
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 51
+        width: 40
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: RedSoilProps_2_00001_13
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 23
+        width: 72
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

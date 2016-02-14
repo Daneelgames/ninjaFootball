@@ -8,6 +8,8 @@ public class TypewriterText : MonoBehaviour {
     [ReadOnly]
     public Text textBox;
     [ReadOnly]
+    public Animator canvasAnimator;
+    [ReadOnly]
     public bool isInDialog = false;
 	[ReadOnly]
     public int currentlyDisplayingText = 0;
@@ -19,6 +21,7 @@ public class TypewriterText : MonoBehaviour {
 
     void Awake()
     {
+        canvasAnimator = GameObject.Find("Canvas").GetComponent<Animator>();
         _audio = GetComponent<AudioSource>() as AudioSource;
         playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>() as PlayerMovement;
         textBox = GameObject.Find("Text").GetComponent<Text>() as Text;
@@ -35,6 +38,7 @@ public class TypewriterText : MonoBehaviour {
             {
                 SkipToNextText();
                 isInDialog = true;
+                canvasAnimator.SetBool("Dialog", true);
                 playerScript.DialogStart();
             }
         }
@@ -66,7 +70,8 @@ public class TypewriterText : MonoBehaviour {
             StartCoroutine(IgnorePlayer());
             currentlyDisplayingText = 0;
 			isInDialog = false;
-			textBox.text = "";
+            canvasAnimator.SetBool("Dialog", false);
+            textBox.text = "";
             playerScript.DialogOver();
         }
 	}

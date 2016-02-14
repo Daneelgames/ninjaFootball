@@ -200,6 +200,7 @@ public class PlayerMovement : MonoBehaviour
         transform.position = activeCheckpoint.position;
         playerLives = 1;
         Physics2D.IgnoreLayerCollision(10, 11, false);
+        _rigidbody.velocity = new Vector2(0, 0);
 
     }
 

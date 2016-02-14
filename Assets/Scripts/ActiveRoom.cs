@@ -10,14 +10,25 @@ public class ActiveRoom : MonoBehaviour {
 
     void Start()
     {
-        cameraController = GameObject.Find("Camera").GetComponent<ScrollController>();
+        cameraController = GameObject.Find("_Camera").GetComponent<ScrollController>();
     }
 
     void OnTriggerEnter2D(Collider2D coll)
     {
         if (coll.tag == "Room")
+        {
             activeRoom = coll.gameObject;
             cameraController.SetActiveRoom();
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D coll)
+    {
+        if (coll.tag == "Room" && activeRoom != coll.gameObject)
+        {
+            activeRoom = coll.gameObject;
+            cameraController.SetActiveRoom();
+        }
     }
 
 }
