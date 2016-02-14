@@ -5,49 +5,37 @@ public class ScrollController : MonoBehaviour {
 
     public float smoothTimeX;
     public float smoothTimeY;
-
-    [ReadOnly]
-    public GameObject cameraAim;
-    [ReadOnly]
-    public GameObject zone;
-    public float offsetX = 1f;
-    public float offsetTop = 1f;
-    public float offsetBottom = 2f;
-
-    private Vector2 velocity;
     public bool scrollToPlayer = false;
 
+    public float screenW;
+    public float screenH;
+    public float scrollSpeed;
+
+    [ReadOnly]
+    public GameObject player;
+    [ReadOnly]
+    public GameObject activeRoom;
+
+    private Vector2 velocity;
+    private Vector2 bottomRightBound;
+
     void Start () {
-        cameraAim = GameObject.Find("CameraAim");
-        zone = GameObject.Find("Zone");
+        player = GameObject.Find("Player");
     }
 
-    void Update () {
-        if (scrollToPlayer)
-            Scroll();
-
-        GetPlayerOffset();
-    }
-
-    void GetPlayerOffset()
+    public void SetActiveRoom()
     {
-        float playerX = cameraAim.transform.position.x;
-        float playerY = cameraAim.transform.position.y;
-        float zoneX = zone.transform.position.x;
-        float zoneY = zone.transform.position.y;
-
-        if (playerX > zoneX + offsetX || playerX < zoneX - offsetX || playerY > zoneY + offsetTop || playerY < zoneY - offsetBottom)
-            scrollToPlayer = true;
-        else
-            scrollToPlayer = false;
+        activeRoom = player.GetComponent<ActiveRoom>().activeRoom;
+        bottomRightBound = activeRoom.GetComponent<GetRightTopCorner>().rightCornerPosition;
     }
 
-    void Scroll()
+    void Update()
     {
-        float posX = Mathf.SmoothDamp(transform.position.x, cameraAim.transform.position.x, ref velocity.x, smoothTimeX);
-        float posY = Mathf.SmoothDamp(transform.position.y, cameraAim.transform.position.y, ref velocity.y, smoothTimeY);
-
-        transform.position = new Vector3(posX, posY, transform.position.z);
+        transform.position = Vector2.Lerp(transform.position, 
+            new Vector2(
+                Mathf.Clamp(player.transform.position.x, activeRoom.transform.position.x + screenW / 2, bottomRightBound.x - screenW/2), 
+                Mathf.Clamp(player.transform.position.y, bottomRightBound.y + screenH / 2, activeRoom.transform.position.y - screenH / 2)),
+                0.1f * scrollSpeed * Time.deltaTime );
     }
 
 }
