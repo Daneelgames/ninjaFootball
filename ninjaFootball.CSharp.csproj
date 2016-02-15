@@ -87,6 +87,7 @@
     <Compile Include="Assets\Scripts\PlayerSounds.cs" />
     <Compile Include="Assets\Scripts\RandomizePitchOnStart.cs" />
     <Compile Include="Assets\Scripts\ScrollController.cs" />
+    <Compile Include="Assets\Scripts\ShakeScreenOnStart.cs" />
     <Compile Include="Assets\Scripts\TimeScale.cs" />
     <Compile Include="Assets\Scripts\TypewriterText.cs" />
     <Compile Include="Assets\Scripts\Weapon.cs" />

@@ -1,8 +1,8 @@
-﻿<Properties>
+﻿<Properties StartupItem="ninjaFootball.CSharp.Plugins.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GameManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Weapon.cs">
     <Files>
-      <File FileName="..\test\Assets\TypewriterText.cs" Line="45" Column="4" />
+      <File FileName="Assets\Scripts\Weapon.cs" Line="14" Column="15" />
       <File FileName="Assets\Scripts\GameManager.cs" Line="3" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>

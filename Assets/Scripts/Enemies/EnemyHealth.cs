@@ -23,7 +23,6 @@ public class EnemyHealth : MonoBehaviour {
     public void Damage(int dmg)
     {
         StartCoroutine(Blink());
-        timeScaleScript.Pause();
         _audio.Play();
         _audio.pitch = Random.Range(.7f, 1.3f);
         health -= dmg;
