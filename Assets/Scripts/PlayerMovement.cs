@@ -4,7 +4,10 @@ using System.Collections;
 public enum Direction {LEFT, RIGHT};
 public class PlayerMovement : MonoBehaviour
 {
-    [HideInInspector] public float jumpPower = 7.0f;
+    public float jumpPower = 10f;
+    public float maxVelocity = 5f;
+    public float minVelocity = -5f;
+
     [HideInInspector] public float tJump = 0f;
     [HideInInspector] public bool shoot = false;
 
@@ -17,10 +20,6 @@ public class PlayerMovement : MonoBehaviour
     public GameObject playerSprite;
 
     [ReadOnly]
-    public float maxVelocity = 5f;
-    [ReadOnly]
-    public float minVelocity = -5f;
-    [ReadOnly]
     public new SpriteRenderer renderer;
     [ReadOnly]
     public bool isOnGround = false;
@@ -28,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
     public Animator _animator;
     [ReadOnly]
     public PlayerSounds playerSound;
-    [ReadOnly]
+
     public Transform activeCheckpoint;
 
     private TimeScale timeScaleScript;
@@ -181,6 +180,13 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(Damage(0.5F));
             StartCoroutine(Blinking(.1F));
             Destroy(enemy.gameObject);
+        }
+
+        else if (enemy.gameObject.tag == "Hazard" && playerLives > 0)
+        {
+            playerSound.PlaySound(2);
+            StartCoroutine(Damage(0.5F));
+            StartCoroutine(Blinking(.1F));
         }
     }
 
