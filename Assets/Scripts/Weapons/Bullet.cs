@@ -6,6 +6,8 @@ public class Bullet : MonoBehaviour {
     public float speed = 5.0f;
     public int damage = 5;
     [ReadOnly]
+    public float hRandom = 1f;
+    [ReadOnly]
     public GameObject bulletParticles;
     [ReadOnly]
     public Collider2D playerActiveZone;
@@ -14,18 +16,18 @@ public class Bullet : MonoBehaviour {
     public Direction bulletDirection = Direction.RIGHT;
 
     private Transform _transform;
-    private Weapon weapon;
     private float hSpeed;
     private float translate;
+    private PlayerMovement playerMovement;
 
     void Start ()
     {
+        playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
         playerActiveZone = GameObject.Find("Zone").GetComponent<Collider2D>();
-        weapon = GameObject.Find("Player").GetComponent<Weapon>();
-        weapon.bulletCount += 1;
-        hSpeed = Random.Range(-5f, 5f);
+        hSpeed = Random.Range(-hRandom, hRandom);
         _transform = transform;
-	}
+        bulletDirection = playerMovement.PlayerDirection;
+    }
 	
 	void Update () {
         MoveBullet();
@@ -65,7 +67,6 @@ public class Bullet : MonoBehaviour {
 
     void BulletDestroy()
     {
-        weapon.bulletCount -= 1;
         Instantiate(bulletParticles, transform.position, transform.rotation);
         Destroy(gameObject);
     }

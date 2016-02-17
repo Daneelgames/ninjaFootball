@@ -3,12 +3,8 @@ using System.Collections;
 
 public class Weapon : MonoBehaviour {
 
-    public int maxBullets = 3;
+    public GameObject[] weapon;
     public float reloadTimeMax = 0.5f;
-    [ReadOnly]
-    public int bulletCount;
-    [ReadOnly]
-    public GameObject bullet;
     [ReadOnly]
     public GameObject shotPosition;
     [ReadOnly]
@@ -21,7 +17,6 @@ public class Weapon : MonoBehaviour {
 	void Start ()
     {
         playerMovement = GetComponent<PlayerMovement>();
-        bulletCount = 0;
 	}
 	
 	// Update is called once per frame
@@ -31,21 +26,14 @@ public class Weapon : MonoBehaviour {
             Shooting();
             Reload();
         }
-
-        // reset bullets
-        if (bulletCount < 0)
-            bulletCount = 0;
 	}
 
     void Shooting()
     {
-        if (Input.GetButtonDown("Fire1") && bulletCount < maxBullets && reloadTimeCur == 0)
+        if (Input.GetButtonDown("Fire1") && reloadTimeCur == 0)
         {
             playerMovement.shoot = true;
-            var tBullet1 = Instantiate(bullet, new Vector2(shotPosition.transform.position.x, shotPosition.transform.position.y + 0.25f), gameObject.transform.rotation) as GameObject;
-            var tBullet2 = Instantiate(bullet, new Vector2(shotPosition.transform.position.x, shotPosition.transform.position.y - 0.25f), gameObject.transform.rotation) as GameObject;
-            tBullet1.GetComponent<Bullet>().bulletDirection = playerMovement.PlayerDirection;
-            tBullet2.GetComponent<Bullet>().bulletDirection = playerMovement.PlayerDirection;
+            Instantiate(weapon[Random.Range(0, weapon.Length)], new Vector2(shotPosition.transform.position.x, shotPosition.transform.position.y), gameObject.transform.rotation);
             reloadTimeCur = reloadTimeMax;
             playerSound.PlaySound(1);
         }

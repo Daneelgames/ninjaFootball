@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EnemyMoveToPlayer : MonoBehaviour
 {
-    public float speed = 2;
+    public float speed = 10;
 
     private float hDir;
     private Transform player;

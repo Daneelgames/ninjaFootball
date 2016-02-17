@@ -70,7 +70,6 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\ActiveRoom.cs" />
     <Compile Include="Assets\Scripts\AnimateOffset.cs" />
-    <Compile Include="Assets\Scripts\Bullet.cs" />
     <Compile Include="Assets\Scripts\CameraRotateZ.cs" />
     <Compile Include="Assets\Scripts\CheckpointController.cs" />
     <Compile Include="Assets\Scripts\ChekpointAnimatorController.cs" />
@@ -92,6 +91,11 @@
     <Compile Include="Assets\Scripts\TimeScale.cs" />
     <Compile Include="Assets\Scripts\TypewriterText.cs" />
     <Compile Include="Assets\Scripts\Weapon.cs" />
+    <Compile Include="Assets\Scripts\Weapons\Bullet.cs" />
+    <Compile Include="Assets\Scripts\Weapons\BulletX2.cs" />
+    <Compile Include="Assets\Scripts\Weapons\BulletX3.cs" />
+    <Compile Include="Assets\Scripts\Weapons\ExplosionEnemyDamage.cs" />
+    <Compile Include="Assets\Scripts\Weapons\TimeBomb.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
