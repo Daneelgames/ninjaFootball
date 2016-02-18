@@ -13,7 +13,7 @@ public class EnemyHealth : MonoBehaviour {
 
     private AudioSource _audio;
 
-    void Awake()
+    void Start()
     {
         timeScaleScript = GameObject.FindGameObjectWithTag("Player").GetComponent<TimeScale>();
         _audio = GetComponent<AudioSource>() as AudioSource;
@@ -27,7 +27,7 @@ public class EnemyHealth : MonoBehaviour {
         _audio.pitch = Random.Range(.7f, 1.3f);
         health -= dmg;
         if (health <= 0)
-            OnDestroy();
+            EnemyDestroy();
     }
 
     IEnumerator Blink()
@@ -37,18 +37,9 @@ public class EnemyHealth : MonoBehaviour {
         spriteRednerer.material.color = Color.white;
     }
 
-    void OnTriggerExit2D(Collider2D coll)
+    void EnemyDestroy()
     {
-        if (coll.tag == "Zone")
-        {
-            OnDestroy();
-        }
-    }
-
-    void OnDestroy()
-    {
-        if (health <= 0)
-            Instantiate(explosion, new Vector3(transform.position.x, transform.position.y, 0), transform.rotation);
+        Instantiate(explosion, new Vector3(transform.position.x, transform.position.y, 0), transform.rotation);
         Destroy(gameObject);
     }
 }

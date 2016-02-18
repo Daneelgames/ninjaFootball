@@ -18,42 +18,52 @@ public class TypewriterText : MonoBehaviour {
     private PlayerMovement playerScript;
     private bool inTrigger = false;
     private AudioSource _audio;
+    private TalkCursorController cursorController;
 
-    void Awake()
+    void Start()
     {
         canvasAnimator = GameObject.Find("Canvas").GetComponent<Animator>();
         _audio = GetComponent<AudioSource>() as AudioSource;
         playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>() as PlayerMovement;
         textBox = GameObject.Find("Text").GetComponent<Text>() as Text;
+        cursorController = GameObject.Find("TalkCursor").GetComponent<TalkCursorController>();
     }
 
     void Update () {
 		//Start dialog
-		if (isInDialog && Input.GetButtonDown("Fire1"))
+		if (isInDialog && Input.anyKeyDown)
 			SkipToNextText();
 
         if (inTrigger)
         {
-            if (!isInDialog && Input.GetButtonDown("Fire1"))
+            if (!isInDialog && Input.GetAxisRaw("Vertical") > 0)
             {
                 SkipToNextText();
                 isInDialog = true;
                 canvasAnimator.SetBool("Dialog", true);
                 playerScript.DialogStart();
+                cursorController.SwitchActive();
             }
         }
-	}
+
+    }
 
     void OnTriggerEnter2D(Collider2D player)
     {
         if (player.gameObject.tag == "Player")
+        {
+            cursorController.SwitchActive();
             inTrigger = true;
+        }
     }
 
     void OnTriggerExit2D(Collider2D player)
     {
         if (player.gameObject.tag == "Player")
+        {
+            cursorController.SwitchActive();
             inTrigger = false;
+        }
     }
 
     public void SkipToNextText(){
@@ -73,6 +83,7 @@ public class TypewriterText : MonoBehaviour {
             canvasAnimator.SetBool("Dialog", false);
             textBox.text = "";
             playerScript.DialogOver();
+            cursorController.SwitchActive();
         }
 	}
 

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemySpawner : MonoBehaviour {
+public class EnemySpawnerInZone : MonoBehaviour {
 
     public GameObject enemy;
     [ReadOnly]

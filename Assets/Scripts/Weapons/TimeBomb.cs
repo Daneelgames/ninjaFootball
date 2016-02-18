@@ -14,7 +14,6 @@ public class TimeBomb : MonoBehaviour {
     [HideInInspector]
     public Direction bulletDirection = Direction.RIGHT;
 
-    private Transform _transform;
     private float hSpeed;
     private float translate;
     private PlayerMovement playerMovement;
@@ -29,9 +28,7 @@ public class TimeBomb : MonoBehaviour {
         hSpeed = Random.Range(0, hRandom);
         audio = GetComponent<AudioSource>();
 
-        _transform = transform;
         bulletDirection = playerMovement.PlayerDirection;
-
         int moveDirection = bulletDirection == Direction.LEFT ? -1 : 1;
 
         translate = moveDirection * speed * Time.deltaTime;
@@ -58,21 +55,14 @@ public class TimeBomb : MonoBehaviour {
         if (other.collider.tag == "Enemy")
         {
             other.collider.gameObject.GetComponent<EnemyHealth>().Damage(damage);
-            Instantiate(explodeParticles, transform.position, transform.rotation);
             BombDestroy();
         }
 
-    }
-    void OnTriggerExit2D(Collider2D zone)
-    {
-        if (zone.tag == "Zone")
-        {
-            BombDestroy();
-        }
     }
 
     void BombDestroy()
     {
+        Instantiate(explodeParticles, transform.position, transform.rotation);
         Destroy(gameObject);
     }
 }

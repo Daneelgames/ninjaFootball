@@ -4,14 +4,13 @@ using System.Collections;
 public class EnemyMoveToPlayer : MonoBehaviour
 {
     public float speed = 10;
+    public bool isVisible = false;
 
     private float hDir;
     private Transform player;
-    private Rigidbody2D _rb;
 
 	// Use this for initialization
 	void Start () {
-        _rb = GetComponent<Rigidbody2D>();
         player = GameObject.Find("Player").transform;
 	}
 	
@@ -26,6 +25,21 @@ public class EnemyMoveToPlayer : MonoBehaviour
 
     void FixedUpdate()
     {
-        _rb.velocity = new Vector2(hDir, -1f) * speed;
+        if (isVisible)
+        {
+            transform.Translate(hDir * speed * Time.deltaTime, 0, 0);
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D coll)
+    {
+        if (coll.tag == "Zone")
+            isVisible = true;
+    }
+
+    void OnTriggerExit2D(Collider2D coll)
+    {
+        if (coll.tag == "Zone")
+            isVisible = false;
     }
 }
