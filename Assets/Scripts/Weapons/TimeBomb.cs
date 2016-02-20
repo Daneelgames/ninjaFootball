@@ -18,7 +18,7 @@ public class TimeBomb : MonoBehaviour {
     private float translate;
     private PlayerMovement playerMovement;
     private Rigidbody2D rb;
-    private AudioSource audio;
+    private AudioSource _audio;
 
     void Start ()
     {
@@ -26,7 +26,7 @@ public class TimeBomb : MonoBehaviour {
         playerActiveZone = GameObject.Find("Zone").GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
         hSpeed = Random.Range(0, hRandom);
-        audio = GetComponent<AudioSource>();
+        _audio = GetComponent<AudioSource>();
 
         bulletDirection = playerMovement.PlayerDirection;
         int moveDirection = bulletDirection == Direction.LEFT ? -1 : 1;
@@ -50,14 +50,15 @@ public class TimeBomb : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        audio.pitch = Random.Range(0.85f, 1.15f);
-        audio.Play();
+        _audio.pitch = Random.Range(0.85f, 1.15f);
+        _audio.Play();
         if (other.collider.tag == "Enemy")
         {
             other.collider.gameObject.GetComponent<EnemyHealth>().Damage(damage);
             BombDestroy();
         }
-
+        else if (other.collider.tag == "Hazard")
+            BombDestroy();
     }
 
     void BombDestroy()

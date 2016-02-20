@@ -68,6 +68,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\AddRandomForceOnStart.cs" />
+    <Compile Include="Assets\Scripts\AlternativeWeaponCost.cs" />
     <Compile Include="Assets\Scripts\AnimateOffset.cs" />
     <Compile Include="Assets\Scripts\CameraRotateZ.cs" />
     <Compile Include="Assets\Scripts\CheckpointController.cs" />
@@ -76,10 +78,11 @@
     <Compile Include="Assets\Scripts\DestroyOnTime.cs" />
     <Compile Include="Assets\Scripts\DestroyOutsideTheRoom.cs" />
     <Compile Include="Assets\Scripts\Dev\ReadOnlyAttribute.cs" />
-    <Compile Include="Assets\Scripts\Enemies\EnemyHealth.cs" />
-    <Compile Include="Assets\Scripts\Enemies\EnemyMoveToPlayer.cs" />
-    <Compile Include="Assets\Scripts\Enemies\EnemySpawnerInRoom.cs" />
-    <Compile Include="Assets\Scripts\Enemies\EnemySpawnerInZone.cs" />
+    <Compile Include="Assets\Scripts\EnemySystem\EnemyDropOnDestroy.cs" />
+    <Compile Include="Assets\Scripts\EnemySystem\EnemyHealth.cs" />
+    <Compile Include="Assets\Scripts\EnemySystem\EnemyMoveToPlayer.cs" />
+    <Compile Include="Assets\Scripts\EnemySystem\EnemySpawnerInRoom.cs" />
+    <Compile Include="Assets\Scripts\EnemySystem\EnemySpawnerInZone.cs" />
     <Compile Include="Assets\Scripts\FlipTowardsPlayer.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\GetRightTopCorner.cs" />

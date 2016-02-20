@@ -8,11 +8,11 @@ public class TimeScale : MonoBehaviour {
     [ReadOnly]
     public Camera mainCamera;
 
-    public float pauseScale = 0.1f;
-    public float pauseWait = 0.075f;
+    public float pauseScale;
+    public float pauseWait;
 
-    public float deadScale = .2f;
-    public float deadWait = 1f;
+    public float deadScale;
+    public float deadWait;
 
     public float shakeAmt = .05f;
 

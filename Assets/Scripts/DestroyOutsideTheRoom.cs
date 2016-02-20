@@ -14,16 +14,16 @@ public class DestroyOutsideTheRoom : MonoBehaviour {
         player = GameObject.Find("Player");
     }
 
-    void OnTriggerEnter2D(Collider2D coll)
-    {
-        if (coll.tag == "Room")
-            objectRoom = coll;
-    }
-
     void Update()
     {
         playerActiveRoom = player.GetComponent<ActiveRoom>().activeRoom.GetComponent<Collider2D>();
 
+    }
+
+    void OnTriggerEnter2D(Collider2D coll)
+    {
+        if (coll.tag == "Room")
+            objectRoom = coll;
     }
 
     void OnTriggerExit2D(Collider2D coll)
@@ -31,7 +31,12 @@ public class DestroyOutsideTheRoom : MonoBehaviour {
         if (coll.tag == "Zone" && objectRoom != playerActiveRoom)
         {
             Destroy(gameObject);
-            print(gameObject.name);
         }
+    }
+
+    void OnTriggerStay2D(Collider2D coll)
+    {
+        if (coll.tag == "Room" && objectRoom != playerActiveRoom)
+            Destroy(gameObject);
     }
 }
