@@ -13,6 +13,13 @@ public class EnemyHealth : MonoBehaviour {
 
     private AudioSource _audio;
 
+    [SerializeField]
+    private GameObject drop;
+    [SerializeField]
+    private int minDrop;
+    [SerializeField]
+    private int maxDrop;
+
     void Start()
     {
         timeScaleScript = GameObject.FindGameObjectWithTag("Player").GetComponent<TimeScale>();
@@ -41,5 +48,7 @@ public class EnemyHealth : MonoBehaviour {
     {
         Instantiate(explosion, new Vector3(transform.position.x, transform.position.y, 0), transform.rotation);
         Destroy(gameObject);
+        for (int i = 0; i < Random.Range(minDrop, maxDrop); i++)
+            Instantiate(drop, transform.position, transform.rotation);
     }
 }

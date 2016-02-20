@@ -11,6 +11,7 @@ public class EnemySpawnerInRoom : MonoBehaviour {
     public Collider2D spawnerRoom;
 
     private GameObject player;
+    [SerializeField]
     private GameObject spawnedMob = null;
 
     void Start()

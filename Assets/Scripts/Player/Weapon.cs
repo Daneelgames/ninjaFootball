@@ -74,5 +74,11 @@ public class Weapon : MonoBehaviour {
             Destroy(coll.gameObject);
             playerSound.PlaySound(4);
         }
+        if (coll.gameObject.tag == "PlayerAmmoDrop")
+        {
+            altWeaponAmmo += coll.gameObject.GetComponent<PlayerDropController>().amount;
+            Destroy(coll.gameObject);
+            playerSound.PlaySound(4);
+        }
     }
 }

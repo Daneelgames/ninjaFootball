@@ -18,16 +18,20 @@ public class PlayerMovement : MonoBehaviour
     public GameObject explosionParticles;
     [ReadOnly]
     public GameObject playerSprite;
+    public GameObject playerAmmoDrop;
+    [SerializeField]
+    private Vector3 playerDropPos;
+
+    [SerializeField]
+    private new SpriteRenderer renderer;
+    [SerializeField]
+    private bool isOnGround = false;
+    [SerializeField]
+    private Animator _animator;
+    [SerializeField]
+    private PlayerSounds playerSound;
 
     [ReadOnly]
-    public new SpriteRenderer renderer;
-    [ReadOnly]
-    public bool isOnGround = false;
-    [ReadOnly]
-    public Animator _animator;
-    [ReadOnly]
-    public PlayerSounds playerSound;
-
     public Transform activeCheckpoint;
 
     private TimeScale timeScaleScript;
@@ -39,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
     private bool hurt = false;
     private bool dialog = false;
     private bool canLand = true;
+
 
     public Direction PlayerDirection
     {
@@ -60,11 +65,11 @@ public class PlayerMovement : MonoBehaviour
         {
             MovePlayer();
             Jump();
+            GroundRaycast();
         }
         else
             translate = 0;
 
-        GroundRaycast();
         Animator();
     }
 
@@ -149,13 +154,15 @@ public class PlayerMovement : MonoBehaviour
                 RaycastHit2D hit0 = Physics2D.Raycast(new Vector2(transform.position.x - 0.27f, transform.position.y), Vector2.down, 0.1f, 1 << 8);
                 RaycastHit2D hit1 = Physics2D.Raycast(transform.position, Vector2.down, 0.1f, 1 << 8);
                 RaycastHit2D hit2 = Physics2D.Raycast(new Vector2(transform.position.x + 0.27f, transform.position.y), Vector2.down, 0.1f, 1 << 8);
-                if (hit0.collider != null || hit1.collider != null || hit2.collider != null)
-                {
-                    isOnGround = true;
-                    jumpDirection = 0;
-                }
-                else if (hit0.collider == null && hit1.collider == null && hit2.collider == null)
-                    isOnGround = false;
+            if (hit0.collider != null || hit1.collider != null || hit2.collider != null)
+            {
+                playerDropPos = transform.position;
+                isOnGround = true;
+                jumpDirection = 0;
+            }
+            else if (hit0.collider == null && hit1.collider == null && hit2.collider == null)
+                isOnGround = false;
+
             }
 
         if (!isOnGround)
@@ -207,7 +214,10 @@ public class PlayerMovement : MonoBehaviour
         playerLives = 1;
         Physics2D.IgnoreLayerCollision(10, 11, false);
         _rigidbody.velocity = new Vector2(0, 0);
-
+        int _weaponAmmo = GetComponent<Weapon>().altWeaponAmmo;
+        GameObject drop = Instantiate(playerAmmoDrop, playerDropPos, transform.rotation) as GameObject;
+        drop.GetComponent<PlayerDropController>().amount = _weaponAmmo;
+        GetComponent<Weapon>().altWeaponAmmo = 0;
     }
 
     IEnumerator Blinking(float waitTime)

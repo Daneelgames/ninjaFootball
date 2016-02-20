@@ -28,7 +28,7 @@ public class DestroyOutsideTheRoom : MonoBehaviour {
 
     void OnTriggerExit2D(Collider2D coll)
     {
-        if (coll.tag == "Zone" && objectRoom != playerActiveRoom)
+        if (coll.tag == "Zone" && coll == playerActiveRoom)
         {
             Destroy(gameObject);
         }
@@ -36,7 +36,7 @@ public class DestroyOutsideTheRoom : MonoBehaviour {
 
     void OnTriggerStay2D(Collider2D coll)
     {
-        if (coll.tag == "Room" && objectRoom != playerActiveRoom)
+        if (coll.tag == "Room" && coll != playerActiveRoom)
             Destroy(gameObject);
     }
 }
