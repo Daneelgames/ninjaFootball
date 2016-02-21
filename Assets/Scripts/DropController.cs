@@ -14,7 +14,7 @@ public class DropController : MonoBehaviour {
 
     void Update()
     {
-        if (amount == 0)
+        if (amount <= 0)
             Destroy(gameObject);
 
         if (pm.playerLives <= 0)

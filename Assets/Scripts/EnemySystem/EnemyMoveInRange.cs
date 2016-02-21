@@ -23,7 +23,8 @@ public class EnemyMoveInRange : MonoBehaviour {
         else
             sprite.transform.localRotation = Quaternion.Euler(0, 180, 0);
         // hDir не меняет направление движения, хз почему
-        transform.Translate(hDir * speed * Time.deltaTime, 0, 0);
+        if (sprite.GetComponent<SpriteRenderer>().isVisible)
+            transform.Translate(hDir * speed * Time.deltaTime, 0, 0);
     }
 
     void OnTriggerEnter2D(Collider2D coll)
