@@ -12,13 +12,7 @@ public class EnemyHealth : MonoBehaviour {
     public Transform explosion;
 
     private AudioSource _audio;
-
-    [SerializeField]
-    private GameObject drop;
-    [SerializeField]
-    private int minDrop;
-    [SerializeField]
-    private int maxDrop;
+    private bool canDestroy = true;
 
     void Start()
     {
@@ -46,9 +40,11 @@ public class EnemyHealth : MonoBehaviour {
 
     void EnemyDestroy()
     {
-        Instantiate(explosion, new Vector3(transform.position.x, transform.position.y, 0), transform.rotation);
-        Destroy(gameObject);
-        for (int i = 0; i < Random.Range(minDrop, maxDrop); i++)
-            Instantiate(drop, transform.position, transform.rotation);
+        if (canDestroy)
+        {
+            canDestroy = false;
+            Instantiate(explosion, new Vector3(transform.position.x, transform.position.y, 0), transform.rotation);
+            Destroy(gameObject, 0.1f);
+        }
     }
 }

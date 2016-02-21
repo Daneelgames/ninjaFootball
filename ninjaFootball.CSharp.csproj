@@ -78,8 +78,10 @@
     <Compile Include="Assets\Scripts\DestroyOnTime.cs" />
     <Compile Include="Assets\Scripts\DestroyOutsideTheRoom.cs" />
     <Compile Include="Assets\Scripts\Dev\ReadOnlyAttribute.cs" />
+    <Compile Include="Assets\Scripts\DropController.cs" />
     <Compile Include="Assets\Scripts\EnemySystem\EnemyDropOnDestroy.cs" />
     <Compile Include="Assets\Scripts\EnemySystem\EnemyHealth.cs" />
+    <Compile Include="Assets\Scripts\EnemySystem\EnemyMoveInRange.cs" />
     <Compile Include="Assets\Scripts\EnemySystem\EnemyMoveToPlayer.cs" />
     <Compile Include="Assets\Scripts\EnemySystem\EnemySpawnerInRoom.cs" />
     <Compile Include="Assets\Scripts\EnemySystem\EnemySpawnerInZone.cs" />
@@ -92,7 +94,6 @@
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerSounds.cs" />
     <Compile Include="Assets\Scripts\Player\Weapon.cs" />
-    <Compile Include="Assets\Scripts\PlayerDropController.cs" />
     <Compile Include="Assets\Scripts\RandomizePitchOnStart.cs" />
     <Compile Include="Assets\Scripts\ScrollController.cs" />
     <Compile Include="Assets\Scripts\ShakeScreenOnStart.cs" />

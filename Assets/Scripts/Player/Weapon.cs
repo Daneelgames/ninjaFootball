@@ -14,6 +14,7 @@ public class Weapon : MonoBehaviour {
     [ReadOnly]
     public int altWeaponAmmo = 100;
 
+    private Animator canvasAnimator;
     private Text ammoCounter;
     private PlayerMovement playerMovement;
     private float reloadTimeCur = 0;
@@ -22,6 +23,7 @@ public class Weapon : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
+        canvasAnimator = GameObject.Find("Canvas").GetComponent<Animator>();
         ammoCounter = GameObject.Find("AmmoCounter").GetComponent<Text>();
         playerMovement = GetComponent<PlayerMovement>();
 	}
@@ -73,12 +75,14 @@ public class Weapon : MonoBehaviour {
             altWeaponAmmo += 1;
             Destroy(coll.gameObject);
             playerSound.PlaySound(4);
+            canvasAnimator.SetTrigger("GetAmmo");
         }
         if (coll.gameObject.tag == "PlayerAmmoDrop")
         {
-            altWeaponAmmo += coll.gameObject.GetComponent<PlayerDropController>().amount;
+            altWeaponAmmo += coll.gameObject.GetComponent<DropController>().amount;
             Destroy(coll.gameObject);
             playerSound.PlaySound(4);
+            canvasAnimator.SetTrigger("GetAmmo");
         }
     }
 }

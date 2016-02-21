@@ -19,6 +19,7 @@ public class TimeBomb : MonoBehaviour {
     private PlayerMovement playerMovement;
     private Rigidbody2D rb;
     private AudioSource _audio;
+    private bool canDestroy = true;
 
     void Start ()
     {
@@ -40,9 +41,9 @@ public class TimeBomb : MonoBehaviour {
     {
         timeLife -= 1f * Time.deltaTime;
 
-        if(timeLife <= 0)
+        if(timeLife <= 0 && canDestroy)
         {
-            Instantiate(explodeParticles, transform.position, transform.rotation);
+            canDestroy = false;
             BombDestroy();
         }
 
@@ -63,6 +64,7 @@ public class TimeBomb : MonoBehaviour {
 
     void BombDestroy()
     {
+        print("BombSplode");
         Instantiate(explodeParticles, transform.position, transform.rotation);
         Destroy(gameObject);
     }

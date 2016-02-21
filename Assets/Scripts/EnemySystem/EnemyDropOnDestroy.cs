@@ -10,10 +10,23 @@ public class EnemyDropOnDestroy : MonoBehaviour
     private int minDrop;
     [SerializeField]
     private int maxDrop;
+    [SerializeField]
+    private EnemyHealth healthScript;
+    private bool canDrop = true;
 
-    void OnDestroy()
+    void Start()
     {
-        for (int i = 0; i < Random.Range(minDrop, maxDrop); i++)
-            Instantiate(drop, transform.position, transform.rotation);
+        healthScript = GetComponent<EnemyHealth>();
+    }
+
+    void Update()
+    {
+        if (healthScript.health < 1 && canDrop)
+        {
+            print("drop");
+            canDrop = false;
+            GameObject dropScript = Instantiate(drop, transform.position, transform.rotation) as GameObject;
+            dropScript.GetComponent<DropController>().amount = Random.Range(minDrop, maxDrop);
+        }
     }
 }

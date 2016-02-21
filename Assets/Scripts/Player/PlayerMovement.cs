@@ -4,36 +4,32 @@ using System.Collections;
 public enum Direction {LEFT, RIGHT};
 public class PlayerMovement : MonoBehaviour
 {
-    public float jumpPower = 10f;
-    public float maxVelocity = 5f;
-    public float minVelocity = -5f;
+    public int playerLives = 1;
+    [ReadOnly]
+    public Transform activeCheckpoint;
+
+    [SerializeField]
+    private float speed = 2f;
+    [SerializeField]
+    private float jumpPower = 10f;
+    [SerializeField]
+    private float jumpPowerLasting = 0.01f;
+    [SerializeField]
+    private float maxVelocity = 5f;
+    [SerializeField]
+    private float minVelocity = -5f;
+    [SerializeField]
+    private GameObject explosionParticles;
+    [SerializeField]
+    private GameObject playerAmmoDrop;
+    [SerializeField]
+    private bool isOnGround = false;
+
 
     [HideInInspector] public float tJump = 0f;
     [HideInInspector] public bool shoot = false;
 
-    public float speed = 2f;
-    public int playerLives = 1;
-
-    [ReadOnly]
-    public GameObject explosionParticles;
-    [ReadOnly]
-    public GameObject playerSprite;
-    public GameObject playerAmmoDrop;
-    [SerializeField]
-    private Vector3 playerDropPos;
-
-    [SerializeField]
-    private new SpriteRenderer renderer;
-    [SerializeField]
-    private bool isOnGround = false;
-    [SerializeField]
-    private Animator _animator;
-    [SerializeField]
-    private PlayerSounds playerSound;
-
-    [ReadOnly]
-    public Transform activeCheckpoint;
-
+    private GameObject playerSprite;
     private TimeScale timeScaleScript;
     private Rigidbody2D _rigidbody;
     private Direction playerDirection = Direction.RIGHT;
@@ -43,7 +39,10 @@ public class PlayerMovement : MonoBehaviour
     private bool hurt = false;
     private bool dialog = false;
     private bool canLand = true;
-
+    private Vector3 playerDropPos;
+    private new SpriteRenderer renderer;
+    private Animator _animator;
+    private PlayerSounds playerSound;
 
     public Direction PlayerDirection
     {
@@ -57,14 +56,18 @@ public class PlayerMovement : MonoBehaviour
         timeScaleScript = GetComponent<TimeScale>();
         _rigidbody = GetComponent(typeof(Rigidbody2D)) as Rigidbody2D;
         weapon = GetComponent<Weapon>() as Weapon;
+        _animator = transform.Find("PlayerSprites").GetComponent<Animator>();
+        playerSound = transform.Find("PlayerSprites").GetComponent<PlayerSounds>();
+        playerSprite = transform.Find("PlayerSprites").gameObject;
+        renderer = playerSprite.GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
         if (playerLives > 0 && !dialog)
         {
-            MovePlayer();
             Jump();
+            MovePlayer();
             GroundRaycast();
         }
         else
@@ -135,25 +138,23 @@ public class PlayerMovement : MonoBehaviour
                 playerSound.PlaySound(0);
             }
         }
-        //Mid-air horizontal movement
-       /* else
+        if (!isOnGround)
         {
-            if (Input.GetAxisRaw("Horizontal") != 0)
+            if (Input.GetButton("Jump"))
             {
-                jumpDirection = Input.GetAxisRaw("Horizontal") * speed/3 * Time.deltaTime;
+                _rigidbody.AddForce(new Vector2(0, jumpPowerLasting), ForceMode2D.Force);
+
             }
-            transform.Translate(jumpDirection/2, 0, 0);
         }
-        */
     }
 
     void GroundRaycast()
     {
             if (tJump == 0)
             {
-                RaycastHit2D hit0 = Physics2D.Raycast(new Vector2(transform.position.x - 0.27f, transform.position.y), Vector2.down, 0.1f, 1 << 8);
+                RaycastHit2D hit0 = Physics2D.Raycast(new Vector2(transform.position.x - 0.2f, transform.position.y), Vector2.down, 0.1f, 1 << 8);
                 RaycastHit2D hit1 = Physics2D.Raycast(transform.position, Vector2.down, 0.1f, 1 << 8);
-                RaycastHit2D hit2 = Physics2D.Raycast(new Vector2(transform.position.x + 0.27f, transform.position.y), Vector2.down, 0.1f, 1 << 8);
+                RaycastHit2D hit2 = Physics2D.Raycast(new Vector2(transform.position.x + 0.2f, transform.position.y), Vector2.down, 0.1f, 1 << 8);
             if (hit0.collider != null || hit1.collider != null || hit2.collider != null)
             {
                 playerDropPos = transform.position;
@@ -216,7 +217,7 @@ public class PlayerMovement : MonoBehaviour
         _rigidbody.velocity = new Vector2(0, 0);
         int _weaponAmmo = GetComponent<Weapon>().altWeaponAmmo;
         GameObject drop = Instantiate(playerAmmoDrop, playerDropPos, transform.rotation) as GameObject;
-        drop.GetComponent<PlayerDropController>().amount = _weaponAmmo;
+        drop.GetComponent<DropController>().amount = _weaponAmmo;
         GetComponent<Weapon>().altWeaponAmmo = 0;
     }
 
