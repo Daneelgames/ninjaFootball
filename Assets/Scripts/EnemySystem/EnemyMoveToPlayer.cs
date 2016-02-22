@@ -14,7 +14,7 @@ public class EnemyMoveToPlayer : MonoBehaviour
 	// Use this for initialization
 	void Start () {
         player = GameObject.Find("Player").transform;
-        sprite = transform.Find("Sprites").gameObject;
+        sprite = transform.Find("Sprite").gameObject;
 	}
 	
 	// Update is called once per frame
@@ -25,12 +25,12 @@ public class EnemyMoveToPlayer : MonoBehaviour
             transform.Translate(hDir * speed * Time.deltaTime, 0, 0);
         }
 
-        if (player.transform.position.x - 1f > transform.position.x)
+        if (player.transform.position.x - 0.5f > transform.position.x)
             {
                sprite.transform.localRotation = Quaternion.Euler(0, 0, 0);
                 hDir = 1.0f;
             }
-        else if (player.transform.position.x + 1f < transform.position.x)
+        else if (player.transform.position.x + 0.5f < transform.position.x)
             {
               sprite.transform.localRotation = Quaternion.Euler(0, 180, 0);
                 hDir = -1.0f;

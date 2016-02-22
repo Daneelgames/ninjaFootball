@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.3.2f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -83,10 +81,14 @@
     <Compile Include="Assets\Scripts\Dev\ReadOnlyAttribute.cs" />
     <Compile Include="Assets\Scripts\DisableColliderOnTime.cs" />
     <Compile Include="Assets\Scripts\DropController.cs" />
+    <Compile Include="Assets\Scripts\EnemySystem\BulletX3.cs" />
+    <Compile Include="Assets\Scripts\EnemySystem\EnemyBullet.cs" />
     <Compile Include="Assets\Scripts\EnemySystem\EnemyDropOnDestroy.cs" />
     <Compile Include="Assets\Scripts\EnemySystem\EnemyHealth.cs" />
+    <Compile Include="Assets\Scripts\EnemySystem\EnemyJumper.cs" />
     <Compile Include="Assets\Scripts\EnemySystem\EnemyMoveInRange.cs" />
     <Compile Include="Assets\Scripts\EnemySystem\EnemyMoveToPlayer.cs" />
+    <Compile Include="Assets\Scripts\EnemySystem\EnemyShootShielded.cs" />
     <Compile Include="Assets\Scripts\EnemySystem\EnemySpawner.cs" />
     <Compile Include="Assets\Scripts\FlipTowardsPlayer.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
@@ -105,7 +107,6 @@
     <Compile Include="Assets\Scripts\TypewriterText.cs" />
     <Compile Include="Assets\Scripts\Weapons\Bullet.cs" />
     <Compile Include="Assets\Scripts\Weapons\BulletX2.cs" />
-    <Compile Include="Assets\Scripts\Weapons\BulletX3.cs" />
     <Compile Include="Assets\Scripts\Weapons\ExplosionEnemyDamage.cs" />
     <Compile Include="Assets\Scripts\Weapons\TimeBomb.cs" />
   </ItemGroup>

@@ -128,23 +128,16 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
-        if (isOnGround)
+        if (isOnGround && Input.GetButtonDown("Jump"))
         {
-            if (Input.GetButtonDown("Jump"))
-            {
                 _rigidbody.AddForce(new Vector2(0, jumpPower), ForceMode2D.Impulse);
                 isOnGround = false;
                 tJump = 1f;
                 playerSound.PlaySound(0);
-            }
         }
-        if (!isOnGround)
+        if (!isOnGround && Input.GetButton("Jump"))
         {
-            if (Input.GetButton("Jump"))
-            {
                 _rigidbody.AddForce(new Vector2(0, jumpPowerLasting), ForceMode2D.Force);
-
-            }
         }
     }
 
@@ -182,19 +175,22 @@ public class PlayerMovement : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D enemy)
     {
-        if (enemy.gameObject.tag == "Enemy" && playerLives > 0)
+        if (playerLives > 0)
         {
-            playerSound.PlaySound(2);
-            StartCoroutine(Damage(0.5F));
-            StartCoroutine(Blinking(.1F));
-            Destroy(enemy.gameObject);
-        }
+            if (enemy.gameObject.tag == "Enemy")
+            {
+                playerSound.PlaySound(2);
+                StartCoroutine(Damage(0.5F));
+                StartCoroutine(Blinking(.1F));
+                Destroy(enemy.gameObject);
+            }
 
-        else if (enemy.gameObject.tag == "Hazard" && playerLives > 0)
-        {
-            playerSound.PlaySound(2);
-            StartCoroutine(Damage(0.5F));
-            StartCoroutine(Blinking(.1F));
+            else if (enemy.gameObject.tag == "Hazard")
+            {
+                playerSound.PlaySound(2);
+                StartCoroutine(Damage(0.5F));
+                StartCoroutine(Blinking(.1F));
+            }
         }
     }
 

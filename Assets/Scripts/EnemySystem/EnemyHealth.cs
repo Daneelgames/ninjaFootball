@@ -4,31 +4,32 @@ using System.Collections;
 public class EnemyHealth : MonoBehaviour {
 
     public int health = 10;
+    public bool invincible = false;
 
-    [ReadOnly]
-    public SpriteRenderer spriteRednerer;
-    [ReadOnly]
-    public TimeScale timeScaleScript;
-    public Transform explosion;
+    [SerializeField]
+    private Transform explosion;
 
+    private SpriteRenderer spriteRednerer;
     private AudioSource _audio;
     private bool canDestroy = true;
 
     void Start()
     {
-        timeScaleScript = GameObject.FindGameObjectWithTag("Player").GetComponent<TimeScale>();
         _audio = GetComponent<AudioSource>() as AudioSource;
         spriteRednerer = GetComponentInChildren<SpriteRenderer>() as SpriteRenderer;
     }
 
     public void Damage(int dmg)
     {
-        StartCoroutine(Blink());
-        _audio.Play();
-        _audio.pitch = Random.Range(.7f, 1.3f);
-        health -= dmg;
-        if (health <= 0)
-            EnemyDestroy();
+        if (!invincible)
+        {
+            StartCoroutine(Blink());
+            _audio.Play();
+            _audio.pitch = Random.Range(.7f, 1.3f);
+            health -= dmg;
+            if (health <= 0)
+                EnemyDestroy();
+        }
     }
 
     IEnumerator Blink()

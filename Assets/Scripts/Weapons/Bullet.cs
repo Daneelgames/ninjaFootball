@@ -41,12 +41,6 @@ public class Bullet : MonoBehaviour {
         translate = moveDirection * speed * Time.deltaTime;
         _transform.Translate(translate, hSpeed * Time.deltaTime, 0);
 
-        //Flip sprite
-        if (translate < 0)
-            transform.localScale = new Vector2(-1f, 1f);
-        else
-            transform.localScale = new Vector2(1f, 1f);
-
     }
 
     void OnCollisionEnter2D(Collision2D other)
