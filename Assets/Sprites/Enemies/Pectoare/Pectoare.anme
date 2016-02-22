@@ -1,7 +1,7 @@
 application/x-vnd.lm_mohodoc
 version 37
 ### Created in Moho version 9.5, © 1999-2013 Smith Micro Software, Inc.
-### Created: Mon Feb 22 17:42:54 2016
+### Created: Tue Feb 23 01:37:35 2016
 #escaped_quotes
 
 ### static values
@@ -305,7 +305,7 @@ layer_type 3
 	layer_outline_width
 	[
 		keys 1
-			0 1 0.1 0.5 1 0 0 0.015625
+			0 1 0.1 0.5 1 0 0 0.03125
 	]
 	layer_outline_color
 	[
@@ -1241,7 +1241,7 @@ layer_type 3
 			layer_outline_on
 			[
 				keys 1
-					0 1 0.1 0.5 1 0 0 true
+					0 1 0.1 0.5 1 0 0 false
 			]
 			layer_outline_width
 			[
@@ -9699,7 +9699,7 @@ layer_type 3
 						""
 						""
 
-					"" true true true true 
+					"" true true false true 
 					[
 						keys 1
 							0 1 0.1 0.5 1 0 0 1.795865
@@ -11285,7 +11285,7 @@ layer_type 3
 			layer_outline_on
 			[
 				keys 1
-					0 1 0.1 0.5 1 0 0 true
+					0 1 0.1 0.5 1 0 0 false
 			]
 			layer_outline_width
 			[
@@ -17264,7 +17264,7 @@ layer_type 3
 			layer_outline_on
 			[
 				keys 1
-					0 1 0.1 0.5 1 0 0 true
+					0 1 0.1 0.5 1 0 0 false
 			]
 			layer_outline_width
 			[
