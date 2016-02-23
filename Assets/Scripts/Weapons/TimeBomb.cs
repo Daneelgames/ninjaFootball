@@ -64,7 +64,6 @@ public class TimeBomb : MonoBehaviour {
 
     void BombDestroy()
     {
-        print("BombSplode");
         Instantiate(explodeParticles, transform.position, transform.rotation);
         Destroy(gameObject);
     }

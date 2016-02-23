@@ -72,6 +72,8 @@
     <Compile Include="Assets\Scripts\AddRandomForceOnStart.cs" />
     <Compile Include="Assets\Scripts\AlternativeWeaponCost.cs" />
     <Compile Include="Assets\Scripts\AnimateOffset.cs" />
+    <Compile Include="Assets\Scripts\BossPathBlocker.cs" />
+    <Compile Include="Assets\Scripts\BossZoneController.cs" />
     <Compile Include="Assets\Scripts\CameraRotateZ.cs" />
     <Compile Include="Assets\Scripts\CheckpointController.cs" />
     <Compile Include="Assets\Scripts\ChekpointAnimatorController.cs" />
@@ -83,6 +85,7 @@
     <Compile Include="Assets\Scripts\DropController.cs" />
     <Compile Include="Assets\Scripts\EnemySystem\BulletX3.cs" />
     <Compile Include="Assets\Scripts\EnemySystem\EnemyBullet.cs" />
+    <Compile Include="Assets\Scripts\EnemySystem\EnemyDosehadsShooter.cs" />
     <Compile Include="Assets\Scripts\EnemySystem\EnemyDropOnDestroy.cs" />
     <Compile Include="Assets\Scripts\EnemySystem\EnemyHealth.cs" />
     <Compile Include="Assets\Scripts\EnemySystem\EnemyJumper.cs" />
@@ -95,6 +98,7 @@
     <Compile Include="Assets\Scripts\GetRightTopCorner.cs" />
     <Compile Include="Assets\Scripts\HUDConttroller.cs" />
     <Compile Include="Assets\Scripts\Parallaxing.cs" />
+    <Compile Include="Assets\Scripts\PlaySoundInTrigger.cs" />
     <Compile Include="Assets\Scripts\Player\ActiveRoom.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerSounds.cs" />

@@ -8,10 +8,14 @@ public class EnemyBullet : MonoBehaviour {
     private float speed = 5f;
     [SerializeField]
     private GameObject bulletParticles;
+    [SerializeField]
+    private Collider2D room;
 
     private Transform _transform;
     private float hSpeed;
     private float translate;
+
+    private bool roomGot = false;
 
     void Start ()
     {
@@ -29,9 +33,18 @@ public class EnemyBullet : MonoBehaviour {
         BulletDestroy();
     }
 
-    void OnTriggerExit2D(Collider2D zone)
+    void OnTriggerEnter2D(Collider2D coll)
     {
-        if (zone.tag == "Zone")
+        if (!roomGot && coll.tag == "Room")
+        {
+            roomGot = true;
+            room = coll;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D coll)
+    {
+        if (coll.tag == "Zone" || coll == room)
         {
             BulletDestroy();
         }
