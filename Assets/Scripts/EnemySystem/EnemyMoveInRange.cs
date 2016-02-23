@@ -9,6 +9,7 @@ public class EnemyMoveInRange : MonoBehaviour {
     private float hDir = 1;
 
     private GameObject sprite;
+    private bool visible = false;
 
     void Start()
     {
@@ -23,7 +24,7 @@ public class EnemyMoveInRange : MonoBehaviour {
         else
             sprite.transform.localRotation = Quaternion.Euler(0, 180, 0);
         // hDir не меняет направление движения, хз почему
-        if (sprite.GetComponent<SpriteRenderer>().isVisible)
+        if (visible)
             transform.Translate(hDir * speed * Time.deltaTime, 0, 0);
     }
 
@@ -31,5 +32,13 @@ public class EnemyMoveInRange : MonoBehaviour {
     {
         if (coll.tag == "EnemyTurner")
             speed *= -1;
+        else if (coll.tag == "Zone")
+            visible = true;
+    }
+
+    void OnTriggerExit2D (Collider2D coll)
+    {
+        if (coll.tag == "Zone")
+            visible = false;
     }
 }
