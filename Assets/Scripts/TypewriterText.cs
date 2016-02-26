@@ -29,25 +29,6 @@ public class TypewriterText : MonoBehaviour {
         cursorController = GameObject.Find("TalkCursor").GetComponent<TalkCursorController>();
     }
 
-    void Update () {
-		//Start dialog
-		if (isInDialog && Input.anyKeyDown)
-			SkipToNextText();
-
-        if (inTrigger)
-        {
-            if (!isInDialog && Input.GetAxisRaw("Vertical") > 0)
-            {
-                SkipToNextText();
-                isInDialog = true;
-                canvasAnimator.SetBool("Dialog", true);
-                playerScript.DialogStart();
-                cursorController.SwitchActive();
-            }
-        }
-
-    }
-
     void OnTriggerEnter2D(Collider2D player)
     {
         if (player.gameObject.tag == "Player")
@@ -64,6 +45,30 @@ public class TypewriterText : MonoBehaviour {
             cursorController.SwitchActive();
             inTrigger = false;
         }
+    }
+
+    void Update () {
+		if (isInDialog && Input.anyKeyDown)
+        {
+            if (textBox.text == sourceText[currentlyDisplayingText - 1])
+                SkipToNextText();
+            else
+                SkipAnimation();
+        }
+
+        if (inTrigger)
+        {
+            //Start dialog
+            if (!isInDialog && Input.GetAxisRaw("Vertical") > 0)
+            {
+                SkipToNextText();
+                isInDialog = true;
+                canvasAnimator.SetBool("Dialog", true);
+                playerScript.DialogStart();
+                cursorController.SwitchActive();
+            }
+        }
+
     }
 
     public void SkipToNextText(){
@@ -85,9 +90,15 @@ public class TypewriterText : MonoBehaviour {
             playerScript.DialogOver();
             cursorController.SwitchActive();
         }
-	}
+    }
 
-    IEnumerator IgnorePlayer()
+    public void SkipAnimation()
+    {
+        StopAllCoroutines();
+        textBox.text = sourceText[currentlyDisplayingText - 1];
+    }
+
+        IEnumerator IgnorePlayer()
     {
         Physics2D.IgnoreLayerCollision(10, 12, true);
         yield return new WaitForSeconds(0.5f);
