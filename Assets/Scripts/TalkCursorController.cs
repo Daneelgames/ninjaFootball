@@ -5,20 +5,34 @@ public class TalkCursorController : MonoBehaviour {
 
     private bool visible = false;
     private SpriteRenderer _renderer;
+    private Collider2D lastCollider;
 
     void Start()
     {
-        _renderer = GetComponent<SpriteRenderer>();
+        _renderer = transform.Find("TalkCursor").GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
         _renderer.enabled = visible;
+        if (lastCollider == null || !lastCollider.enabled)
+            visible = false;
+
+    }
+    
+    void OnTriggerEnter2D (Collider2D coll)
+    {
+        if (coll.tag == "NPC")
+        {
+            visible = true;
+            lastCollider = coll;
+        }
     }
 
-    public void SwitchActive()
+    void OnTriggerExit2D (Collider2D coll)
     {
-        visible = !visible;
+        if (coll.tag == "NPC")
+            visible = false;
     }
 
 }

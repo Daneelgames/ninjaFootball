@@ -5,7 +5,6 @@ public class Bullet : MonoBehaviour {
 
     public float speed = 15.0f;
     public int damage = 5;
-    [ReadOnly]
     public float hRandom = 1f;
     [ReadOnly]
     public GameObject bulletParticles;
@@ -22,7 +21,8 @@ public class Bullet : MonoBehaviour {
 
     void Start ()
     {
-        speed += Random.Range(-5f, 5f);
+        //hRandom = Random.Range(-1F, 1F);
+        speed += Random.Range(-3f, 3f);
         playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
         playerActiveZone = GameObject.Find("Zone").GetComponent<Collider2D>();
         hSpeed = Random.Range(-hRandom, hRandom);

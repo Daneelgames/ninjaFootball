@@ -43,6 +43,10 @@ public class PlayerMovement : MonoBehaviour
     private new SpriteRenderer renderer;
     private Animator _animator;
     private PlayerSounds playerSound;
+    private int hAxis;
+
+    private bool jumpTrigger = false;
+    private bool jumpContinue = false;
 
     public Direction PlayerDirection
     {
@@ -64,9 +68,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        ConstrainAxis();
+
         if (playerLives > 0 && !dialog)
         {
-            Jump();
+            JumpInput();
             MovePlayer();
             GroundRaycast();
         }
@@ -76,18 +82,58 @@ public class PlayerMovement : MonoBehaviour
         Animator();
     }
 
+    void ConstrainAxis()
+    {
+        if (Input.GetAxisRaw("Horizontal") > 0)
+            hAxis = 1;
+        else if (Input.GetAxisRaw("Horizontal") < 0)
+            hAxis = -1;
+        else if (Input.GetAxisRaw("Horizontal") == 0)
+            hAxis = 0;
+    }
+
     void FixedUpdate()
     {
+
         if (_rigidbody.velocity.magnitude > maxVelocity)
             _rigidbody.velocity = _rigidbody.velocity.normalized * maxVelocity;
 
         if (_rigidbody.velocity.magnitude < minVelocity)
             _rigidbody.velocity = _rigidbody.velocity.normalized * minVelocity;
+
+        if (jumpTrigger)
+        {
+            _rigidbody.AddForce(new Vector2(0, jumpPower), ForceMode2D.Impulse);
+            jumpTrigger = false;
+        }
+        
+        if (jumpContinue)
+        {
+            _rigidbody.AddForce(new Vector2(0, jumpPowerLasting), ForceMode2D.Force);
+        }
+
+    }
+
+    void JumpInput()
+    {
+        if (isOnGround && Input.GetButtonDown("Jump"))
+        {
+            jumpTrigger = true;
+            isOnGround = false;
+            tJump = 1f;
+            playerSound.PlaySound(0);
+        }
+        if (!isOnGround && Input.GetButton("Jump"))
+        {
+            jumpContinue = true;
+        }
+        else
+            jumpContinue = false;
     }
 
     void MovePlayer()
     {
-        translate = Input.GetAxisRaw("Horizontal") * speed * Time.deltaTime;
+        translate = hAxis * speed * Time.deltaTime;
         //check wall
         RaycastHit2D hit0 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + 0.1f), new Vector2(Input.GetAxisRaw("Horizontal"), 0), 0.35f, 1 << 8);
         RaycastHit2D hit1 = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + 0.5f), new Vector2(Input.GetAxisRaw("Horizontal"), 0), 0.35f, 1 << 8);
@@ -106,7 +152,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (Input.GetAxisRaw("Horizontal") != 0)
                 {
-                    jumpDirection = Input.GetAxisRaw("Horizontal") * speed * Time.deltaTime;
+                    jumpDirection = hAxis * speed * Time.deltaTime;
                     transform.Translate(jumpDirection, 0, 0);
                 }
             else if (Input.GetAxisRaw("Horizontal") == 0)
@@ -123,21 +169,6 @@ public class PlayerMovement : MonoBehaviour
         {
             playerDirection = Direction.LEFT;
             playerSprite.transform.localRotation = Quaternion.Euler(0, 180, 0);
-        }
-    }
-
-    void Jump()
-    {
-        if (isOnGround && Input.GetButtonDown("Jump"))
-        {
-                _rigidbody.AddForce(new Vector2(0, jumpPower), ForceMode2D.Impulse);
-                isOnGround = false;
-                tJump = 1f;
-                playerSound.PlaySound(0);
-        }
-        if (!isOnGround && Input.GetButton("Jump"))
-        {
-                _rigidbody.AddForce(new Vector2(0, jumpPowerLasting), ForceMode2D.Force);
         }
     }
 

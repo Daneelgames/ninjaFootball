@@ -9,6 +9,9 @@ public class DestroyOutsideZone : MonoBehaviour {
     public bool eZoneDepend;
     private GameObject player;
 
+    [SerializeField]
+    private bool canDestroy = false;
+
     void Start()
     {
         player = GameObject.Find("Player");
@@ -23,14 +26,20 @@ public class DestroyOutsideZone : MonoBehaviour {
     void OnTriggerStay2D(Collider2D coll)
     {
         if (coll.tag == "Room" && coll != playerActiveRoom)
-            Destroy(gameObject);
+            canDestroy = true;
     }
 
     void OnTriggerExit2D(Collider2D coll)
     {
-        if (coll.tag == "Zone" && eZoneDepend)
+        if (coll.tag == "Zone")
         {
-            Destroy(gameObject);
+            if (eZoneDepend)
+                Destroy(gameObject);
+
+            else if (canDestroy && !eZoneDepend)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

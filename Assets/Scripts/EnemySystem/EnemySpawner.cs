@@ -9,11 +9,14 @@ public class EnemySpawner : MonoBehaviour {
     private Collider2D playerActiveRoom;
     [SerializeField]
     private Collider2D playerZone;
-
-    private Collider2D spawnerRoom;
-    private GameObject player;
-    private GameObject spawnedMob = null;
+    [SerializeField]
     private bool canSpawn = true;
+    [SerializeField]
+    private GameObject spawnedMob = null;
+    [SerializeField]
+    private Collider2D spawnerRoom;
+
+    private GameObject player;
 
     void Start()
     {

@@ -18,7 +18,6 @@ public class TypewriterText : MonoBehaviour {
     private PlayerMovement playerScript;
     private bool inTrigger = false;
     private AudioSource _audio;
-    private TalkCursorController cursorController;
 
     void Start()
     {
@@ -26,14 +25,12 @@ public class TypewriterText : MonoBehaviour {
         _audio = GetComponent<AudioSource>() as AudioSource;
         playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>() as PlayerMovement;
         textBox = GameObject.Find("Text").GetComponent<Text>() as Text;
-        cursorController = GameObject.Find("TalkCursor").GetComponent<TalkCursorController>();
     }
 
     void OnTriggerEnter2D(Collider2D player)
     {
         if (player.gameObject.tag == "Player")
         {
-            cursorController.SwitchActive();
             inTrigger = true;
         }
     }
@@ -42,7 +39,6 @@ public class TypewriterText : MonoBehaviour {
     {
         if (player.gameObject.tag == "Player")
         {
-            cursorController.SwitchActive();
             inTrigger = false;
         }
     }
@@ -65,7 +61,6 @@ public class TypewriterText : MonoBehaviour {
                 isInDialog = true;
                 canvasAnimator.SetBool("Dialog", true);
                 playerScript.DialogStart();
-                cursorController.SwitchActive();
             }
         }
 
@@ -88,7 +83,6 @@ public class TypewriterText : MonoBehaviour {
             canvasAnimator.SetBool("Dialog", false);
             textBox.text = "";
             playerScript.DialogOver();
-            cursorController.SwitchActive();
         }
     }
 
