@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
     public int playerLives = 1;
     [ReadOnly]
     public Transform activeCheckpoint;
+    [ReadOnly]
+    public bool isOnGround = false;
 
     [SerializeField]
     private float speed = 2f;
@@ -22,8 +24,6 @@ public class PlayerMovement : MonoBehaviour
     private GameObject explosionParticles;
     [SerializeField]
     private GameObject playerAmmoDrop;
-    [SerializeField]
-    private bool isOnGround = false;
 
 
     [HideInInspector] public float tJump = 0f;
@@ -226,7 +226,8 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator Damage(float waitTime)
     {
-        Instantiate(explosionParticles, new Vector3(transform.position.x, transform.position.y, 0), transform.rotation);
+        GameObject explode = Instantiate(explosionParticles, new Vector3(transform.position.x, transform.position.y, 0), transform.rotation) as GameObject;
+        explode.GetComponent<ExplosionEnemyDamage>().damage = 0;
         _rigidbody.AddForce(new Vector2(0, jumpPower), ForceMode2D.Impulse);
         timeScaleScript.PlayerDead();
         Physics2D.IgnoreLayerCollision(10, 11, true);

@@ -4,7 +4,6 @@ using System.Collections;
 public class EnemySpawner : MonoBehaviour {
 
     public GameObject enemy;
-    public bool zoneDepend = false;
     [SerializeField]
     private Collider2D playerActiveRoom;
     [SerializeField]
@@ -17,10 +16,12 @@ public class EnemySpawner : MonoBehaviour {
     private Collider2D spawnerRoom;
 
     private GameObject player;
+    private PlayerMovement _pm;
 
     void Start()
     {
         player = GameObject.Find("Player");
+        _pm = player.GetComponent<PlayerMovement>();
         playerZone = GameObject.Find("Zone").GetComponent<Collider2D>() as Collider2D;
     }
     // Room spawn
@@ -34,34 +35,20 @@ public class EnemySpawner : MonoBehaviour {
     {
         playerActiveRoom = player.GetComponent<ActiveRoom>().activeRoom.GetComponent<Collider2D>();
 
-        if (spawnerRoom != playerActiveRoom && !zoneDepend)
-        {
+        if (spawnerRoom != playerActiveRoom)
             canSpawn = true;
-        }
+        else if (spawnedMob == null)
+            if (_pm.playerLives <= 0)
+                canSpawn = true;
     }
 
     //zone spawn
     void OnTriggerStay2D(Collider2D coll)
     {
-        if (coll == playerZone && canSpawn && zoneDepend)
+        if (coll.tag == "Zone" && spawnerRoom == playerActiveRoom && canSpawn && spawnedMob == null)
         {
-            GameObject mob = (GameObject) Instantiate(enemy, transform.position, transform.rotation);
-            mob.GetComponent<DestroyOutsideZone>().eZoneDepend = true;
             canSpawn = false;
-        }
-
-        if (coll.tag == "Zone" && spawnerRoom == playerActiveRoom && canSpawn && spawnedMob == null && !zoneDepend)
-        {
             spawnedMob = Instantiate(enemy, transform.position, transform.rotation) as GameObject;
-            canSpawn = false;
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D coll)
-    {
-        if (coll == playerZone && zoneDepend)
-        {
-            canSpawn = true;
         }
     }
 

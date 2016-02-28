@@ -57,7 +57,7 @@ public class TypewriterText : MonoBehaviour {
         if (inTrigger)
         {
             //Start dialog
-            if (!isInDialog && Input.GetAxisRaw("Vertical") > 0)
+            if (!isInDialog && Input.GetAxisRaw("Vertical") > 0 && playerScript.isOnGround)
             {
                 SkipToNextText();
                 isInDialog = true;
