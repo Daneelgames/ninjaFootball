@@ -2,12 +2,12 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class ChestController : MonoBehaviour {
+public class ChestControllerAmmo : MonoBehaviour {
 
     [SerializeField]
     private GameObject drop;
     [SerializeField]
-    private GameObject weapon;
+    private int amount;
 
     private bool inTrigger = false;
     private AudioSource _audio;
@@ -52,7 +52,7 @@ public class ChestController : MonoBehaviour {
 
     public void OpenChest(){
         GameObject lastDrop = Instantiate(drop, transform.position, transform.rotation) as GameObject;
-        lastDrop.GetComponent<WeaponDropController>().weapon = weapon;
+        lastDrop.GetComponent<DropController>().amount = amount;
         _collider.enabled = false;
         _audio.Play();
         _animator.SetTrigger("Open");

@@ -74,12 +74,12 @@ public class PlayerMovement : MonoBehaviour
         {
             JumpInput();
             MovePlayer();
-            GroundRaycast();
         }
         else
             translate = 0;
 
         Animator();
+        GroundRaycast();
     }
 
     void ConstrainAxis()
@@ -176,9 +176,9 @@ public class PlayerMovement : MonoBehaviour
     {
             if (tJump == 0)
             {
-                RaycastHit2D hit0 = Physics2D.Raycast(new Vector2(transform.position.x - 0.2f, transform.position.y), Vector2.down, 0.1f, 1 << 8);
+                RaycastHit2D hit0 = Physics2D.Raycast(new Vector2(transform.position.x - 0.25f, transform.position.y), Vector2.down, 0.1f, 1 << 8);
                 RaycastHit2D hit1 = Physics2D.Raycast(transform.position, Vector2.down, 0.1f, 1 << 8);
-                RaycastHit2D hit2 = Physics2D.Raycast(new Vector2(transform.position.x + 0.2f, transform.position.y), Vector2.down, 0.1f, 1 << 8);
+                RaycastHit2D hit2 = Physics2D.Raycast(new Vector2(transform.position.x + 0.25f, transform.position.y), Vector2.down, 0.1f, 1 << 8);
             if (hit0.collider != null || hit1.collider != null || hit2.collider != null)
             {
                 playerDropPos = transform.position;
@@ -213,7 +213,6 @@ public class PlayerMovement : MonoBehaviour
                 playerSound.PlaySound(2);
                 StartCoroutine(Damage(0.5F));
                 StartCoroutine(Blinking(.1F));
-                Destroy(enemy.gameObject);
             }
 
             else if (enemy.gameObject.tag == "Hazard")

@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class TypewriterText : MonoBehaviour {
 
+    public bool talked = false;
+
 	public string[] sourceText;
     [ReadOnly]
     public Text textBox;
@@ -83,6 +85,7 @@ public class TypewriterText : MonoBehaviour {
             canvasAnimator.SetBool("Dialog", false);
             textBox.text = "";
             playerScript.DialogOver();
+            talked = true;
         }
     }
 

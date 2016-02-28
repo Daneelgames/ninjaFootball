@@ -9,7 +9,6 @@ public class DestroyOutsideZone : MonoBehaviour {
     public bool eZoneDepend;
     private GameObject player;
 
-    [SerializeField]
     private bool canDestroy = false;
 
     void Start()
@@ -20,13 +19,12 @@ public class DestroyOutsideZone : MonoBehaviour {
     void Update()
     {
         playerActiveRoom = player.GetComponent<ActiveRoom>().activeRoom.GetComponent<Collider2D>();
-
     }
 
     void OnTriggerStay2D(Collider2D coll)
     {
-        if (coll.tag == "Room" && coll != playerActiveRoom)
-            canDestroy = true;
+        if (coll.tag == "Room" && coll != playerActiveRoom && canDestroy)
+            Destroy(gameObject);
     }
 
     void OnTriggerExit2D(Collider2D coll)
@@ -36,9 +34,9 @@ public class DestroyOutsideZone : MonoBehaviour {
             if (eZoneDepend)
                 Destroy(gameObject);
 
-            else if (canDestroy && !eZoneDepend)
+            else if (!eZoneDepend)
             {
-                Destroy(gameObject);
+                canDestroy = true;
             }
         }
     }

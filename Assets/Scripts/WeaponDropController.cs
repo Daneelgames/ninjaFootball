@@ -24,7 +24,7 @@ public class WeaponDropController : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         pm = GameObject.Find("Player").GetComponent<PlayerMovement>();
 
-        rb.AddForce(new Vector2(0, 7), ForceMode2D.Impulse);
+        rb.AddForce(new Vector2(0, 10), ForceMode2D.Impulse);
         Physics2D.IgnoreCollision(_collider, playerCollider, true);
 
         SetWeaponSprite();
@@ -64,12 +64,6 @@ public class WeaponDropController : MonoBehaviour {
     void OnTriggerEnter2D (Collider2D coll)
     {
         if (coll.tag == "Hazard")
-            Destroy(gameObject);
-    }
-
-    void OnTriggerExit2D (Collider2D coll)
-    {
-        if (coll.tag == "Zone")
             Destroy(gameObject);
     }
 }

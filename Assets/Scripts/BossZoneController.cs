@@ -3,13 +3,11 @@ using System.Collections;
 
 public class BossZoneController : MonoBehaviour {
 
-    private GameObject player;
     private GameObject leftBound;
     private GameObject rightBound;
 
     void Start()
     {
-        player = GameObject.Find("Player");
         leftBound = transform.Find("LeftBound").gameObject;
         rightBound = transform.Find("RightBound").gameObject;
 

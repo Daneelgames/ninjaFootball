@@ -34,13 +34,7 @@ public class EnemySpawner : MonoBehaviour {
     {
         playerActiveRoom = player.GetComponent<ActiveRoom>().activeRoom.GetComponent<Collider2D>();
 
-        if (spawnerRoom == playerActiveRoom && canSpawn && spawnedMob == null && !zoneDepend)
-        {
-            spawnedMob = Instantiate(enemy, transform.position, transform.rotation) as GameObject;
-            canSpawn = false;
-        }
-
-        else if (spawnerRoom != playerActiveRoom && !zoneDepend)
+        if (spawnerRoom != playerActiveRoom && !zoneDepend)
         {
             canSpawn = true;
         }
@@ -53,6 +47,12 @@ public class EnemySpawner : MonoBehaviour {
         {
             GameObject mob = (GameObject) Instantiate(enemy, transform.position, transform.rotation);
             mob.GetComponent<DestroyOutsideZone>().eZoneDepend = true;
+            canSpawn = false;
+        }
+
+        if (coll.tag == "Zone" && spawnerRoom == playerActiveRoom && canSpawn && spawnedMob == null && !zoneDepend)
+        {
+            spawnedMob = Instantiate(enemy, transform.position, transform.rotation) as GameObject;
             canSpawn = false;
         }
     }

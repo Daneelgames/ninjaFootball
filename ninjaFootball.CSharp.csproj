@@ -74,10 +74,13 @@
     <Compile Include="Assets\Scripts\AnimateOffset.cs" />
     <Compile Include="Assets\Scripts\BossPathBlocker.cs" />
     <Compile Include="Assets\Scripts\BossZoneController.cs" />
+    <Compile Include="Assets\Scripts\Bosses\OrginMuderCutScene.cs" />
+    <Compile Include="Assets\Scripts\Bosses\OrginMuderMovement.cs" />
     <Compile Include="Assets\Scripts\CameraRotateZ.cs" />
     <Compile Include="Assets\Scripts\CheckpointController.cs" />
     <Compile Include="Assets\Scripts\ChekpointAnimatorController.cs" />
-    <Compile Include="Assets\Scripts\ChestController.cs" />
+    <Compile Include="Assets\Scripts\ChestControllerAmmo.cs" />
+    <Compile Include="Assets\Scripts\ChestControllerWeapon.cs" />
     <Compile Include="Assets\Scripts\DestroyOnHazard.cs" />
     <Compile Include="Assets\Scripts\DestroyOnTime.cs" />
     <Compile Include="Assets\Scripts\DestroyOutsideZone.cs" />
