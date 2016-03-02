@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public float tJump = 0f;
     [HideInInspector] public bool shoot = false;
 
+    private bool hurt = false;
     private GameObject playerSprite;
     private TimeScale timeScaleScript;
     private Rigidbody2D _rigidbody;
@@ -36,7 +37,6 @@ public class PlayerMovement : MonoBehaviour
     private Weapon weapon;
     private float jumpDirection = 0.0f;
     private float translate;
-    private bool hurt = false;
     private bool dialog = false;
     private bool canLand = true;
     private Vector3 playerDropPos;

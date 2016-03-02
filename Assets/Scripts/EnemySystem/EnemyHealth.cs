@@ -9,6 +9,7 @@ public class EnemyHealth : MonoBehaviour {
     [SerializeField]
     private Transform explosion;
 
+    [SerializeField]
     private SpriteRenderer spriteRednerer;
     private AudioSource _audio;
     private bool canDestroy = true;
@@ -16,7 +17,6 @@ public class EnemyHealth : MonoBehaviour {
     void Start()
     {
         _audio = GetComponent<AudioSource>() as AudioSource;
-        spriteRednerer = GetComponentInChildren<SpriteRenderer>() as SpriteRenderer;
     }
 
     public void Damage(int dmg)

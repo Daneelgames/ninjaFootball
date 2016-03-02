@@ -7,8 +7,6 @@ public class EnemySpawner : MonoBehaviour {
     [SerializeField]
     private Collider2D playerActiveRoom;
     [SerializeField]
-    private Collider2D playerZone;
-    [SerializeField]
     private bool canSpawn = true;
     [SerializeField]
     private GameObject spawnedMob = null;
@@ -22,7 +20,6 @@ public class EnemySpawner : MonoBehaviour {
     {
         player = GameObject.Find("Player");
         _pm = player.GetComponent<PlayerMovement>();
-        playerZone = GameObject.Find("Zone").GetComponent<Collider2D>() as Collider2D;
     }
     // Room spawn
     void OnTriggerEnter2D(Collider2D coll)
@@ -45,7 +42,7 @@ public class EnemySpawner : MonoBehaviour {
     //zone spawn
     void OnTriggerStay2D(Collider2D coll)
     {
-        if (coll.tag == "Zone" && spawnerRoom == playerActiveRoom && canSpawn && spawnedMob == null)
+        if (coll.tag == "Zone" && spawnerRoom == playerActiveRoom && canSpawn && spawnedMob == null && _pm.playerLives > 0)
         {
             canSpawn = false;
             spawnedMob = Instantiate(enemy, transform.position, transform.rotation) as GameObject;

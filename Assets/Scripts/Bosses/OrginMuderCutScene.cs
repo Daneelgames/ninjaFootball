@@ -6,6 +6,7 @@ public class OrginMuderCutScene : MonoBehaviour {
     [SerializeField]
     private AudioClip[] clipList;
 
+    [SerializeField]
     private OrginMuderMovement orginMuder;
 
     private TypewriterText swordTypewriter;
@@ -15,7 +16,6 @@ public class OrginMuderCutScene : MonoBehaviour {
     private Animator _animator;
 
     void Start () {
-        orginMuder = GameObject.Find("OrginMuder").GetComponent<OrginMuderMovement>();
         _animator = GetComponent<Animator>();
         swordTypewriter = GetComponent<TypewriterText>();
         playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>() as PlayerMovement;

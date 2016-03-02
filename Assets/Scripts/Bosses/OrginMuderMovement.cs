@@ -6,19 +6,29 @@ public class OrginMuderMovement : MonoBehaviour {
     public bool inBattle = false;
 
     [SerializeField]
+    private GameObject explosionHolder;
+    [SerializeField]
+    private GameObject explosion;
+
+
+    [SerializeField]
     private float jumpPower = 1;
     [SerializeField]
     private float minT = 0.5f;
     [SerializeField]
     private float maxT = 4.5f;
 
+    [SerializeField]
     private float timer = 2f;
 
+    [SerializeField]
+    private EnemyHealth _healthScript;
+
+    private BossHealthbarController _healthbarScript;
     private GameObject player;
+    private PlayerMovement pm;
     private Animator _animator;
     private Rigidbody2D _rb;
-
-    private string state = "Idle";
 
     enum State {Idle, RightSide, RightDown, LeftSide, LeftDown};
 
@@ -30,11 +40,21 @@ public class OrginMuderMovement : MonoBehaviour {
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         player = GameObject.Find("Player");
+        pm = player.GetComponent<PlayerMovement>();
+
+        _healthbarScript = GameObject.Find("BossHealthbar").GetComponent<BossHealthbarController>();
+        _healthbarScript.maxBossHealth = _healthScript.health;
     }
 
     void Update ()
     {
-        if (inBattle)
+        if (pm.playerLives <= 0)
+            Destroy(gameObject, 1f);
+
+        if (_healthScript != null)
+            _healthbarScript.curBossHealth = _healthScript.health;
+
+        if (inBattle && _healthScript.health > 0)
             StatesManager();
     }
 
@@ -44,7 +64,7 @@ public class OrginMuderMovement : MonoBehaviour {
         {
             if (timer > 0)
                 timer -= 1f * Time.deltaTime;
-            else
+            else if (timer <= 0)
             {
                 timer = Random.Range(minT, maxT);
                 if (player.transform.position.y < transform.position.y + 13f)
@@ -76,17 +96,19 @@ public class OrginMuderMovement : MonoBehaviour {
             _animator.SetTrigger("RS");
     }
 
-    public void Sidejump(string direction)
+    public void Sidejump()
     {
-        if (direction == "Left")
-            _rb.AddForce(new Vector2(jumpPower * -1, 0f), ForceMode2D.Impulse);
-        else if (direction == "Right")
-            _rb.AddForce(new Vector2(jumpPower, 0f), ForceMode2D.Impulse);
+        float distance = Vector2.Distance(transform.position, player.transform.position);
+
+        if (player.transform.position.x < transform.position.x)
+            _rb.AddForce(new Vector2(jumpPower * distance/2 * -1, 0f), ForceMode2D.Impulse);
+        else
+            _rb.AddForce(new Vector2(jumpPower * distance/2, 0f), ForceMode2D.Impulse);
     }
 
-    public void SwordHit(Vector2 position)
+    public void SwordHitGround()
     {
-
+        Instantiate(explosion, explosionHolder.transform.position, explosionHolder.transform.rotation);
     }
 
     IEnumerator ReturnToIdle()

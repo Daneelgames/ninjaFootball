@@ -5,16 +5,20 @@ using UnityEngine.UI;
 public class BossHealthbarController : MonoBehaviour {
 
     [SerializeField]
-    private float fillAmount = 1;
-    [SerializeField]
     private Image content;
 
-    private int curBossHealth = 100;
+    public int maxBossHealth = 100;
+    public int curBossHealth = 100;
+
     private int minBossHealth = 0;
-    private int maxBossHealth = 100;
 
     private float minFill = 0f;
     private float maxFill = 1f;
+
+    void Start ()
+    {
+        curBossHealth = maxBossHealth;
+    }
 
     // Use this for initialization
     void Update () {

@@ -69,12 +69,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\BossHealthbarController.cs" />
     <Compile Include="Assets\Scripts\AddRandomForceOnStart.cs" />
     <Compile Include="Assets\Scripts\AlternativeWeaponCost.cs" />
     <Compile Include="Assets\Scripts\AnimateOffset.cs" />
     <Compile Include="Assets\Scripts\BossPathBlocker.cs" />
     <Compile Include="Assets\Scripts\BossZoneController.cs" />
+    <Compile Include="Assets\Scripts\Bosses\BossHealthbarController.cs" />
     <Compile Include="Assets\Scripts\Bosses\OrginMuderCutScene.cs" />
     <Compile Include="Assets\Scripts\Bosses\OrginMuderMovement.cs" />
     <Compile Include="Assets\Scripts\CameraRotateZ.cs" />
