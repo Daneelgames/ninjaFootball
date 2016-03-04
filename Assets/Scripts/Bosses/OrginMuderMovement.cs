@@ -9,8 +9,6 @@ public class OrginMuderMovement : MonoBehaviour {
     private GameObject explosionHolder;
     [SerializeField]
     private GameObject explosion;
-
-
     [SerializeField]
     private float jumpPower = 1;
     [SerializeField]
@@ -20,7 +18,6 @@ public class OrginMuderMovement : MonoBehaviour {
 
     [SerializeField]
     private float timer = 2f;
-
     [SerializeField]
     private EnemyHealth _healthScript;
 
@@ -55,7 +52,9 @@ public class OrginMuderMovement : MonoBehaviour {
             _healthbarScript.curBossHealth = _healthScript.health;
 
         if (inBattle && _healthScript.health > 0)
+        {
             StatesManager();
+        }
     }
 
     void StatesManager()
@@ -76,10 +75,22 @@ public class OrginMuderMovement : MonoBehaviour {
                 }
                 else
                 {
+                    float attackChoose = Random.Range(0, 2);
+
                     if (player.transform.position.x >= transform.position.x)
-                        bossState = State.RightSide;
+                        {
+                            if (attackChoose < 1)
+                                bossState = State.RightSide;
+                            else
+                                bossState = State.RightDown;
+                        }
                     else
-                        bossState = State.LeftSide;
+                        {
+                            if (attackChoose < 1)
+                                bossState = State.LeftSide;
+                            else
+                                bossState = State.LeftDown;
+                        }
                 }
             }
         }
@@ -98,7 +109,7 @@ public class OrginMuderMovement : MonoBehaviour {
 
     public void Sidejump()
     {
-        float distance = Vector2.Distance(transform.position, player.transform.position);
+        float distance = Vector2.Distance(new Vector2(transform.position.x, transform.position.y), new Vector2(player.transform.position.x, transform.position.y));
 
         if (player.transform.position.x < transform.position.x)
             _rb.AddForce(new Vector2(jumpPower * distance/2 * -1, 0f), ForceMode2D.Impulse);

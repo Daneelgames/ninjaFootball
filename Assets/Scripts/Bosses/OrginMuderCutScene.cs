@@ -8,6 +8,10 @@ public class OrginMuderCutScene : MonoBehaviour {
 
     [SerializeField]
     private OrginMuderMovement orginMuder;
+    [SerializeField]
+    private CircleCollider2D healthCollider;
+    [SerializeField]
+    private Animator muderAnimator;
 
     private TypewriterText swordTypewriter;
 
@@ -16,6 +20,7 @@ public class OrginMuderCutScene : MonoBehaviour {
     private Animator _animator;
 
     void Start () {
+        healthCollider.enabled = false;
         _animator = GetComponent<Animator>();
         swordTypewriter = GetComponent<TypewriterText>();
         playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>() as PlayerMovement;
@@ -36,6 +41,7 @@ public class OrginMuderCutScene : MonoBehaviour {
 
     IEnumerator CutScene()
     {
+        muderAnimator.SetTrigger("Awake");
         AudioSource.PlayClipAtPoint(clipList[0], transform.position);
         _animator.SetTrigger("Action");
         yield return new WaitForSeconds(3.5f);
@@ -43,6 +49,7 @@ public class OrginMuderCutScene : MonoBehaviour {
         yield return new WaitForSeconds(0.5f);
         orginMuder.inBattle = true;
         playerScript.DialogOver();
+        healthCollider.enabled = true;
         Destroy(gameObject);
     }
 

@@ -26,10 +26,11 @@ public class TimeScale : MonoBehaviour {
 
     public void Pause()
     {
-        StartCoroutine(PauseForTime());
+       // StartCoroutine(PauseForTime());
+        Shake();
     }
 
-    IEnumerator PauseForTime()
+   /* IEnumerator PauseForTime()
     {
         Shake();
         Time.timeScale = pauseScale;
@@ -39,7 +40,7 @@ public class TimeScale : MonoBehaviour {
             yield return 0;
         }
         Time.timeScale = 1;
-    }
+    } */
 
     public void PlayerDead()
     {

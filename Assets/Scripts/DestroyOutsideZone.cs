@@ -8,6 +8,8 @@ public class DestroyOutsideZone : MonoBehaviour {
 
     private GameObject player;
 
+    private Collider2D ownerRoom;
+
     private bool canDestroy = false;
 
     void Start()
@@ -20,6 +22,11 @@ public class DestroyOutsideZone : MonoBehaviour {
         playerActiveRoom = player.GetComponent<ActiveRoom>().activeRoom.GetComponent<Collider2D>();
     }
 
+    void OnTriggerEnter2D(Collider2D coll)
+    {
+        if (ownerRoom == null && coll.tag == "Room")
+            ownerRoom = coll;
+    }
 
     void OnTriggerStay2D(Collider2D coll)
     {
@@ -33,5 +40,8 @@ public class DestroyOutsideZone : MonoBehaviour {
         {
             canDestroy = true;
         }
+
+        if(coll == ownerRoom)
+            Destroy(gameObject);
     }
 }
