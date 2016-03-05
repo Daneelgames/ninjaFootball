@@ -11,22 +11,15 @@ public class EnemyHealth : MonoBehaviour {
 
     [SerializeField]
     private SpriteRenderer spriteRednerer;
-    private AudioSource _audio;
     private bool canDestroy = true;
 
-    void Start()
-    {
-        _audio = GetComponent<AudioSource>() as AudioSource;
-    }
 
     public void Damage(int dmg)
     {
         if (!invincible)
         {
-            StartCoroutine(Blink());
-            _audio.Play();
-            _audio.pitch = Random.Range(.7f, 1.3f);
             health -= dmg;
+            StartCoroutine(Blink());
             if (health <= 0)
                 EnemyDestroy();
         }

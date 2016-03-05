@@ -3,15 +3,13 @@ using System.Collections;
 
 public class PlayerSounds : MonoBehaviour {
 
-    //[ReadOnly]
-    //public AudioSource source;
-    public AudioClip[] audioClip;
+    [SerializeField]
+    private AudioClip[] audioClip;
     
     private float pitch;
 
     public void PlaySound(int clip)
     {
-        //source.clip = audioClip[clip];
         pitch = Random.Range(.75f, 1.25f);
         PlayClipAtPoint(audioClip[clip], new Vector3(transform.position.x, transform.position.y, 0), 1f, pitch);
     }

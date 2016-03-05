@@ -7,6 +7,8 @@ public class EnemyShootShielded : MonoBehaviour {
     private GameObject projectile;
     [SerializeField]
     private float attackTimer;
+    [SerializeField]
+    private AudioSource _audio;
 
     private bool isVisible = false;
     private GameObject sprite;
@@ -39,6 +41,8 @@ public class EnemyShootShielded : MonoBehaviour {
         spriteAnimator.SetTrigger("Shoot");
         yield return new WaitForSeconds(waitTime);
         Instantiate(projectile, shotHolder.transform.position, transform.rotation);
+        _audio.Play();
+        _audio.pitch = Random.Range(0.8f, 1.2f);
         yield return new WaitForSeconds(waitTime*2);
         enemyHealthScript.invincible = true;
         yield return new WaitForSeconds(waitTime * 2);

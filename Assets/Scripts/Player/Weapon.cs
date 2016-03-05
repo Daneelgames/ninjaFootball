@@ -7,9 +7,14 @@ public class Weapon : MonoBehaviour {
     [SerializeField]
     private GameObject mainWeapon;
     [SerializeField]
+    private GameObject _weaponDrop;
+
+    [SerializeField]
     private float reloadTimeMax = 0.5f;
     [SerializeField]
-    private GameObject _weaponDrop;
+    private float reloadTimeMaxAlt = 1f;
+    private float reloadTimeCur = 0;
+    private float reloadTimeCurAlt = 0;
 
     public GameObject altWeapon;
     public int altWeaponAmmo = 100;
@@ -18,7 +23,6 @@ public class Weapon : MonoBehaviour {
     private PlayerSounds playerSound;
     private Animator canvasAnimator;
     private PlayerMovement playerMovement;
-    private float reloadTimeCur = 0;
     private GameObject _lastAltInstance = null;
     private int _altWeaponCost;
     private Text ammoCounter;
@@ -55,14 +59,14 @@ public class Weapon : MonoBehaviour {
             reloadTimeCur = reloadTimeMax;
         }
 
-        if (Input.GetButtonDown("Fire2") && reloadTimeCur == 0)
+        if (Input.GetButtonDown("Fire2") && reloadTimeCurAlt == 0)
         {
             if (altWeaponAmmo >= _altWeaponCost && _lastAltInstance == null && altWeapon != null)
             {
                 altWeaponAmmo -= _altWeaponCost;
                 playerMovement.shoot = true;
                 _lastAltInstance = Instantiate(altWeapon, new Vector2(shotPosition.transform.position.x, shotPosition.transform.position.y), gameObject.transform.rotation) as GameObject;
-                reloadTimeCur = reloadTimeMax;
+                reloadTimeCurAlt = reloadTimeMaxAlt;
             }
             else if (altWeapon == null)
             {
@@ -80,10 +84,14 @@ public class Weapon : MonoBehaviour {
     void Reload()
     {
         if (reloadTimeCur > 0)
-            reloadTimeCur -= 5f * Time.deltaTime;
+            reloadTimeCur -= 1f * Time.deltaTime;
         else if (reloadTimeCur < 0)
             reloadTimeCur = 0;
 
+        if (reloadTimeCurAlt > 0)
+            reloadTimeCurAlt -= 1f * Time.deltaTime;
+        else if (reloadTimeCurAlt < 0)
+            reloadTimeCurAlt = 0;
     }
 
     void OnCollisionEnter2D(Collision2D coll)

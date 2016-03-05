@@ -14,18 +14,22 @@ public class EnemyBullet : MonoBehaviour {
     private Transform _transform;
     private float hSpeed;
     private float translate;
+    private PlayerMovement _pm;
 
     private bool roomGot = false;
 
     void Start ()
     {
         _transform = transform;
-
+        _pm = GameObject.Find("Player").GetComponent<PlayerMovement>();
     }
 
     void Update()
     {
         _transform.Translate(direction.x * speed * Time.deltaTime, direction.y * speed * Time.deltaTime, 0);
+
+        if (_pm.playerLives <= 0)
+            BulletDestroy();
     }
 
     void OnCollisionEnter2D(Collision2D other)

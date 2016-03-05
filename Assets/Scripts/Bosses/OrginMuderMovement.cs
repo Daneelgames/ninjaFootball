@@ -5,10 +5,15 @@ public class OrginMuderMovement : MonoBehaviour {
 
     public bool inBattle = false;
 
+
     [SerializeField]
-    private GameObject explosionHolder;
+    private GameObject spikes;
+    [SerializeField]
+    private GameObject spikesHolder;
     [SerializeField]
     private GameObject explosion;
+    [SerializeField]
+    private GameObject explosionHolder;
     [SerializeField]
     private float jumpPower = 1;
     [SerializeField]
@@ -21,40 +26,54 @@ public class OrginMuderMovement : MonoBehaviour {
     [SerializeField]
     private EnemyHealth _healthScript;
 
+    private GameObject healthbar;
     private BossHealthbarController _healthbarScript;
     private GameObject player;
     private PlayerMovement pm;
     private Animator _animator;
     private Rigidbody2D _rb;
 
-    enum State {Idle, RightSide, RightDown, LeftSide, LeftDown};
+    private GameObject spawner;
+
+    private bool canSpikes = false;
+
+    enum State {Idle, RightSide, RightDown, LeftSide, LeftDown, Spikes};
 
     [SerializeField]
     private State bossState = State.Idle;
 
     void Start()
     {
+        spawner = GameObject.Find("OrginMuderSpawner");
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         player = GameObject.Find("Player");
         pm = player.GetComponent<PlayerMovement>();
-
-        _healthbarScript = GameObject.Find("BossHealthbar").GetComponent<BossHealthbarController>();
-        _healthbarScript.maxBossHealth = _healthScript.health;
+        healthbar = GameObject.Find("BossHealthbar");
+        _healthbarScript = healthbar.GetComponent<BossHealthbarController>();
     }
 
     void Update ()
     {
-        if (pm.playerLives <= 0)
-            Destroy(gameObject, 1f);
+        if (inBattle)
+        {
+            if (_healthbarScript.maxBossHealth == 0)
+                 _healthbarScript.maxBossHealth = _healthScript.health;
 
-        if (_healthScript != null)
             _healthbarScript.curBossHealth = _healthScript.health;
 
-        if (inBattle && _healthScript.health > 0)
-        {
-            StatesManager();
+            if (_healthScript.health > 0)
+            {
+                StatesManager();
+            }
+            else
+            {
+                BossKilled();
+            }
         }
+
+        if (pm.playerLives <= 0)
+            Destroy(gameObject, 1f);
     }
 
     void StatesManager()
@@ -75,22 +94,47 @@ public class OrginMuderMovement : MonoBehaviour {
                 }
                 else
                 {
-                    float attackChoose = Random.Range(0, 2);
-
+                    float attackChoose = Random.Range(0f, 1f);
                     if (player.transform.position.x >= transform.position.x)
                         {
-                            if (attackChoose < 1)
+                            if (attackChoose < 0.2)
                                 bossState = State.RightSide;
-                            else
+                            else if (attackChoose > 0.8)
                                 bossState = State.RightDown;
+                            else
+                            {
+                                if (_healthScript.health < 50 && canSpikes)
+                                    {
+                                        bossState = State.Spikes;
+                                        canSpikes = false;
+                                    }
+                            else
+                                    {
+                                        bossState = State.RightSide;
+                                        canSpikes = true;
+                                    }
+                            }
                         }
                     else
                         {
-                            if (attackChoose < 1)
+                            if (attackChoose < 0.2)
                                 bossState = State.LeftSide;
-                            else
+                            else if (attackChoose > 0.8)
                                 bossState = State.LeftDown;
-                        }
+                            else
+                            {
+                                if (_healthScript.health < 50 && canSpikes)
+                                    {
+                                        bossState = State.Spikes;
+                                        canSpikes = false;
+                                    }
+                                else
+                                    {
+                                        bossState = State.LeftSide;
+                                        canSpikes = true;
+                                    }
+                            }
+                    }
                 }
             }
         }
@@ -105,6 +149,8 @@ public class OrginMuderMovement : MonoBehaviour {
             _animator.SetTrigger("RD");
         if (bossState == State.RightSide)
             _animator.SetTrigger("RS");
+        if (bossState == State.Spikes)
+           _animator.SetTrigger("Spikes");
     }
 
     public void Sidejump()
@@ -128,4 +174,15 @@ public class OrginMuderMovement : MonoBehaviour {
         bossState = State.Idle;
     }
 
+    void BossKilled()
+    {
+        Destroy(spawner);
+        _animator.SetBool("Dead", true);
+    }
+
+    void OnDestroy()
+    {
+        _healthbarScript.maxBossHealth = 0;
+        _healthbarScript.curBossHealth = 0;
+    }
 }

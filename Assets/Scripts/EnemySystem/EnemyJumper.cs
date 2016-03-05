@@ -11,6 +11,8 @@ public class EnemyJumper : MonoBehaviour {
     private float waitBeforeJumpCur = 0;
     [SerializeField]
     private bool isOnGround = false;
+    [SerializeField]
+    private AudioSource _audio;
 
     private GameObject player;
     private GameObject sprite;
@@ -54,6 +56,8 @@ public class EnemyJumper : MonoBehaviour {
         if (isOnGround && waitBeforeJumpCur <= 0 && isVisible)
         {
             _animator.SetTrigger("Jump");
+            _audio.Play();
+            _audio.pitch = Random.Range(0.8f, 1.2f);
             _rigidbody.AddForce(new Vector2(hDir * jumpPower, jumpPower * 1.5f), ForceMode2D.Impulse);
             isOnGround = false;
             tJump = 1f;
@@ -65,9 +69,9 @@ public class EnemyJumper : MonoBehaviour {
     {
         if (tJump == 0)
         {
-            RaycastHit2D hit0 = Physics2D.Raycast(new Vector2(transform.position.x - 0.2f, transform.position.y), Vector2.down, 0.1f, 1 << 8);
+            RaycastHit2D hit0 = Physics2D.Raycast(new Vector2(transform.position.x - 0.5f, transform.position.y), Vector2.down, 0.1f, 1 << 8);
             RaycastHit2D hit1 = Physics2D.Raycast(transform.position, Vector2.down, 0.1f, 1 << 8);
-            RaycastHit2D hit2 = Physics2D.Raycast(new Vector2(transform.position.x + 0.2f, transform.position.y), Vector2.down, 0.1f, 1 << 8);
+            RaycastHit2D hit2 = Physics2D.Raycast(new Vector2(transform.position.x + 0.5f, transform.position.y), Vector2.down, 0.1f, 1 << 8);
             if (hit0.collider != null || hit1.collider != null || hit2.collider != null)
             {
                 isOnGround = true;

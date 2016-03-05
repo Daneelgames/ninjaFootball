@@ -44,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator _animator;
     private PlayerSounds playerSound;
     private int hAxis;
+    private Animator canvasAnimator;
 
     private bool jumpTrigger = false;
     private bool jumpContinue = false;
@@ -63,6 +64,7 @@ public class PlayerMovement : MonoBehaviour
         _animator = transform.Find("PlayerSprites").GetComponent<Animator>();
         playerSound = transform.Find("PlayerSprites").GetComponent<PlayerSounds>();
         playerSprite = transform.Find("PlayerSprites").gameObject;
+        canvasAnimator = GameObject.Find("Canvas").GetComponent<Animator>();
         renderer = playerSprite.GetComponent<SpriteRenderer>();
     }
 
@@ -233,7 +235,8 @@ public class PlayerMovement : MonoBehaviour
         Physics2D.IgnoreLayerCollision(10, 11, true);
         hurt = true;
         playerLives = 0;
-        yield return new WaitForSeconds(waitTime + waitTime/2);
+        yield return new WaitForSeconds(waitTime/2);
+        canvasAnimator.SetTrigger("Dead");
         hurt = false;
         if (!renderer.enabled)
             renderer.enabled = true;

@@ -7,6 +7,8 @@ public class EnemyDosehadsShooter : MonoBehaviour {
     private GameObject projectile;
     [SerializeField]
     private float attackTime = 1f;
+    [SerializeField]
+    private AudioSource _audio;
 
     private GameObject player;
     private GameObject head_1;
@@ -48,19 +50,25 @@ public class EnemyDosehadsShooter : MonoBehaviour {
         animator_1.SetTrigger("Shoot");
         yield return new WaitForSeconds(waitTime * 0.5f);
         GameObject lastBullet_1 = Instantiate(projectile, head_1.transform.position, transform.rotation) as GameObject;
-        lastBullet_1.GetComponent<EnemyBullet>().direction = new Vector2(_directionH, 0);
+        _audio.Play();
+        _audio.pitch = Random.Range(0.75f, 0.9f);
+        lastBullet_1.GetComponent<EnemyBullet>().direction = new Vector2(_directionH, 0.5f);
         yield return new WaitForSeconds(waitTime * 0.5f);
 
         animator_2.SetTrigger("Shoot");
         yield return new WaitForSeconds(waitTime * 0.5f);
         GameObject lastBullet_2 = Instantiate(projectile, head_2.transform.position, transform.rotation) as GameObject;
-        lastBullet_2.GetComponent<EnemyBullet>().direction = new Vector2(_directionH, -0.25f);
+        _audio.Play();
+        _audio.pitch = Random.Range(0.75f, 0.9f);
+        lastBullet_2.GetComponent<EnemyBullet>().direction = new Vector2(_directionH, 0);
         yield return new WaitForSeconds(waitTime * 0.5f);
 
         animator_3.SetTrigger("Shoot");
         yield return new WaitForSeconds(waitTime * 0.5f);
         GameObject lastBullet_3 = Instantiate(projectile, head_3.transform.position, transform.rotation) as GameObject;
-        lastBullet_3.GetComponent<EnemyBullet>().direction = new Vector2(_directionH, -0.2f);
+        _audio.Play();
+        _audio.pitch = Random.Range(0.75f, 0.9f);
+        lastBullet_3.GetComponent<EnemyBullet>().direction = new Vector2(_directionH, 0);
         yield return new WaitForSeconds(waitTime * 0.5f);
         canStartCoroutine = true;
     }
