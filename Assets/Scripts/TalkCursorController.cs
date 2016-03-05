@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class TalkCursorController : MonoBehaviour {
-
+    
     private bool visible = false;
     private SpriteRenderer _renderer;
     private Collider2D lastCollider;

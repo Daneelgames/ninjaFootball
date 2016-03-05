@@ -58,13 +58,17 @@ public class TypewriterText : MonoBehaviour {
         {
             //Start dialog
             if (!isInDialog && Input.GetAxisRaw("Vertical") > 0 && playerScript.isOnGround)
-            {
-                SkipToNextText();
-                isInDialog = true;
-                canvasAnimator.SetBool("Dialog", true);
-                playerScript.DialogStart();
-            }
+                StartDialog();
         }
+
+    }
+
+    public void StartDialog()
+    {
+        SkipToNextText();
+        isInDialog = true;
+        canvasAnimator.SetBool("Dialog", true);
+        playerScript.DialogStart();
 
     }
 
@@ -85,7 +89,6 @@ public class TypewriterText : MonoBehaviour {
             canvasAnimator.SetBool("Dialog", false);
             textBox.text = "";
             playerScript.DialogOver();
-            talked = true;
         }
     }
 
@@ -100,6 +103,7 @@ public class TypewriterText : MonoBehaviour {
         Physics2D.IgnoreLayerCollision(10, 12, true);
         yield return new WaitForSeconds(0.5f);
         Physics2D.IgnoreLayerCollision(10, 12, false);
+        talked = true;
     }
 
     IEnumerator AnimateText(int curStr)
