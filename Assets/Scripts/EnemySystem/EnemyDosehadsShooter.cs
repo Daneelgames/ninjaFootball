@@ -10,6 +10,7 @@ public class EnemyDosehadsShooter : MonoBehaviour {
     [SerializeField]
     private AudioSource _audio;
 
+    private bool isVisible = false;
     private GameObject player;
     private GameObject head_1;
     private GameObject head_2;
@@ -33,7 +34,7 @@ public class EnemyDosehadsShooter : MonoBehaviour {
 
     void Update ()
     {
-        if (canStartCoroutine)
+        if (canStartCoroutine && isVisible)
             StartCoroutine(Shoot(attackTime));
     }
 
@@ -71,6 +72,18 @@ public class EnemyDosehadsShooter : MonoBehaviour {
         lastBullet_3.GetComponent<EnemyBullet>().direction = new Vector2(_directionH, 0);
         yield return new WaitForSeconds(waitTime * 0.5f);
         canStartCoroutine = true;
+    }
+
+    void OnTriggerStay2D(Collider2D coll)
+    {
+        if (coll.tag == "Zone")
+            isVisible = true;
+    }
+
+    void OnTriggerExit2D(Collider2D coll)
+    {
+        if (coll.tag == "Zone")
+            isVisible = false;
     }
 
 }

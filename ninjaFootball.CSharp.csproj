@@ -112,6 +112,7 @@
     <Compile Include="Assets\Scripts\RandomizePitchOnStart.cs" />
     <Compile Include="Assets\Scripts\ScrollController.cs" />
     <Compile Include="Assets\Scripts\ShakeScreenOnStart.cs" />
+    <Compile Include="Assets\Scripts\SpawnInstanceOnStart.cs" />
     <Compile Include="Assets\Scripts\StartCutSceneInTrigger.cs" />
     <Compile Include="Assets\Scripts\StartDrawnAnimation.cs" />
     <Compile Include="Assets\Scripts\TalkCursorController.cs" />
