@@ -13,27 +13,22 @@ public class OrginMuderCutScene : MonoBehaviour {
     [SerializeField]
     private Animator muderAnimator;
 
-    private TypewriterText swordTypewriter;
 
     private PlayerMovement playerScript;
-    private bool cutSceneRun = false;
     private Animator _animator;
 
     void Start () {
         healthCollider.enabled = false;
         _animator = GetComponent<Animator>();
-        swordTypewriter = GetComponent<TypewriterText>();
         playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>() as PlayerMovement;
 
     }
-	
-	void Update () {
-	    if (!cutSceneRun && swordTypewriter.talked)
+
+    void OnTriggerEnter2D (Collider2D coll)
+    {
+        if (coll.tag == "Player")
         {
             GetComponent<Collider2D>().enabled = false;
-            GetComponent<TypewriterText>().enabled = false;
-
-            cutSceneRun = true;
             playerScript.DialogStart();
             StartCoroutine(CutScene());
         }

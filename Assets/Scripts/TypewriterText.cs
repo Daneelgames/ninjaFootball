@@ -7,8 +7,8 @@ public class TypewriterText : MonoBehaviour {
     public bool talked = false;
 
 	public string[] sourceText;
-    [ReadOnly]
-    public Text textBox;
+    [SerializeField]
+    private Sprite[] dialogPicture;
     [ReadOnly]
     public Animator canvasAnimator;
     [ReadOnly]
@@ -21,12 +21,16 @@ public class TypewriterText : MonoBehaviour {
     private bool inTrigger = false;
     private AudioSource _audio;
 
+    private Text textBox;
+    private Image picBox;
+
     void Start()
     {
         canvasAnimator = GameObject.Find("Canvas").GetComponent<Animator>();
         _audio = GetComponent<AudioSource>() as AudioSource;
         playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>() as PlayerMovement;
         textBox = GameObject.Find("Text").GetComponent<Text>() as Text;
+        picBox = GameObject.Find("DialogPicture").GetComponent<Image>() as Image;
     }
 
     void OnTriggerEnter2D(Collider2D player)
@@ -75,8 +79,19 @@ public class TypewriterText : MonoBehaviour {
     public void SkipToNextText(){
 		StopAllCoroutines();
 		//Skip to the next line
-		if (currentlyDisplayingText < sourceText.Length) {
-			StartCoroutine (AnimateText(currentlyDisplayingText));
+		if (currentlyDisplayingText < sourceText.Length)
+        {
+            if (dialogPicture[currentlyDisplayingText] != null)
+                {   
+                    if (picBox.enabled != true)
+                        picBox.enabled = true;
+
+                    picBox.sprite = dialogPicture[currentlyDisplayingText];
+                }
+            else
+                picBox.enabled = false;
+
+            StartCoroutine (AnimateText(currentlyDisplayingText));
             currentlyDisplayingText += 1;
         }
 		//Reached the end of the array
