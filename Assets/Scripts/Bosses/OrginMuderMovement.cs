@@ -16,15 +16,11 @@ public class OrginMuderMovement : MonoBehaviour {
     private GameObject explosionHolder;
     [SerializeField]
     private float jumpPower = 1;
-    [SerializeField]
-    private float minT = 0.5f;
-    [SerializeField]
-    private float maxT = 4.5f;
 
     [SerializeField]
-    private float timer = 2f;
-    [SerializeField]
     private EnemyHealth _healthScript;
+    [SerializeField]
+    private AudioSource _audioSource;
 
     private GameObject healthbar;
     private BossHealthbarController _healthbarScript;
@@ -32,8 +28,11 @@ public class OrginMuderMovement : MonoBehaviour {
     private PlayerMovement pm;
     private Animator _animator;
     private Rigidbody2D _rb;
-
     private GameObject spawner;
+
+    private float timer = 0f;
+    private float minT = 0.5f;
+    private float maxT = 4.5f;
 
     private bool canSpikes = false;
 
@@ -57,6 +56,9 @@ public class OrginMuderMovement : MonoBehaviour {
     {
         if (inBattle)
         {
+            if (!_audioSource.isPlaying)
+                _audioSource.Play();
+
             if (_healthbarScript.maxBossHealth == 0)
                  _healthbarScript.maxBossHealth = _healthScript.health;
 
@@ -176,8 +178,12 @@ public class OrginMuderMovement : MonoBehaviour {
 
     void BossKilled()
     {
-        Destroy(spawner);
-        _animator.SetBool("Dead", true);
+        if (_audioSource.isPlaying)
+        {
+            _audioSource.Stop();
+            Destroy(spawner);
+            _animator.SetBool("Dead", true);
+        }
     }
 
     void OnDestroy()
