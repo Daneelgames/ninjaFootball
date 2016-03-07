@@ -15,12 +15,18 @@ public class OrginMuderMovement : MonoBehaviour {
     [SerializeField]
     private GameObject explosionHolder;
     [SerializeField]
+    private GameObject darkCang2;
+    [SerializeField]
+    private Vector3 darkCangPosition;
+    [SerializeField]
     private float jumpPower = 1;
 
     [SerializeField]
     private EnemyHealth _healthScript;
     [SerializeField]
     private AudioSource _audioSource;
+    [SerializeField]
+    private AudioClip victoryTheme;
 
     private GameObject healthbar;
     private BossHealthbarController _healthbarScript;
@@ -31,10 +37,11 @@ public class OrginMuderMovement : MonoBehaviour {
     private GameObject spawner;
 
     private float timer = 0f;
-    private float minT = 0.5f;
-    private float maxT = 4.5f;
+    private float minT = 0f;
+    private float maxT = 2f;
 
     private bool canSpikes = false;
+    private bool dead = false;
 
     enum State {Idle, RightSide, RightDown, LeftSide, LeftDown, Spikes};
 
@@ -121,7 +128,7 @@ public class OrginMuderMovement : MonoBehaviour {
                         {
                             if (attackChoose < 0.2)
                                 bossState = State.LeftSide;
-                            else if (attackChoose > 0.8)
+                            else if (attackChoose > 0.9)
                                 bossState = State.LeftDown;
                             else
                             {
@@ -178,9 +185,12 @@ public class OrginMuderMovement : MonoBehaviour {
 
     void BossKilled()
     {
-        if (_audioSource.isPlaying)
+        if (!dead)
         {
-            _audioSource.Stop();
+            Instantiate(darkCang2, darkCangPosition, transform.rotation);
+            _audioSource.clip = victoryTheme;
+            _audioSource.Play();
+            dead = true;
             Destroy(spawner);
             _animator.SetBool("Dead", true);
         }

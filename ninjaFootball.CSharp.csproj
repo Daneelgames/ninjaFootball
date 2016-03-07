@@ -77,6 +77,7 @@
     <Compile Include="Assets\Scripts\Bosses\BossHealthbarController.cs" />
     <Compile Include="Assets\Scripts\Bosses\OrginMuderCutScene.cs" />
     <Compile Include="Assets\Scripts\Bosses\OrginMuderMovement.cs" />
+    <Compile Include="Assets\Scripts\CS\CSWalkToMotherWithCang.cs" />
     <Compile Include="Assets\Scripts\CameraRotateZ.cs" />
     <Compile Include="Assets\Scripts\CheckpointController.cs" />
     <Compile Include="Assets\Scripts\ChekpointAnimatorController.cs" />

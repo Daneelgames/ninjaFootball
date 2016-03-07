@@ -9,6 +9,10 @@ public class PlayerMovement : MonoBehaviour
     public Transform activeCheckpoint;
     [ReadOnly]
     public bool isOnGround = false;
+    [HideInInspector]
+    public bool dialog = false;
+    [HideInInspector]
+    public int hAxis;
 
     [SerializeField]
     private float speed = 2f;
@@ -29,7 +33,6 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public float tJump = 0f;
     [HideInInspector] public bool shoot = false;
 
-    private bool dialog = false;
     private bool hurt = false;
     private GameObject playerSprite;
     private TimeScale timeScaleScript;
@@ -43,7 +46,6 @@ public class PlayerMovement : MonoBehaviour
     private new SpriteRenderer renderer;
     private Animator _animator;
     private PlayerSounds playerSound;
-    private int hAxis;
     private Animator canvasAnimator;
 
     private bool jumpTrigger = false;
@@ -70,16 +72,16 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        ConstrainAxis();
 
         if (playerLives > 0 && !dialog)
         {
+            ConstrainAxis();
             JumpInput();
-            MovePlayer();
         }
         else
             translate = 0;
 
+        MovePlayer();
         Animator();
         GroundRaycast();
     }
@@ -276,6 +278,7 @@ public class PlayerMovement : MonoBehaviour
     {
         dialog = true;
         weapon.enabled = false;
+        hAxis = 0;
     }
 
     public void DialogOver()

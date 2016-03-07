@@ -4,7 +4,9 @@ using System.Collections;
 public class CreateNewInstanceAfterTalk : MonoBehaviour {
 
     [SerializeField]
-    private GameObject npcInstance;
+    private GameObject nextNpcInstance;
+    [SerializeField]
+    private bool notDestroy = false;
 
     private TypewriterText npcScript;
     private bool canspawn = true;
@@ -19,8 +21,9 @@ public class CreateNewInstanceAfterTalk : MonoBehaviour {
         if(npcScript.talked && canspawn)
         {
             canspawn = false;
-            Instantiate(npcInstance, transform.position, transform.rotation);
-            Destroy(gameObject);
+            Instantiate(nextNpcInstance, transform.position, transform.rotation);
+            if (!notDestroy)
+                Destroy(gameObject);
         }
 
     }
