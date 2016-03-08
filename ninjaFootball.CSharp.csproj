@@ -79,6 +79,7 @@
     <Compile Include="Assets\Scripts\Bosses\OrginMuderMovement.cs" />
     <Compile Include="Assets\Scripts\CS\CSWalkToMotherWithCang.cs" />
     <Compile Include="Assets\Scripts\CameraRotateZ.cs" />
+    <Compile Include="Assets\Scripts\ChangeSpriteEverySec.cs" />
     <Compile Include="Assets\Scripts\CheckpointController.cs" />
     <Compile Include="Assets\Scripts\ChekpointAnimatorController.cs" />
     <Compile Include="Assets\Scripts\ChestControllerAmmo.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Assets\Scripts\DestroyOutsideZone.cs" />
     <Compile Include="Assets\Scripts\Dev\ReadOnlyAttribute.cs" />
     <Compile Include="Assets\Scripts\DisableColliderOnTime.cs" />
+    <Compile Include="Assets\Scripts\DoorLogic.cs" />
     <Compile Include="Assets\Scripts\DropController.cs" />
     <Compile Include="Assets\Scripts\EnemySystem\BulletX3.cs" />
     <Compile Include="Assets\Scripts\EnemySystem\EnemyBullet.cs" />
