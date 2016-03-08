@@ -15,7 +15,6 @@ public class ChangeSpriteEverySec : MonoBehaviour {
     {
         if (coll.tag == "Zone")
         {
-            print("Invoke");
             InvokeRepeating("ChangeSprite", tPeriod, tPeriod);
         }
     }
@@ -30,6 +29,5 @@ public class ChangeSpriteEverySec : MonoBehaviour {
     {
         int newSprite = Random.Range(0, sprites.Length);
         _renderer.sprite = sprites[newSprite];
-        print(newSprite);
     }
 }
