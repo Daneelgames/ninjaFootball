@@ -15,11 +15,13 @@ public class EnemySpawner : MonoBehaviour {
 
     private GameObject player;
     private PlayerMovement _pm;
+    private ActiveRoom playerActiveRoomScript;
 
     void Start()
     {
         player = GameObject.Find("Player");
         _pm = player.GetComponent<PlayerMovement>();
+        playerActiveRoomScript = player.GetComponent<ActiveRoom>();
     }
     // Room spawn
     void OnTriggerEnter2D(Collider2D coll)
@@ -33,16 +35,11 @@ public class EnemySpawner : MonoBehaviour {
         GetPlayerRoom();
         MobReset();
         MobSpawn();
-    }
+    }   
 
     void GetPlayerRoom()
     {
-        playerActiveRoom = player.GetComponent<ActiveRoom>().activeRoom.GetComponent<Collider2D>();
-
-        if (spawnerRoom != playerActiveRoom)
-            canSpawn = true;
-        else if (spawnedMob == null && _pm.playerLives <= 0)
-            canSpawn = true;
+        playerActiveRoom = playerActiveRoomScript.activeRoom.GetComponent<Collider2D>();
     }
 
     void MobSpawn()
@@ -53,27 +50,23 @@ public class EnemySpawner : MonoBehaviour {
             spawnedMob = Instantiate(enemy, transform.position, transform.rotation) as GameObject;
         }
 
+        if (spawnerRoom != playerActiveRoom)
+        {
+            canSpawn = true;
+            if (spawnedMob != null)
+                Destroy(spawnedMob);
+        }
     }
 
     void MobReset()
     {
         //destroy mob if player is dead
-        if (_pm.playerLives <= 0 && spawnedMob != null)
+        if (_pm.playerLives <= 0)
         {
-            Destroy(spawnedMob, 0.5f);
+            if (spawnedMob != null)
+                Destroy(spawnedMob, 0.25f);
+
             canSpawn = true;
         }
     }
-
-    /*
-    //spawn on zone collide
-    void OnTriggerStay2D(Collider2D coll)
-    {
-        if (coll.tag == "Zone" && spawnerRoom == playerActiveRoom && canSpawn && spawnedMob == null && _pm.playerLives > 0)
-        {
-            canSpawn = false;
-            spawnedMob = Instantiate(enemy, transform.position, transform.rotation) as GameObject;
-        }
-    } */
-
 }

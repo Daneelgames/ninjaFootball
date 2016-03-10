@@ -11,16 +11,16 @@ public class WeaponDropController : MonoBehaviour {
 
     private PlayerMovement pm;
     private Rigidbody2D rb;
-    private BoxCollider2D playerCollider;
-    private BoxCollider2D _collider;
+    private Collider2D playerCollider;
+    private Collider2D _collider;
 
     private float ignoreT = 1f;
 
     void Start()
     {
         weaponSprite = transform.Find("Sprite").GetComponent<SpriteRenderer>();
-        _collider = GetComponent<BoxCollider2D>();
-        playerCollider = GameObject.Find("Player").GetComponent<BoxCollider2D>();
+        _collider = GetComponent<Collider2D>();
+        playerCollider = GameObject.Find("Player").GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
         pm = GameObject.Find("Player").GetComponent<PlayerMovement>();
 

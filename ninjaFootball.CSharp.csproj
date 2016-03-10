@@ -103,6 +103,7 @@
     <Compile Include="Assets\Scripts\EnemySystem\EnemyShootShielded.cs" />
     <Compile Include="Assets\Scripts\EnemySystem\EnemySpawner.cs" />
     <Compile Include="Assets\Scripts\EnemySystem\EnemySplathorsController.cs" />
+    <Compile Include="Assets\Scripts\EnemySystem\EnemySplathorsMovementController.cs" />
     <Compile Include="Assets\Scripts\FlipTowardsPlayer.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\GetRightTopCorner.cs" />

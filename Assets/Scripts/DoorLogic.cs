@@ -24,6 +24,10 @@ public class DoorLogic : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        if (inTrigger && playerScript.playerLives <= 0)
+            inTrigger = false;
+
         if (inTrigger)
         {
             if (!isInDialog && Input.GetAxisRaw("Vertical") > 0 && playerScript.isOnGround)
@@ -53,7 +57,7 @@ public class DoorLogic : MonoBehaviour {
         isInDialog = false;
 
     }
-
+    
     void OnTriggerEnter2D(Collider2D player)
     {
         if (player.gameObject.tag == "Player")
