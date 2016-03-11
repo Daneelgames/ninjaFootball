@@ -17,7 +17,9 @@ public class Shotgun : MonoBehaviour {
         for (int i = 0; i < 10; i++)
         {
             var lastBullet = Instantiate(bullet, new Vector2(transform.position.x, transform.position.y - 0.1f), gameObject.transform.rotation) as GameObject;
-            lastBullet.GetComponent<Bullet>().hRandom = 10f;
+            Bullet bulletScript = lastBullet.GetComponent<Bullet>() as Bullet;
+            bulletScript.hRandom = 10f;
+            bulletScript.damage = 3;
         }
         Destroy(gameObject);
     }

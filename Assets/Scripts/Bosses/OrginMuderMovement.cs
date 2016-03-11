@@ -34,7 +34,6 @@ public class OrginMuderMovement : MonoBehaviour {
     private PlayerMovement pm;
     private Animator _animator;
     private Rigidbody2D _rb;
-    private GameObject spawner;
 
     private float timer = 0f;
     private float minT = 0f;
@@ -50,7 +49,6 @@ public class OrginMuderMovement : MonoBehaviour {
 
     void Start()
     {
-        spawner = GameObject.Find("OrginMuderSpawner");
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         player = GameObject.Find("Player");
@@ -191,7 +189,6 @@ public class OrginMuderMovement : MonoBehaviour {
             _audioSource.clip = victoryTheme;
             _audioSource.Play();
             dead = true;
-            Destroy(spawner);
             _animator.SetBool("Dead", true);
         }
     }

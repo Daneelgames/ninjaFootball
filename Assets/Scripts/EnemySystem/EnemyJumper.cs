@@ -69,9 +69,9 @@ public class EnemyJumper : MonoBehaviour {
     {
         if (tJump == 0)
         {
-            RaycastHit2D hit0 = Physics2D.Raycast(new Vector2(transform.position.x - 0.5f, transform.position.y), Vector2.down, 0.1f, 1 << 8);
+            RaycastHit2D hit0 = Physics2D.Raycast(new Vector2(transform.position.x - 0.4f, transform.position.y), Vector2.down, 0.1f, 1 << 8);
             RaycastHit2D hit1 = Physics2D.Raycast(transform.position, Vector2.down, 0.1f, 1 << 8);
-            RaycastHit2D hit2 = Physics2D.Raycast(new Vector2(transform.position.x + 0.5f, transform.position.y), Vector2.down, 0.1f, 1 << 8);
+            RaycastHit2D hit2 = Physics2D.Raycast(new Vector2(transform.position.x + 0.4f, transform.position.y), Vector2.down, 0.1f, 1 << 8);
             if (hit0.collider != null || hit1.collider != null || hit2.collider != null)
             {
                 isOnGround = true;

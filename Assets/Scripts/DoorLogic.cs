@@ -49,12 +49,12 @@ public class DoorLogic : MonoBehaviour {
         _audio.Play();
         _audio.pitch = Random.Range(0.75f, 1.25f);
         player.transform.position = destination.transform.position;
+        isInDialog = false;
         yield return new WaitForSeconds(.75F);
         Physics2D.IgnoreLayerCollision(10, 12, ignore: false);
         Physics2D.IgnoreLayerCollision(10, 11, ignore: false);
         Physics2D.IgnoreLayerCollision(10, 16, ignore: false);
         Physics2D.IgnoreLayerCollision(10, 17, ignore: false);
-        isInDialog = false;
 
     }
     

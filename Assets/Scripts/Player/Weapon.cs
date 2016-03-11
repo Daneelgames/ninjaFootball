@@ -98,11 +98,6 @@ public class Weapon : MonoBehaviour {
     {
         if (coll.gameObject.tag == "WeaponDrop")
         {
-            if (altWeapon != null)
-            {
-                GameObject lastDrop = Instantiate(_weaponDrop, transform.position, transform.rotation) as GameObject;
-                lastDrop.GetComponent<WeaponDropController>().weapon = altWeapon;
-            }
             altWeapon = coll.gameObject.GetComponent<WeaponDropController>().weapon;
             Destroy(coll.gameObject);
             playerSound.PlaySound(4);
