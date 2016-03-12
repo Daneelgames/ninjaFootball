@@ -17,7 +17,11 @@ public class CSWalkToMotherWithCang : MonoBehaviour {
     private Vector3 cameraNewPosition;
     [SerializeField]
     private Collider2D ownCollider;
+    [SerializeField]
+    private GameObject motherNew;
+    private GameObject motherNewInstance;
 
+    private GameObject motherOld;
     private GameObject cam;
     private Animator canvasAnimator;
     private GameObject player;
@@ -28,6 +32,9 @@ public class CSWalkToMotherWithCang : MonoBehaviour {
     
     void Start()
     {
+        motherOld = GameObject.Find("Mother_2(Clone)");
+        motherNewInstance = Instantiate(motherNew, motherOld.transform.position, transform.rotation) as GameObject;
+        Destroy(motherOld);
         transform.position = new Vector3(14, -2, 0);
         player = GameObject.Find("Player");
         _pm = player.GetComponent<PlayerMovement>();
@@ -63,5 +70,6 @@ public class CSWalkToMotherWithCang : MonoBehaviour {
         _pm.hAxis = 0;
         _pm.DialogOver();
         ownCollider.enabled = true;
+        motherNewInstance.GetComponent<Collider2D>().enabled = true;
     }
 }

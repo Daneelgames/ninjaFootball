@@ -61,7 +61,7 @@ public class TypewriterText : MonoBehaviour {
         if (inTrigger)
         {
             //Start dialog
-            if (!isInDialog && Input.GetAxisRaw("Vertical") > 0 && playerScript.isOnGround)
+            if (!isInDialog && Input.GetAxisRaw("Vertical") > 0 && playerScript.isOnGround && !playerScript.dialog)
                 StartDialog();
         }
 

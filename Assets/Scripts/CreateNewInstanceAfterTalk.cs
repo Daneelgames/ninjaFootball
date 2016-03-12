@@ -21,7 +21,9 @@ public class CreateNewInstanceAfterTalk : MonoBehaviour {
         if(npcScript.talked && canspawn)
         {
             canspawn = false;
-            Instantiate(nextNpcInstance, transform.position, transform.rotation);
+            if (nextNpcInstance != null)
+                Instantiate(nextNpcInstance, transform.position, transform.rotation);
+
             if (!notDestroy)
                 Destroy(gameObject);
         }
