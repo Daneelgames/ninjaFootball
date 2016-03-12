@@ -45,7 +45,7 @@ public class EnemyShootShielded : MonoBehaviour {
         _audio.pitch = Random.Range(0.8f, 1.2f);
         yield return new WaitForSeconds(waitTime);
         enemyHealthScript.invincible = true;
-        yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSeconds(waitTime * 2);
         canStartCoroutine = true;
     }
 
