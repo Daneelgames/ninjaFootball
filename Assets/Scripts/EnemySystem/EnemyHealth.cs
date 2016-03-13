@@ -8,11 +8,22 @@ public class EnemyHealth : MonoBehaviour {
 
     [SerializeField]
     private Transform explosion;
+    [SerializeField]
+    private EnemyHealth syncHealth;
 
     [SerializeField]
     private SpriteRenderer spriteRednerer;
     private bool canDestroy = true;
 
+
+    void Update()
+    {
+        if (syncHealth != null)
+        {
+            if (syncHealth.health < health)
+                health = syncHealth.health;
+        }
+    }
 
     public void Damage(int dmg)
     {

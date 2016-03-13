@@ -61,7 +61,7 @@ public class EnemySplathorsController : MonoBehaviour {
     IEnumerator SlowWait()
     {
         canSlow = false;
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1.75F);
         canSlow = true;
     }
 
