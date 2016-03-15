@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
     public bool dialog = false;
     [HideInInspector]
     public int hAxis;
+    [HideInInspector]
+    public int vAxis;
 
     [SerializeField]
     private float speed = 2f;
@@ -94,6 +96,13 @@ public class PlayerMovement : MonoBehaviour
             hAxis = -1;
         else if (Input.GetAxisRaw("Horizontal") == 0)
             hAxis = 0;
+        
+        if (Input.GetAxisRaw("Vertical") > 0)
+            vAxis = 1;
+        else if (Input.GetAxisRaw("Vertical") < 0)
+            vAxis = -1;
+        else if (Input.GetAxisRaw("Vertical") == 0)
+            vAxis = 0;
     }
 
     void FixedUpdate()
