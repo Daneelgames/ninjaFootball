@@ -6,9 +6,13 @@ public class PathDiggerLogic : MonoBehaviour {
 
     [HideInInspector]
     public bool roomsFinished = false;
+    [HideInInspector]
+    public int roomBuilded = 0;
 
     [SerializeField]
     private int maxRooms = 9;
+
+    private bool doublesChecked = false;
 
     [SerializeField]
     private float roomWidth = 11f;
@@ -33,6 +37,12 @@ public class PathDiggerLogic : MonoBehaviour {
     {
         if (roomCount >= maxRooms && !roomsFinished)
             roomsFinished = true;
+
+        if (roomBuilded == maxRooms && !doublesChecked)
+        {
+            doublesChecked = true;
+            CheckDoubles();
+        }
     }
 
     void SetPath()
@@ -96,6 +106,22 @@ public class PathDiggerLogic : MonoBehaviour {
             roomCount += 1;
             positions.Add(transform.position);
         }
+    }
 
+    void CheckDoubles()
+    {
+        GameObject[,] downPathsSorted = new GameObject[16,16];
+        GameObject[] downPaths = GameObject.FindGameObjectsWithTag("DownPath");
+        for(int j = 0; j < downPaths.Length; j ++)
+        {
+            for (int i = 0; i < maxRooms; i++)
+            {
+                if (downPaths[j].transform.position.y == i * roomHeigth * -1)
+                {
+                    downPathsSorted[i,j] = downPaths[j];
+                }
+            }
+
+        }
     }
 }

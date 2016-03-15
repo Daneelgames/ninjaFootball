@@ -1,22 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RoomRaycast : MonoBehaviour {
+public class RoomBuilder : MonoBehaviour {
 
     [SerializeField]
-    private GameObject[] upPass;
+    private GameObject[] upPath;
     [SerializeField]
     private GameObject[] upWall;
     [SerializeField]
-    private GameObject[] rightPass;
+    private GameObject[] rightPath;
     [SerializeField]
     private GameObject[] rightWall;
     [SerializeField]
-    private GameObject[] downPass;
+    private GameObject[] downPath;
     [SerializeField]
     private GameObject[] downWall;
     [SerializeField]
-    private GameObject[] leftPass;
+    private GameObject[] leftPath;
     [SerializeField]
     private GameObject[] leftWall;
 
@@ -43,11 +43,24 @@ public class RoomRaycast : MonoBehaviour {
     private bool dBuilded = false;
     private bool lBuilded = false;
 
+    private GameObject downPart;
+    private bool roomBuilded = false;
+
     void Start () {
         digger = GameObject.Find("PathDigger").GetComponent<PathDiggerLogic>();
 	}
 	
 	void Update () {
+
+        if (!roomBuilded)
+        {
+            if (uBuilded && rBuilded && dBuilded && lBuilded)
+            {
+                digger.roomBuilded += 1;
+                roomBuilded = true;
+            } 
+        }
+
         if (!canRaycast && digger.roomsFinished)
             canRaycast = true;
 
@@ -122,7 +135,7 @@ public class RoomRaycast : MonoBehaviour {
         {
             if (pathUp)
             {
-                Instantiate(upPass[0], transform.position, transform.rotation);
+                Instantiate(upPath[0], transform.position, transform.rotation);
                 uBuilded = true;
             }
             else
@@ -136,7 +149,7 @@ public class RoomRaycast : MonoBehaviour {
         {
             if (pathRight)
             {
-                Instantiate(rightPass[0], transform.position, transform.rotation);
+                Instantiate(rightPath[0], transform.position, transform.rotation);
                 rBuilded = true;
             }
             else
@@ -150,12 +163,12 @@ public class RoomRaycast : MonoBehaviour {
         {
             if (pathDown)
             {
-                    Instantiate(downPass[0], transform.position, transform.rotation);
-                    dBuilded = true;
+                downPart = Instantiate(downPath[0], transform.position, transform.rotation) as GameObject;
+                dBuilded = true;
             }
             else
             {
-                Instantiate(downWall[0], transform.position, transform.rotation);
+                downPart = Instantiate(downWall[0], transform.position, transform.rotation) as GameObject;
                 dBuilded = true;
             }
         }
@@ -164,7 +177,7 @@ public class RoomRaycast : MonoBehaviour {
         {
             if (pathLeft)
             {
-                Instantiate(leftPass[0], transform.position, transform.rotation);
+                Instantiate(leftPath[0], transform.position, transform.rotation);
                 lBuilded = true;
             }
             else
@@ -173,5 +186,11 @@ public class RoomRaycast : MonoBehaviour {
                 lBuilded = true;
             }
         }
+    }
+
+    public void RebuildFloor ()
+    {
+        Destroy(downPart);
+        downPart = Instantiate(downPath[0], transform.position, transform.rotation) as GameObject;
     }
 }
