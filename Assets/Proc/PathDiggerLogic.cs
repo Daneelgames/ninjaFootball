@@ -26,10 +26,6 @@ public class PathDiggerLogic : MonoBehaviour {
 
     void Start ()
     {
-        Instantiate(room, transform.position, transform.rotation);
-        roomCount += 1;
-        positions.Add(transform.position);
-
         SetPath();
     }
 
@@ -41,7 +37,7 @@ public class PathDiggerLogic : MonoBehaviour {
         if (roomBuilded == maxRooms && !doublesChecked)
         {
             doublesChecked = true;
-            CheckDoubles();
+            CheckDublicates();
         }
     }
 
@@ -92,8 +88,6 @@ public class PathDiggerLogic : MonoBehaviour {
     void MoveAndSpawn(float moveX, float moveY)
     {
         bool canSpawn = false;
-        
-        gameObject.transform.position = new Vector3(gameObject.transform.position.x + moveX, gameObject.transform.position.y + moveY, 0);
 
         if (!positions.Contains(transform.position))
         {
@@ -106,22 +100,52 @@ public class PathDiggerLogic : MonoBehaviour {
             roomCount += 1;
             positions.Add(transform.position);
         }
+
+        gameObject.transform.position = new Vector3(gameObject.transform.position.x + moveX, gameObject.transform.position.y + moveY, 0);
+
     }
 
-    void CheckDoubles()
+    void CheckDublicates()
     {
-        GameObject[,] downPathsSorted = new GameObject[16,16];
+        GameObject[,] downPathsSorted = new GameObject[maxRooms, maxRooms];
         GameObject[] downPaths = GameObject.FindGameObjectsWithTag("DownPath");
-        for(int j = 0; j < downPaths.Length; j ++)
+        for(int i = 0; i < maxRooms; i++)
         {
-            for (int i = 0; i < maxRooms; i++)
+            for (int j = 0; j < downPaths.Length; j++)
             {
                 if (downPaths[j].transform.position.y == i * roomHeigth * -1)
                 {
                     downPathsSorted[i,j] = downPaths[j];
                 }
             }
-
         }
+
+        for (int i = 0; i < downPathsSorted.GetLength(0); i++)
+        {
+            int pathsInRow = 0;
+            List<GameObject> doubles = new List<GameObject>();
+
+            for (int j = 0; j < downPathsSorted.GetLength(1); j++)
+            {
+                if (downPathsSorted[i, j] != null)
+                {
+                    pathsInRow += 1;
+                    doubles.Add(downPathsSorted[i, j]);
+                }
+            }
+
+            if (pathsInRow > 1)
+            {
+                int randomIndex = Random.Range(0, doubles.Count);
+                doubles.RemoveAt(randomIndex);
+
+                for (int p = 0; p < doubles.Count; p++)
+                {
+                    doubles[p].gameObject.GetComponent<RebuildDownPathToWall>().RebuildFloor();
+                }
+            }
+        }
+
+        Destroy(gameObject);
     }
 }

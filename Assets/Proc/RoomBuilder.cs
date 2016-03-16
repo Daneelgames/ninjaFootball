@@ -42,8 +42,7 @@ public class RoomBuilder : MonoBehaviour {
     private bool rBuilded = false;
     private bool dBuilded = false;
     private bool lBuilded = false;
-
-    private GameObject downPart;
+    
     private bool roomBuilded = false;
 
     void Start () {
@@ -163,12 +162,12 @@ public class RoomBuilder : MonoBehaviour {
         {
             if (pathDown)
             {
-                downPart = Instantiate(downPath[0], transform.position, transform.rotation) as GameObject;
+                Instantiate(downPath[0], transform.position, transform.rotation);
                 dBuilded = true;
             }
             else
             {
-                downPart = Instantiate(downWall[0], transform.position, transform.rotation) as GameObject;
+                Instantiate(downWall[0], transform.position, transform.rotation);
                 dBuilded = true;
             }
         }
@@ -186,11 +185,5 @@ public class RoomBuilder : MonoBehaviour {
                 lBuilded = true;
             }
         }
-    }
-
-    public void RebuildFloor ()
-    {
-        Destroy(downPart);
-        downPart = Instantiate(downPath[0], transform.position, transform.rotation) as GameObject;
     }
 }
