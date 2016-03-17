@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 6961b912cc7f3e24ea2386ea632addd8
-timeCreated: 1458209104
+timeCreated: 1458216678
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
@@ -13,9 +13,9 @@ TextureImporter:
     21300012: 6
     21300014: 4
     21300016: 3
-    21300018: sheet_0
-    21300020: sheet_1
-    21300022: sheet_2
+    21300018: body
+    21300020: top
+    21300022: top_2
     21300024: sheet_3
     21300026: sheet_4
     21300028: sheet_5
@@ -24,6 +24,11 @@ TextureImporter:
     21300034: sheet_8
     21300036: sheet_horizontalEmpty
     21300038: sheet_verticalEmpty
+    21300040: top_1
+    21300042: body_0
+    21300044: top_0
+    21300046: body_1
+    21300048: body_2
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -70,131 +75,84 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: sheet_0
+    - name: top_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 40
-        width: 8
-        height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1
+        y: 118
+        width: 50
+        height: 9
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: sheet_1
+    - name: body_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 40
-        width: 32
-        height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: sheet_2
-      rect:
-        serializedVersion: 2
-        x: 40
-        y: 40
-        width: 8
-        height: 8
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: sheet_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 8
-        width: 8
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: sheet_4
-      rect:
-        serializedVersion: 2
-        x: 8
-        y: 8
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1
+        y: 57
+        width: 50
+        height: 50
+      alignment: 6
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -16, y: 16}
-        - {x: -16, y: -16}
-        - {x: 16, y: -16}
-        - {x: 16, y: 16}
-    - name: sheet_5
+      - - {x: 0, y: 50}
+        - {x: 0, y: 0}
+        - {x: 50, y: 0}
+        - {x: 50, y: 50}
+    - name: top_2
       rect:
         serializedVersion: 2
-        x: 40
-        y: 8
-        width: 8
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1
+        y: 108
+        width: 50
+        height: 9
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: sheet_6
+    - name: top_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 8
-        height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 53
+        y: 118
+        width: 50
+        height: 9
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: sheet_7
+    - name: body_1
       rect:
         serializedVersion: 2
-        x: 8
-        y: 0
-        width: 32
-        height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 53
+        y: 57
+        width: 50
+        height: 50
+      alignment: 6
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: sheet_8
+      outline:
+      - - {x: 0, y: 50}
+        - {x: 0, y: 0}
+        - {x: 50, y: 0}
+        - {x: 50, y: 50}
+    - name: body_2
       rect:
         serializedVersion: 2
-        x: 40
-        y: 0
-        width: 8
-        height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1
+        y: 5
+        width: 50
+        height: 50
+      alignment: 6
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: sheet_horizontalEmpty
-      rect:
-        serializedVersion: 2
-        x: 8
-        y: 20
-        width: 32
-        height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: sheet_verticalEmpty
-      rect:
-        serializedVersion: 2
-        x: 20
-        y: 8
-        width: 8
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
+      outline:
+      - - {x: 0, y: 50}
+        - {x: 0, y: 0}
+        - {x: 50, y: 0}
+        - {x: 50, y: 50}
     outline: []
   spritePackingTag: 
   userData: 
