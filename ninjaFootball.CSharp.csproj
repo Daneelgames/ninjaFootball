@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Proc\PathDiggerLogic.cs" />
+    <Compile Include="Assets\Proc\ProceduralTileController.cs" />
     <Compile Include="Assets\Proc\RebuildDownPathToWall.cs" />
     <Compile Include="Assets\Proc\RoomBuilder.cs" />
     <Compile Include="Assets\Scripts\AddRandomForceOnStart.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="Assets\Scripts\DestroyOnTime.cs" />
     <Compile Include="Assets\Scripts\DestroyOutsideZone.cs" />
     <Compile Include="Assets\Scripts\Dev\ReadOnlyAttribute.cs" />
+    <Compile Include="Assets\Scripts\Dev\VecHelper.cs" />
     <Compile Include="Assets\Scripts\DisableColliderOnTime.cs" />
     <Compile Include="Assets\Scripts\DoorLogic.cs" />
     <Compile Include="Assets\Scripts\DropController.cs" />

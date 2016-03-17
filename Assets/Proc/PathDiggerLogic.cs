@@ -26,8 +26,13 @@ public class PathDiggerLogic : MonoBehaviour {
     private int roomCount = 0;
     List<Vector3> positions = new List<Vector3>();
 
+    private GameObject rooms;
+
     void Start ()
     {
+        rooms = new GameObject();
+        rooms.name = "Rooms";
+        rooms.transform.position = new Vector3(0, 0, 0);
         SetPath();
     }
 
@@ -98,7 +103,8 @@ public class PathDiggerLogic : MonoBehaviour {
 
         if (canSpawn == true)
         {
-            Instantiate(room, transform.position, transform.rotation);
+            GameObject newRoom = Instantiate(room, transform.position, transform.rotation) as GameObject;
+            newRoom.transform.parent = rooms.transform;
             roomCount += 1;
             positions.Add(transform.position);
         }

@@ -49,6 +49,11 @@ public class Bullet : MonoBehaviour {
         {
             other.collider.gameObject.GetComponent<EnemyHealth>().Damage(damage);
         }
+
+        if (other.collider.tag == "Ground")
+        {
+            other.gameObject.GetComponent<ProceduralTileController>().Damage(damage);
+        }
         BulletDestroy();
 
     }

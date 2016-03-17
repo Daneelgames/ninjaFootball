@@ -134,12 +134,14 @@ public class RoomBuilder : MonoBehaviour {
         {
             if (pathUp)
             {
-                Instantiate(upPath[Random.Range(0,upPath.Length)], transform.position, transform.rotation);
+                GameObject template = Instantiate(upPath[Random.Range(0,upPath.Length)], transform.position, transform.rotation) as GameObject;
+                template.transform.parent = gameObject.transform;
                 uBuilded = true;
             }
             else
             {
-                Instantiate(upWall[Random.Range(0, upWall.Length)], transform.position, transform.rotation);
+                GameObject template = Instantiate(upWall[Random.Range(0, upWall.Length)], transform.position, transform.rotation) as GameObject;
+                template.transform.parent = gameObject.transform;
                 uBuilded = true;
             }
         }
@@ -148,12 +150,14 @@ public class RoomBuilder : MonoBehaviour {
         {
             if (pathRight)
             {
-                Instantiate(rightPath[Random.Range(0, rightPath.Length)], transform.position, transform.rotation);
+                GameObject template = Instantiate(rightPath[Random.Range(0, rightPath.Length)], transform.position, transform.rotation) as GameObject;
+                template.transform.parent = gameObject.transform;
                 rBuilded = true;
             }
             else
             {
-                Instantiate(rightWall[Random.Range(0, rightWall.Length)], transform.position, transform.rotation);
+                GameObject template = Instantiate(rightWall[Random.Range(0, rightWall.Length)], transform.position, transform.rotation) as GameObject;
+                template.transform.parent = gameObject.transform;
                 rBuilded = true;
             }
         }
@@ -162,12 +166,14 @@ public class RoomBuilder : MonoBehaviour {
         {
             if (pathDown)
             {
-                Instantiate(downPath[Random.Range(0, downPath.Length)], transform.position, transform.rotation);
+                GameObject template = Instantiate(downPath[Random.Range(0, downPath.Length)], transform.position, transform.rotation) as GameObject;
+                template.transform.parent = gameObject.transform;
                 dBuilded = true;
             }
             else
             {
-                Instantiate(downWall[Random.Range(0, downWall.Length)], transform.position, transform.rotation);
+                GameObject template = Instantiate(downWall[Random.Range(0, downWall.Length)], transform.position, transform.rotation) as GameObject;
+                template.transform.parent = gameObject.transform;
                 dBuilded = true;
             }
         }
@@ -176,12 +182,14 @@ public class RoomBuilder : MonoBehaviour {
         {
             if (pathLeft)
             {
-                Instantiate(leftPath[Random.Range(0, leftPath.Length)], transform.position, transform.rotation);
+                GameObject template = Instantiate(leftPath[Random.Range(0, leftPath.Length)], transform.position, transform.rotation) as GameObject;
+                template.transform.parent = gameObject.transform;
                 lBuilded = true;
             }
             else
             {
-                Instantiate(leftWall[Random.Range(0, leftWall.Length)], transform.position, transform.rotation);
+                GameObject template = Instantiate(leftWall[Random.Range(0, leftWall.Length)], transform.position, transform.rotation) as GameObject;
+                template.transform.parent = gameObject.transform;
                 lBuilded = true;
             }
         }

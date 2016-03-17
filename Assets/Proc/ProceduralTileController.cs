@@ -18,9 +18,23 @@ public class ProceduralTileController : MonoBehaviour {
     private ProceduralTileController neighbourUp;
     private ProceduralTileController neighbourDown;
 
+    private int health = 10;
+
     void Start()
     {
         GetNeighbours();
+    }
+
+    public void Damage(int damage)
+    {
+        health -= damage;
+        CheckHealth();
+    }
+
+    void CheckHealth()
+    {
+        if (health <= 0)
+            Destroy(gameObject);
     }
 
     public void GetNeighbours()
