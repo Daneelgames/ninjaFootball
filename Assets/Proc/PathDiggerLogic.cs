@@ -11,6 +11,8 @@ public class PathDiggerLogic : MonoBehaviour {
 
     [SerializeField]
     private int maxRooms = 9;
+    [SerializeField]
+    private GameObject scrollZone;
 
     private bool doublesChecked = false;
 
@@ -146,6 +148,45 @@ public class PathDiggerLogic : MonoBehaviour {
             }
         }
 
-        Destroy(gameObject);
+        GetRoomSize();
+    }
+
+    void GetRoomSize()
+    {
+        float minX = 0f;
+        float maxX = 0f;
+        float minY = 0f;
+        float maxY = 0f;
+
+        GameObject[] roomBuilders = GameObject.FindGameObjectsWithTag("RoomBuilder");
+
+        for (int i = 0; i < roomBuilders.Length; i++)
+        {
+            if (roomBuilders[i].transform.position.x < minX)
+                minX = roomBuilders[i].transform.position.x;
+
+            if (roomBuilders[i].transform.position.x > maxX)
+                maxX = roomBuilders[i].transform.position.x;
+
+            if (roomBuilders[i].transform.position.y < minY)
+                minY = roomBuilders[i].transform.position.y;
+
+            if (roomBuilders[i].transform.position.y > maxY)
+                maxY = roomBuilders[i].transform.position.y;
+        }
+
+        CreateScrollZone(minX, maxX, minY, maxY);
+    }
+
+    void CreateScrollZone(float minx, float maxx, float miny, float maxy)
+    {
+        //get actual position
+        float scrollZoneX = minx - roomWidth / 2;
+        float scrollZoneY = maxy + roomHeigth / 2;
+        float scrollZoneWidth = Vector3.Distance(new Vector3(scrollZoneX, scrollZoneY, 0), new Vector3((maxx + roomWidth/2), (maxy + roomHeigth/2), 0));
+        float scrollZoneHeight = Vector3.Distance(new Vector3(scrollZoneX, scrollZoneY, 0), new Vector3((minx - roomWidth / 2), (miny - roomHeigth / 2), 0));
+        
+        GameObject zone = Instantiate(scrollZone, new Vector3(scrollZoneX, scrollZoneY, 0), transform.rotation) as GameObject;
+        zone.transform.localScale = new Vector3(scrollZoneWidth, scrollZoneHeight, 1);
     }
 }

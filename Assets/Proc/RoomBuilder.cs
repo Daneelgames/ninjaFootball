@@ -84,7 +84,7 @@ public class RoomBuilder : MonoBehaviour {
             
             if (!upCast)
             {
-                if (hitUp.collider != null && hitUp.collider.tag == "Room")
+                if (hitUp.collider != null && hitUp.collider.tag == "RoomBuilder")
                 {
                     pathUp = true;
                     upCast = true;
@@ -95,7 +95,7 @@ public class RoomBuilder : MonoBehaviour {
 
             if (!rightCast)
             {
-                if (hitRight.collider != null && hitRight.collider.tag == "Room")
+                if (hitRight.collider != null && hitRight.collider.tag == "RoomBuilder")
                 {
                     pathRight = true;
                     rightCast = true;
@@ -106,7 +106,7 @@ public class RoomBuilder : MonoBehaviour {
 
             if (!downCast)
             {
-                if (hitDown.collider != null && hitDown.collider.tag == "Room")
+                if (hitDown.collider != null && hitDown.collider.tag == "RoomBuilder")
                 {
                     pathDown = true;
                     downCast = true;
@@ -117,7 +117,7 @@ public class RoomBuilder : MonoBehaviour {
 
             if (!leftCast)
             {
-                if (hitLeft.collider != null && hitLeft.collider.tag == "Room")
+                if (hitLeft.collider != null && hitLeft.collider.tag == "RoomBuilder")
                 {
                     pathLeft = true;
                     leftCast = true;
@@ -134,12 +134,12 @@ public class RoomBuilder : MonoBehaviour {
         {
             if (pathUp)
             {
-                Instantiate(upPath[0], transform.position, transform.rotation);
+                Instantiate(upPath[Random.Range(0,upPath.Length)], transform.position, transform.rotation);
                 uBuilded = true;
             }
             else
             {
-                Instantiate(upWall[0], transform.position, transform.rotation);
+                Instantiate(upWall[Random.Range(0, upWall.Length)], transform.position, transform.rotation);
                 uBuilded = true;
             }
         }
@@ -148,12 +148,12 @@ public class RoomBuilder : MonoBehaviour {
         {
             if (pathRight)
             {
-                Instantiate(rightPath[0], transform.position, transform.rotation);
+                Instantiate(rightPath[Random.Range(0, rightPath.Length)], transform.position, transform.rotation);
                 rBuilded = true;
             }
             else
             {
-                Instantiate(rightWall[0], transform.position, transform.rotation);
+                Instantiate(rightWall[Random.Range(0, rightWall.Length)], transform.position, transform.rotation);
                 rBuilded = true;
             }
         }
@@ -162,12 +162,12 @@ public class RoomBuilder : MonoBehaviour {
         {
             if (pathDown)
             {
-                Instantiate(downPath[0], transform.position, transform.rotation);
+                Instantiate(downPath[Random.Range(0, downPath.Length)], transform.position, transform.rotation);
                 dBuilded = true;
             }
             else
             {
-                Instantiate(downWall[0], transform.position, transform.rotation);
+                Instantiate(downWall[Random.Range(0, downWall.Length)], transform.position, transform.rotation);
                 dBuilded = true;
             }
         }
@@ -176,12 +176,12 @@ public class RoomBuilder : MonoBehaviour {
         {
             if (pathLeft)
             {
-                Instantiate(leftPath[0], transform.position, transform.rotation);
+                Instantiate(leftPath[Random.Range(0, leftPath.Length)], transform.position, transform.rotation);
                 lBuilded = true;
             }
             else
             {
-                Instantiate(leftWall[0], transform.position, transform.rotation);
+                Instantiate(leftWall[Random.Range(0, leftWall.Length)], transform.position, transform.rotation);
                 lBuilded = true;
             }
         }

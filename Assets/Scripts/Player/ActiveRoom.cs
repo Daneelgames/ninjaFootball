@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class ActiveRoom : MonoBehaviour {
-
+/*
     [ReadOnly]
     public GameObject activeRoom;
     [ReadOnly]
@@ -30,5 +30,5 @@ public class ActiveRoom : MonoBehaviour {
             cameraController.SetActiveRoom();
         }
     }
-
+*/
 }

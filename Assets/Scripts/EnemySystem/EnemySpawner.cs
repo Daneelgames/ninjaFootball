@@ -5,8 +5,6 @@ public class EnemySpawner : MonoBehaviour {
 
     public GameObject enemy;
     [SerializeField]
-    private Collider2D playerActiveRoom;
-    [SerializeField]
     private bool canSpawn = true;
     [SerializeField]
     private GameObject spawnedMob = null;
@@ -15,13 +13,11 @@ public class EnemySpawner : MonoBehaviour {
 
     private GameObject player;
     private PlayerMovement _pm;
-    private ActiveRoom playerActiveRoomScript;
 
     void Start()
     {
         player = GameObject.Find("Player");
         _pm = player.GetComponent<PlayerMovement>();
-        playerActiveRoomScript = player.GetComponent<ActiveRoom>();
     }
     // Room spawn
     void OnTriggerEnter2D(Collider2D coll)
@@ -32,29 +28,16 @@ public class EnemySpawner : MonoBehaviour {
 
     void Update()
     {
-        GetPlayerRoom();
         MobReset();
         MobSpawn();
     }   
-
-    void GetPlayerRoom()
-    {
-        playerActiveRoom = playerActiveRoomScript.activeRoom.GetComponent<Collider2D>();
-    }
-
+    
     void MobSpawn()
     {
-        if (spawnerRoom == playerActiveRoom && canSpawn && spawnedMob == null && _pm.playerLives > 0)
+        if (canSpawn && spawnedMob == null && _pm.playerLives > 0)
         {
             canSpawn = false;
             spawnedMob = Instantiate(enemy, transform.position, transform.rotation) as GameObject;
-        }
-
-        if (spawnerRoom != playerActiveRoom)
-        {
-            canSpawn = true;
-            if (spawnedMob != null)
-                Destroy(spawnedMob);
         }
     }
 
