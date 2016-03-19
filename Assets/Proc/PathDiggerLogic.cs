@@ -194,5 +194,7 @@ public class PathDiggerLogic : MonoBehaviour {
         
         GameObject zone = Instantiate(scrollZone, new Vector3(scrollZoneX, scrollZoneY, 0), transform.rotation) as GameObject;
         zone.transform.localScale = new Vector3(scrollZoneWidth, scrollZoneHeight, 1);
+
+        zone.GetComponent<CreateTilesInScrollZone>().BuildWalls();
     }
 }

@@ -18,6 +18,9 @@ public class ScrollController : MonoBehaviour {
     private Vector2 velocity;
     [SerializeField]
     private Vector2 bottomRightBound;
+    [SerializeField]
+    private float offset = 0;
+    private float offsetTime = 0;
 
     void Start () {
         player = GameObject.Find("Player");
@@ -30,18 +33,35 @@ public class ScrollController : MonoBehaviour {
         {
             activeRoom = GameObject.FindGameObjectWithTag("Room");
         }
-        else // if (bottomRightBound == null)
+        else
             bottomRightBound = activeRoom.gameObject.transform.Find("RightTopCorner").transform.position;
 
         if (!_pm.dialog && activeRoom != null && bottomRightBound != null)
         {
-            //transform.position = Vector2.Lerp(transform.position, new Vector2 (player.transform.position.x + _pm.hAxis * 2, player.transform.position.y + 1 + _pm.vAxis * 2), 0.1f * scrollSpeed * Time.deltaTime);
-             transform.position = Vector2.Lerp(transform.position,
-                 new Vector2(
-                     Mathf.Clamp(player.transform.position.x, activeRoom.transform.position.x + screenW / 2, bottomRightBound.x - screenW / 2),
-                     Mathf.Clamp(player.transform.position.y, bottomRightBound.y + screenH / 2, activeRoom.transform.position.y - screenH / 2)),
-                     0.1f * scrollSpeed * Time.deltaTime);
+            Scroll();
+            VerticalOffset();
         }
+        else
+            offset = 0;
+    }
+
+    void VerticalOffset()
+    {
+        if (Input.GetAxisRaw("Vertical") > 0)
+            offset = 4f;
+        else if (Input.GetAxisRaw("Vertical") < 0)
+            offset = -4f;
+        else
+            offset = 0; 
+    }
+
+    void Scroll()
+    {
+        transform.position = Vector2.Lerp(transform.position,
+                 new Vector2(
+                     Mathf.Clamp(player.transform.position.x, activeRoom.transform.position.x + screenW / 2, bottomRightBound.x - screenW / 2), 
+                     Mathf.Clamp(player.transform.position.y + offset, bottomRightBound.y + screenH / 2, activeRoom.transform.position.y - screenH / 2)),
+                     0.1f * scrollSpeed * Time.deltaTime);
     }
 
 }
