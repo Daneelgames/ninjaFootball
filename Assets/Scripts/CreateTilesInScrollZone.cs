@@ -29,6 +29,8 @@ public class CreateTilesInScrollZone : MonoBehaviour {
         pos = gameObject.transform.position;
         sizeX = Mathf.RoundToInt(transform.localScale.x);
         sizeY = Mathf.RoundToInt(transform.localScale.y);
+        ScrollZoneSetBackground background = GetComponent<ScrollZoneSetBackground>() as ScrollZoneSetBackground;
+        background.SetBackground(transform.localScale.x, transform.localScale.y);
 
         for (y = 0; y > sizeY * -1f; y--)
         {

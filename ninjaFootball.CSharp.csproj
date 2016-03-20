@@ -73,6 +73,7 @@
     <Compile Include="Assets\Proc\ProceduralTileController.cs" />
     <Compile Include="Assets\Proc\RebuildDownPathToWall.cs" />
     <Compile Include="Assets\Proc\RoomBuilder.cs" />
+    <Compile Include="Assets\Proc\ScrollZoneSetBackground.cs" />
     <Compile Include="Assets\Scripts\AddRandomForceOnStart.cs" />
     <Compile Include="Assets\Scripts\AlternativeWeaponCost.cs" />
     <Compile Include="Assets\Scripts\AnimateOffset.cs" />
