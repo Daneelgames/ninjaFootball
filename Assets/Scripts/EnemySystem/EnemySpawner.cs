@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EnemySpawner : MonoBehaviour {
 
-    public GameObject enemy;
+    public GameObject[] enemies;
     [SerializeField]
     private bool canSpawn = true;
     [SerializeField]
@@ -12,10 +12,13 @@ public class EnemySpawner : MonoBehaviour {
     private GameObject player;
     private PlayerMovement _pm;
 
+    private int mobToSpawn = 0;
+
     void Start()
     {
         player = GameObject.Find("Player");
         _pm = player.GetComponent<PlayerMovement>();
+        mobToSpawn = Random.Range(0, enemies.Length);
     }
 
     void Update()
@@ -29,7 +32,7 @@ public class EnemySpawner : MonoBehaviour {
         if (canSpawn && spawnedMob == null && _pm.playerLives > 0)
         {
             canSpawn = false;
-            spawnedMob = Instantiate(enemy, transform.position, transform.rotation) as GameObject;
+            spawnedMob = Instantiate(enemies[mobToSpawn], transform.position, transform.rotation) as GameObject;
         }
     }
 

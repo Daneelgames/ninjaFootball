@@ -12,6 +12,11 @@ public class RoomBuilder : MonoBehaviour {
     private int neighbourRoomCount = 0;
 
     [SerializeField]
+    private GameObject enemySpawner;
+    [SerializeField]
+    private GameObject chest;
+
+    [SerializeField]
     private GameObject[] upPath;
     [SerializeField]
     private GameObject[] upWall;
@@ -144,7 +149,9 @@ public class RoomBuilder : MonoBehaviour {
         {
             FindEmptyTile();
             GameObject player = GameObject.Find("Player") as GameObject;
-            player.transform.position = FindEmptyTile();
+            List<Vector3> emptyTiles = FindEmptyTile();
+            int randomTile = Random.Range(0, emptyTiles.Count);
+            player.transform.position = new Vector3(emptyTiles[randomTile].x, emptyTiles[randomTile].y + 0.5f);
         }
 
         //Exit room
@@ -152,11 +159,34 @@ public class RoomBuilder : MonoBehaviour {
         {
             FindEmptyTile();
             GameObject exit = GameObject.Find("Exit") as GameObject;
-            exit.transform.position = FindEmptyTile();
+            List<Vector3> emptyTiles = FindEmptyTile();
+            int randomTile = Random.Range(0, emptyTiles.Count);
+            exit.transform.position = new Vector3(emptyTiles[randomTile].x, emptyTiles[randomTile].y + 0.5f);
+            emptyTiles.RemoveAt(randomTile);
+            for (int i = 0; i < emptyTiles.Count; i ++)
+            {
+                float chance = Random.Range(0f, 1f);
+                if (chance > 0.75)
+                    Instantiate(enemySpawner, new Vector3(emptyTiles[i].x, emptyTiles[i].y + 0.5f) , transform.rotation);
+            }
+        }
+
+        // default
+        if ( _roomType == RoomType.Default)
+        {
+            FindEmptyTile();
+            List<Vector3> emptyTiles = FindEmptyTile();
+            for (int i = 0; i < emptyTiles.Count; i++)
+            {
+                float chance = Random.Range(0f, 1f);
+                if (chance > 0.5)
+                    Instantiate(enemySpawner, new Vector3(emptyTiles[i].x, emptyTiles[i].y + 0.5f), transform.rotation);
+            }
+
         }
     }
 
-    Vector3 FindEmptyTile()
+    List<Vector3> FindEmptyTile()
     {
         ProceduralTileController[] tiles = gameObject.GetComponentsInChildren<ProceduralTileController>();
         List<Vector3> emptyTiles = new List<Vector3>();
@@ -169,8 +199,6 @@ public class RoomBuilder : MonoBehaviour {
                     emptyTiles.Add(tiles[i].gameObject.transform.position);
             }
         }
-        int randomTile = Random.Range(0, emptyTiles.Count);
-
-        return new Vector3(emptyTiles[randomTile].x, emptyTiles[randomTile].y + 0.5f);
+        return emptyTiles;
     }
 }
