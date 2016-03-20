@@ -4,6 +4,8 @@ using System.Collections;
 
 public class ProceduralTileController : MonoBehaviour {
 
+    public Vector2 tileCode;
+
     [SerializeField]
     private float stayChance = 1f;
     [SerializeField]
@@ -20,7 +22,6 @@ public class ProceduralTileController : MonoBehaviour {
     [SerializeField]
     private SpriteRenderer[] tileParts;
 
-    private Vector2 tileCode;
     private float tileSize = 1f;
 
     private ProceduralTileController neighbourDown;
@@ -84,8 +85,8 @@ public class ProceduralTileController : MonoBehaviour {
     void RebuildTile()
     {
         tileParts[1].sprite = tilesBody[Random.Range(0, tilesBody.Length)];
-        tileParts[0].sortingOrder = 5;
-        tileParts[1].sortingOrder = Random.Range(-5, 0);
+        tileParts[0].sortingOrder = 6;
+        tileParts[1].sortingOrder = Random.Range(2, 5);
         if (tileCode.x == 1)
         {
             tileParts[0].sprite = tilesTop[0];

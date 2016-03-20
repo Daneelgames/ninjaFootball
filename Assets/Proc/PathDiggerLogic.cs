@@ -105,6 +105,15 @@ public class PathDiggerLogic : MonoBehaviour {
         {
             GameObject newRoom = Instantiate(room, transform.position, transform.rotation) as GameObject;
             newRoom.transform.parent = rooms.transform;
+            if (roomCount == 0)
+                newRoom.GetComponent<RoomBuilder>()._roomType = RoomBuilder.RoomType.Enter;
+
+            else if (roomCount == maxRooms - 1)
+                newRoom.GetComponent<RoomBuilder>()._roomType = RoomBuilder.RoomType.Exit;
+
+            else
+                newRoom.GetComponent<RoomBuilder>()._roomType = RoomBuilder.RoomType.Default;
+
             roomCount += 1;
             positions.Add(transform.position);
         }
