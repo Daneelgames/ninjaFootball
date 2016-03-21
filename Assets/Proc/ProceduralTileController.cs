@@ -92,12 +92,13 @@ public class ProceduralTileController : MonoBehaviour {
         {
             tileCode.y = 1;
             neighbourDown = hitDown.collider.gameObject.GetComponent<ProceduralTileController>();
-            neighbourDown.GetNeighbours();
+
+            if (neighbourDown != null)
+                neighbourDown.GetNeighbours();
         }
         else
             tileCode.y = 0;
         
-
         RebuildTile();
     }
 

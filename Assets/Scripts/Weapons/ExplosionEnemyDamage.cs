@@ -12,6 +12,11 @@ public class ExplosionEnemyDamage : MonoBehaviour {
             other.gameObject.GetComponent<EnemyHealth>().Damage(damage);
         }
 
+        if (other.tag == "Hazard")
+        {
+            other.gameObject.GetComponent<EnemyHealth>().Damage(damage);
+        }
+
         if (other.tag == "Ground")
         {
             other.gameObject.GetComponent<ProceduralTileController>().Damage(damage);
