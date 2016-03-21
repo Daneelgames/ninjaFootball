@@ -176,13 +176,23 @@ public class RoomBuilder : MonoBehaviour {
         {
             FindEmptyTile();
             List<Vector3> emptyTiles = FindEmptyTile();
-            for (int i = 0; i < emptyTiles.Count; i++)
+
+            //CreateChest
+            int chestWeaponTile = Random.Range(0, emptyTiles.Count);
+            float chestWeaponChance = Random.Range(0f, 1f);
+            if (chestWeaponChance > 0.5)
             {
-                float chance = Random.Range(0f, 1f);
-                if (chance > 0.5)
-                    Instantiate(enemySpawner, new Vector3(emptyTiles[i].x, emptyTiles[i].y + 0.5f), transform.rotation);
+                Instantiate(chest, new Vector3(emptyTiles[chestWeaponTile].x, emptyTiles[chestWeaponTile].y + 0.5f), transform.rotation);
+                emptyTiles.RemoveAt(chestWeaponTile);
             }
 
+            //create enemies
+            for (int i = 0; i < emptyTiles.Count; i++)
+            {
+                float enemyChance = Random.Range(0f, 1f);
+                if (enemyChance > 0.5)
+                    Instantiate(enemySpawner, new Vector3(emptyTiles[i].x, emptyTiles[i].y + 0.5f), transform.rotation);
+            }
         }
     }
 

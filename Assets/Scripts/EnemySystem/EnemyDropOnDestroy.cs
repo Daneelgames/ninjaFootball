@@ -23,7 +23,6 @@ public class EnemyDropOnDestroy : MonoBehaviour
     {
         if (healthScript.health < 1 && canDrop)
         {
-            print("drop");
             canDrop = false;
             GameObject dropScript = Instantiate(drop, transform.position, transform.rotation) as GameObject;
             dropScript.GetComponent<DropController>().amount = Random.Range(minDrop, maxDrop);

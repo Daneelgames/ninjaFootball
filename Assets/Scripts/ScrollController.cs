@@ -36,7 +36,7 @@ public class ScrollController : MonoBehaviour {
         else
             bottomRightBound = activeRoom.gameObject.transform.Find("RightTopCorner").transform.position;
 
-        if (!_pm.dialog && activeRoom != null && bottomRightBound != null)
+        if (!_pm.dialog && activeRoom != null /* && bottomRightBound != null*/)
         {
             Scroll();
             VerticalOffset();

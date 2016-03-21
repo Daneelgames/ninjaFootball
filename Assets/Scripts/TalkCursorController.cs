@@ -22,7 +22,7 @@ public class TalkCursorController : MonoBehaviour {
     
     void OnTriggerEnter2D (Collider2D coll)
     {
-        if (coll.tag == "NPC")
+        if (coll.tag == "NPC" || coll.tag == "Active")
         {
             visible = true;
             lastCollider = coll;
@@ -31,7 +31,7 @@ public class TalkCursorController : MonoBehaviour {
 
     void OnTriggerExit2D (Collider2D coll)
     {
-        if (coll.tag == "NPC")
+        if (coll.tag == "NPC" || coll.tag == "Active")
             visible = false;
     }
 

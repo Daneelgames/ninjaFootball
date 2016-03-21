@@ -16,7 +16,8 @@ public class EnemyMoveInRange : MonoBehaviour {
     [SerializeField]
     private bool visible = false;
 
-    private RaycastHit2D hit;
+    private RaycastHit2D hitRight;
+    private RaycastHit2D hitLeft;
 
     void Start()
     {
@@ -43,13 +44,20 @@ public class EnemyMoveInRange : MonoBehaviour {
 
     void FixedUpdate()
     {
-        hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + 0.25f), new Vector2(transform.position.x + speed, transform.position.y + 0.25f), 0.5f, 1 << 8);
+        if (visible)
+        {
+            hitRight = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + 0.5f), Vector2.right, 0.8f, 1 << 8);
+            hitLeft = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + 0.5f), Vector2.left, 0.8f, 1 << 8);
+        }
     }
 
     void CheckCast()
     {
-        if (hit == true)
-            speed *= -1;
+        if (hitRight)
+            speed = -1.5f;
+
+        else if (hitLeft)
+            speed = 1.5f;
     }
 
     void OnTriggerEnter2D(Collider2D coll)

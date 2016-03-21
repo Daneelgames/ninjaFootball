@@ -59,17 +59,21 @@ public class ProceduralTileController : MonoBehaviour {
     public void GetNeighbours()
     {
         RaycastHit2D hitUp = Physics2D.Raycast(transform.position, Vector2.up, tileSize, 1 << 8);
+        RaycastHit2D hitRight = Physics2D.Raycast(transform.position, Vector2.right, tileSize, 1 << 8);
         RaycastHit2D hitDown = Physics2D.Raycast(transform.position, Vector2.down, tileSize, 1 << 8);
+        RaycastHit2D hitLeft = Physics2D.Raycast(transform.position, Vector2.left, tileSize, 1 << 8);
 
+        if (!hitUp && !hitRight && !hitDown && !hitLeft)
+            Destroy(gameObject);
 
-        if (hitUp.collider != null && hitUp.collider.tag == "Ground")
+        if (hitUp)
         {
             tileCode.x = 1;
         }
         else
             tileCode.x = 0;
         
-        if (hitDown.collider != null && hitDown.collider.tag == "Ground")
+        if (hitDown)
         {
             tileCode.y = 1;
             neighbourDown = hitDown.collider.gameObject.GetComponent<ProceduralTileController>();

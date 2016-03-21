@@ -64,7 +64,7 @@ public class TimeScale : MonoBehaviour {
 
     {
         InvokeRepeating("CameraShake", 0, .01f);
-        Invoke("StopShaking", 0.2f);
+        Invoke("StopShaking", 0.25f);
     }
 
     void CameraShake()

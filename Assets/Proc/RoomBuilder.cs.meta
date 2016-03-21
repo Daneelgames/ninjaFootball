@@ -1,10 +1,13 @@
 fileFormatVersion: 2
 guid: e925669d2039533498f6bb32cf5ce3a7
-timeCreated: 1458037775
+timeCreated: 1458547958
 licenseType: Pro
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - enemySpawner: {fileID: 196562, guid: be322ef7a60873c4fa48355b6c29cf46, type: 2}
+  - chestWeapon: {fileID: 197320, guid: 1031e5246b446c240840ec7edade9e77, type: 2}
+  - chestAmmo: {fileID: 179764, guid: 63797250764ef454f8f1a8848bc464ea, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
