@@ -20,14 +20,14 @@ public class ChestController : MonoBehaviour {
     private DropType dropType;
     private int ammoAmount;
     private AudioSource _audio;
-    private BoxCollider2D _collider;
     private Animator _animator;
+    private Collider2D _collider;
 
     void Start()
     {
         _animator = GetComponentInChildren<Animator>();
-        _collider = GetComponent<BoxCollider2D>();
         _audio = GetComponent<AudioSource>() as AudioSource;
+        _collider = gameObject.GetComponent<Collider2D>();
 
         SetDrop();
     }
@@ -37,17 +37,17 @@ public class ChestController : MonoBehaviour {
         dropType = Random.value < .5 ? DropType.Ammo : DropType.Weapon;
     }
 
-    void OnTriggerEnter2D(Collider2D player)
+    void OnCollisionEnter2D(Collision2D player)
     {
         if (player.gameObject.tag == "Player")
         {
             OpenChest();
+            Physics2D.IgnoreCollision(_collider, player.collider);
         }
     }
 
     public void OpenChest()
     {
-        _collider.enabled = false;
         _audio.Play();
         _animator.SetTrigger("Open");
 

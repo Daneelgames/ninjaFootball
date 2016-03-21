@@ -10,6 +10,5 @@ public class ShakeScreenOnStart : MonoBehaviour {
     {
         timeScaleScript = GameObject.Find("Player").GetComponent<TimeScale>();
         timeScaleScript.Pause();
-
     }
 }

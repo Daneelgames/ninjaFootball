@@ -34,6 +34,26 @@ public class ProceduralTileController : MonoBehaviour {
         tileParts[0] = transform.GetChild(0).GetComponent<SpriteRenderer>();
         tileParts[1] = transform.GetChild(1).GetComponent<SpriteRenderer>();
         GetNeighbours();
+        InvokeRepeating("CheckNearTiles", .1f, .1f);
+        Invoke("StopChecking", 0.5f);
+    }
+
+    void CheckNearTiles()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.up, 0.1f, 1 << 8);
+        RaycastHit2D hitUp = Physics2D.Raycast(transform.position, Vector2.up, tileSize, 1 << 8);
+        RaycastHit2D hitRight = Physics2D.Raycast(transform.position, Vector2.right, tileSize, 1 << 8);
+        RaycastHit2D hitDown = Physics2D.Raycast(transform.position, Vector2.down, tileSize, 1 << 8);
+        RaycastHit2D hitLeft = Physics2D.Raycast(transform.position, Vector2.left, tileSize, 1 << 8);
+
+        if (!hitUp && !hitRight && !hitDown && !hitLeft)
+            Destroy(gameObject);
+        else if (hit)
+            Destroy(gameObject);
+    }
+    void StopChecking()
+    {
+        CancelInvoke("CheckNearTiles");
     }
 
     void CheckIfStay()
@@ -59,13 +79,8 @@ public class ProceduralTileController : MonoBehaviour {
     public void GetNeighbours()
     {
         RaycastHit2D hitUp = Physics2D.Raycast(transform.position, Vector2.up, tileSize, 1 << 8);
-        RaycastHit2D hitRight = Physics2D.Raycast(transform.position, Vector2.right, tileSize, 1 << 8);
         RaycastHit2D hitDown = Physics2D.Raycast(transform.position, Vector2.down, tileSize, 1 << 8);
-        RaycastHit2D hitLeft = Physics2D.Raycast(transform.position, Vector2.left, tileSize, 1 << 8);
-
-        if (!hitUp && !hitRight && !hitDown && !hitLeft)
-            Destroy(gameObject);
-
+        
         if (hitUp)
         {
             tileCode.x = 1;

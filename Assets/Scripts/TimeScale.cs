@@ -27,13 +27,13 @@ public class TimeScale : MonoBehaviour {
 
     public void Pause()
     {
-       // StartCoroutine(PauseForTime());
-        Shake();
+        StartCoroutine(PauseForTime());
+        ShakeExplosion();
     }
 
-   /* IEnumerator PauseForTime()
+    IEnumerator PauseForTime()
     {
-        Shake();
+        ShakeExplosion();
         Time.timeScale = pauseScale;
         float pauseEndTime = Time.realtimeSinceStartup + pauseWait;
         while (Time.realtimeSinceStartup < pauseEndTime)
@@ -41,7 +41,7 @@ public class TimeScale : MonoBehaviour {
             yield return 0;
         }
         Time.timeScale = 1;
-    } */
+    }
 
     public void PlayerDead()
     {
@@ -50,7 +50,7 @@ public class TimeScale : MonoBehaviour {
 
     IEnumerator DeadForTime()
     {
-        Shake();
+        ShakeExplosion();
         Time.timeScale = deadScale;
         float pauseEndTime = Time.realtimeSinceStartup + deadWait;
         while (Time.realtimeSinceStartup < pauseEndTime)
@@ -60,11 +60,18 @@ public class TimeScale : MonoBehaviour {
         Time.timeScale = 1;
     }
 
-    void Shake()
+    public void ShakeShot()
 
     {
         InvokeRepeating("CameraShake", 0, .01f);
-        Invoke("StopShaking", 0.25f);
+        Invoke("StopShaking", 0.1f);
+    }
+
+    public void ShakeExplosion()
+
+    {
+        InvokeRepeating("CameraExplosionShake", 0, .01f);
+        Invoke("StopExplosionShaking", 0.25f);
     }
 
     void CameraShake()
@@ -72,9 +79,10 @@ public class TimeScale : MonoBehaviour {
         if (shakeAmt > 0)
         {
             originalCameraPosition = mainCamera.transform.position;
-            float quakeAmt = Random.value * shakeAmt * 2 - shakeAmt;
+            float quakeAmt = Random.Range(-1f, 1f) * shakeAmt * 2;
             Vector3 pp = mainCamera.transform.position;
-            pp.y += quakeAmt; // can also add to x and/or z
+            pp.y += quakeAmt;
+            pp.x += quakeAmt;
             mainCamera.transform.position = pp;
         }
     }
@@ -82,6 +90,25 @@ public class TimeScale : MonoBehaviour {
     void StopShaking()
     {
         CancelInvoke("CameraShake");
+        mainCamera.transform.position = originalCameraPosition;
+    }
+
+    void CameraExplosionShake()
+    {
+        if (shakeAmt > 0)
+        {
+            originalCameraPosition = mainCamera.transform.position;
+            float quakeAmt = Random.Range(-1f, 1f) * shakeAmt * 3;
+            Vector3 pp = mainCamera.transform.position;
+            pp.y += quakeAmt;
+            pp.x += quakeAmt;
+            mainCamera.transform.position = pp;
+        }
+    }
+
+    void StopExplosionShaking()
+    {
+        CancelInvoke("CameraExplosionShake");
         mainCamera.transform.position = originalCameraPosition;
     }
 }

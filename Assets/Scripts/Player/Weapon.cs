@@ -26,6 +26,7 @@ public class Weapon : MonoBehaviour {
     private GameObject _lastAltInstance = null;
     private int _altWeaponCost;
     private Text ammoCounter;
+    private TimeScale timeManager;
 
     // Use this for initialization
     void Start ()
@@ -35,7 +36,9 @@ public class Weapon : MonoBehaviour {
         canvasAnimator = GameObject.Find("Canvas").GetComponent<Animator>();
         ammoCounter = GameObject.Find("AmmoCounter").GetComponent<Text>();
         playerMovement = GetComponent<PlayerMovement>();
-	}
+        timeManager = GetComponent<TimeScale>();
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -57,6 +60,7 @@ public class Weapon : MonoBehaviour {
             playerMovement.shoot = true;
             Instantiate(mainWeapon, new Vector2(shotPosition.transform.position.x, shotPosition.transform.position.y), gameObject.transform.rotation);
             reloadTimeCur = reloadTimeMax;
+            timeManager.ShakeShot();
         }
 
         if (Input.GetButtonDown("Fire2") && reloadTimeCurAlt == 0)
@@ -67,6 +71,7 @@ public class Weapon : MonoBehaviour {
                 playerMovement.shoot = true;
                 _lastAltInstance = Instantiate(altWeapon, new Vector2(shotPosition.transform.position.x, shotPosition.transform.position.y), gameObject.transform.rotation) as GameObject;
                 reloadTimeCurAlt = reloadTimeMaxAlt;
+                timeManager.ShakeShot();
             }
             else if (altWeapon == null)
             {
