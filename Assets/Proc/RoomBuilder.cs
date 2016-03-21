@@ -15,6 +15,8 @@ public class RoomBuilder : MonoBehaviour {
     private GameObject enemySpawner;
     [SerializeField]
     private GameObject chest;
+    [SerializeField]
+    private GameObject wallTrap;
 
     [SerializeField]
     private GameObject[] upPath;
@@ -43,7 +45,8 @@ public class RoomBuilder : MonoBehaviour {
     private bool pathRight = false;
     private bool pathDown = false;
     private bool pathLeft = false;
-    
+
+    ProceduralTileController[] tiles;
 
     void Start () {
         digger = GameObject.Find("PathDigger").GetComponent<PathDiggerLogic>();
@@ -144,6 +147,9 @@ public class RoomBuilder : MonoBehaviour {
 
     void BuildContent()
     {
+        //get all tiles
+        tiles = gameObject.GetComponentsInChildren<ProceduralTileController>();
+
         //Enter room
         if (_roomType == RoomType.Enter)
         {
@@ -162,6 +168,7 @@ public class RoomBuilder : MonoBehaviour {
             List<Vector3> emptyTiles = FindEmptyTile();
             int randomTile = Random.Range(0, emptyTiles.Count);
             exit.transform.position = new Vector3(emptyTiles[randomTile].x, emptyTiles[randomTile].y + 0.5f);
+
             emptyTiles.RemoveAt(randomTile);
             for (int i = 0; i < emptyTiles.Count; i ++)
             {
@@ -175,7 +182,9 @@ public class RoomBuilder : MonoBehaviour {
         if ( _roomType == RoomType.Default)
         {
             FindEmptyTile();
+            FindEmptyTileWithOffset();
             List<Vector3> emptyTiles = FindEmptyTile();
+            List<Vector3> emptyWallTiles = FindEmptyTileWithOffset();
 
             //CreateChest
             int chestWeaponTile = Random.Range(0, emptyTiles.Count);
@@ -193,12 +202,20 @@ public class RoomBuilder : MonoBehaviour {
                 if (enemyChance > 0.5)
                     Instantiate(enemySpawner, new Vector3(emptyTiles[i].x, emptyTiles[i].y + 0.5f), transform.rotation);
             }
+
+            //create arrow trap
+            int arrowTrapTile = Random.Range(0, emptyWallTiles.Count);
+            float arrowTrapChance = Random.Range(0f, 1f);
+            if (arrowTrapChance > 0.5)
+            {
+                Instantiate(wallTrap, new Vector3(emptyWallTiles[arrowTrapTile].x, emptyWallTiles[arrowTrapTile].y), transform.rotation);
+                emptyTiles.RemoveAt(chestWeaponTile);
+            }
         }
     }
 
     List<Vector3> FindEmptyTile()
     {
-        ProceduralTileController[] tiles = gameObject.GetComponentsInChildren<ProceduralTileController>();
         List<Vector3> emptyTiles = new List<Vector3>();
         for (int i = 0; i < tiles.Length; i++)
         {
@@ -210,5 +227,31 @@ public class RoomBuilder : MonoBehaviour {
             }
         }
         return emptyTiles;
+    }
+
+    List<Vector3> FindEmptyTileWithOffset()
+    {
+        float checkEmptyonRight = Random.Range(0f, 1f);
+
+        List<Vector3> emptyWallTiles = new List<Vector3>();
+        for (int i = 0; i < tiles.Length; i++)
+        {
+            if (tiles[i].tileCode.x == 0 && tiles[i].gameObject.transform.position.y < transform.position.y && tiles[i].gameObject.transform.position.y > transform.position.y - roomHeigth)
+            {
+                if(checkEmptyonRight > 0.5f)
+                {
+                    RaycastHit2D hitRight = Physics2D.Raycast(new Vector3(tiles[i].gameObject.transform.position.x, tiles[i].gameObject.transform.position.y + 1f, tiles[i].gameObject.transform.position.z), Vector2.right, 5, 1 << 8);
+                    if (!hitRight)
+                        emptyWallTiles.Add(new Vector3(tiles[i].gameObject.transform.position.x, tiles[i].gameObject.transform.position.y + 1f, tiles[i].gameObject.transform.position.z));
+                }
+                else
+                {
+                    RaycastHit2D hitLeft = Physics2D.Raycast(new Vector3(tiles[i].gameObject.transform.position.x, tiles[i].gameObject.transform.position.y + 1f, tiles[i].gameObject.transform.position.z), Vector2.left, 5, 1 << 8);
+                    if (!hitLeft)
+                        emptyWallTiles.Add(new Vector3(tiles[i].gameObject.transform.position.x, tiles[i].gameObject.transform.position.y + 1f, tiles[i].gameObject.transform.position.z));
+                }
+            }
+        }
+        return emptyWallTiles;
     }
 }

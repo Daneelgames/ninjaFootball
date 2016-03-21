@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BulletX3 : MonoBehaviour {
+public class EnemyBulletX3 : MonoBehaviour {
 
     public GameObject bullet;
 

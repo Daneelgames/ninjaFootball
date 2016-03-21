@@ -8,7 +8,11 @@ public class WallArrowAttackTrigger : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player")
+        if (other.gameObject.tag == "Player")
+        {
+            print("collision");
             wallArrowController.Attack();
+        }
+          
     }
 }

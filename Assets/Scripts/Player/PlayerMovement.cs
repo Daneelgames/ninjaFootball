@@ -62,6 +62,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        Physics2D.IgnoreLayerCollision(10, 11, false);
         timeScaleScript = GetComponent<TimeScale>();
         _rigidbody = GetComponent(typeof(Rigidbody2D)) as Rigidbody2D;
         weapon = GetComponent<Weapon>() as Weapon;

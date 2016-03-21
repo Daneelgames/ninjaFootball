@@ -3,6 +3,8 @@ using System.Collections;
 
 public class EnemyBullet : MonoBehaviour {
 
+    [SerializeField]
+    private int damage = 5;
     public Vector2 direction;
     [SerializeField]
     private float speed = 5f;
@@ -34,6 +36,10 @@ public class EnemyBullet : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D other)
     {
+        if (other.collider.tag == "Ground")
+        {
+            other.gameObject.GetComponent<ProceduralTileController>().Damage(damage);
+        }
         BulletDestroy();
     }
 
