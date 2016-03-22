@@ -4,7 +4,9 @@ using System.Collections;
 public class EnemyJumper : MonoBehaviour {
 
     [SerializeField]
-    private float jumpPower;
+    private float jumpPowerMax;
+    [SerializeField]
+    private float jumpPowerMin;
     [SerializeField]
     private float waitBeforeJumpMax;
     [SerializeField]
@@ -14,6 +16,7 @@ public class EnemyJumper : MonoBehaviour {
     [SerializeField]
     private AudioSource _audio;
 
+    private float jumpPower;
     private GameObject player;
     private GameObject sprite;
     private Animator _animator;
@@ -55,6 +58,7 @@ public class EnemyJumper : MonoBehaviour {
     {
         if (isOnGround && waitBeforeJumpCur <= 0 && isVisible)
         {
+            jumpPower = Random.Range(jumpPowerMin, jumpPowerMax);
             _animator.SetTrigger("Jump");
             _audio.Play();
             _audio.pitch = Random.Range(0.8f, 1.2f);

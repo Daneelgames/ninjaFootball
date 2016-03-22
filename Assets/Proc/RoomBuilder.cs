@@ -173,8 +173,8 @@ public class RoomBuilder : MonoBehaviour {
             //saw
             for (int i = 0; i < emptyTiles.Count; i++)
             {
-                float sawChance = Random.Range(0f, 1f);
-                if (sawChance > 0.75)
+                int chance = Random.Range(1, 20);
+                if (chance == 1)
                 {
                     Instantiate(circularSaw, new Vector3(emptyTiles[i].x, emptyTiles[i].y + 0.5f), transform.rotation);
                     emptyTiles.RemoveAt(i);
@@ -194,8 +194,8 @@ public class RoomBuilder : MonoBehaviour {
             emptyTiles.RemoveAt(randomTile);
             for (int i = 0; i < emptyTiles.Count; i ++)
             {
-                float chance = Random.Range(0f, 1f);
-                if (chance > 0.75)
+                int chance = Random.Range(1, 20);
+                if (chance == 1)
                 {
                     Instantiate(enemySpawner, new Vector3(emptyTiles[i].x, emptyTiles[i].y + 0.5f), transform.rotation);
                     emptyTiles.RemoveAt(i);
@@ -204,8 +204,8 @@ public class RoomBuilder : MonoBehaviour {
             //saw
             for (int i = 0; i < emptyTiles.Count; i++)
             {
-                float sawChance = Random.Range(0f, 1f);
-                if (sawChance > 0.25)
+                int chance = Random.Range(1, 30);
+                if (chance == 1)
                 {
                     Instantiate(circularSaw, new Vector3(emptyTiles[i].x, emptyTiles[i].y + 1f), transform.rotation);
                     emptyTiles.RemoveAt(i);
@@ -223,8 +223,8 @@ public class RoomBuilder : MonoBehaviour {
 
             //CreateChest
             int chestTile = Random.Range(0, emptyTiles.Count);
-            float chestWeaponChance = Random.Range(0f, 1f);
-            if (chestWeaponChance > 0.5)
+            int chance = Random.Range(1, 20);
+            if (chance == 1)
             {
                 Instantiate(chest, new Vector3(emptyTiles[chestTile].x, emptyTiles[chestTile].y + 0.5f), transform.rotation);
                 emptyTiles.RemoveAt(chestTile);
@@ -233,8 +233,8 @@ public class RoomBuilder : MonoBehaviour {
             //create enemies
             for (int i = 0; i < emptyTiles.Count; i++)
             {
-                float enemyChance = Random.Range(0f, 1f);
-                if (enemyChance > 0.5)
+                int enemyChance = Random.Range(1, 10);
+                if (enemyChance == 1)
                 {
                     Instantiate(enemySpawner, new Vector3(emptyTiles[i].x, emptyTiles[i].y + 0.5f), transform.rotation);
                 }
@@ -243,8 +243,8 @@ public class RoomBuilder : MonoBehaviour {
             //saw
             for (int i = 0; i < emptyTiles.Count; i++)
             {
-                float sawChance = Random.Range(0f, 1f);
-                if (sawChance > 0.5)
+                int sawChance = Random.Range(1, 20);
+                if (sawChance == 1)
                 {
                     Instantiate(circularSaw, new Vector3(emptyTiles[i].x, emptyTiles[i].y + 0.5f), transform.rotation);
                     emptyTiles.RemoveAt(i);
@@ -253,8 +253,8 @@ public class RoomBuilder : MonoBehaviour {
 
             //create arrow trap
             int arrowTrapTile = Random.Range(0, emptyWallTiles.Count);
-            float arrowTrapChance = Random.Range(0f, 1f);
-            if (arrowTrapChance > 0.5)
+            int arrowChance = Random.Range(1, 5);
+            if (arrowChance == 1)
             {
                 Instantiate(wallTrap, new Vector3(emptyWallTiles[arrowTrapTile].x, emptyWallTiles[arrowTrapTile].y), transform.rotation);
                 emptyWallTiles.RemoveAt(arrowTrapTile);
