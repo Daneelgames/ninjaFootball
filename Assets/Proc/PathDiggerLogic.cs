@@ -14,7 +14,7 @@ public class PathDiggerLogic : MonoBehaviour {
     [SerializeField]
     private GameObject scrollZone;
 
-    private bool doublesChecked = false;
+    private bool getScrollSize = false;
 
     [SerializeField]
     private float roomWidth = 11f;
@@ -41,10 +41,10 @@ public class PathDiggerLogic : MonoBehaviour {
         if (roomCount >= maxRooms && !roomsFinished)
             roomsFinished = true;
 
-        if (roomBuilded == maxRooms && !doublesChecked)
+        if (roomBuilded == maxRooms && !getScrollSize)
         {
-            doublesChecked = true;
-            CheckDublicates();
+            getScrollSize = true;
+            GetRoomSize();
         }
     }
 
@@ -121,51 +121,7 @@ public class PathDiggerLogic : MonoBehaviour {
         gameObject.transform.position = new Vector3(gameObject.transform.position.x + moveX, gameObject.transform.position.y + moveY, 0);
 
     }
-
-    void CheckDublicates()
-    {
-        GameObject[,] downPathsSorted = new GameObject[maxRooms, maxRooms];
-        GameObject[] downPaths = GameObject.FindGameObjectsWithTag("DownPath");
-        for(int i = 0; i < maxRooms; i++)
-        {
-            for (int j = 0; j < downPaths.Length; j++)
-            {
-                if (downPaths[j].transform.position.y == i * roomHeigth * -1)
-                {
-                    downPathsSorted[i,j] = downPaths[j];
-                }
-            }
-        }
-
-        for (int i = 0; i < downPathsSorted.GetLength(0); i++)
-        {
-            int pathsInRow = 0;
-            List<GameObject> doubles = new List<GameObject>();
-
-            for (int j = 0; j < downPathsSorted.GetLength(1); j++)
-            {
-                if (downPathsSorted[i, j] != null)
-                {
-                    pathsInRow += 1;
-                    doubles.Add(downPathsSorted[i, j]);
-                }
-            }
-
-            if (pathsInRow > 1)
-            {
-                int randomIndex = Random.Range(0, doubles.Count);
-                doubles.RemoveAt(randomIndex);
-
-                for (int p = 0; p < doubles.Count; p++)
-                {
-                    doubles[p].gameObject.GetComponent<RebuildDownPathToWall>().RebuildFloor();
-                }
-            }
-        }
-
-        GetRoomSize();
-    }
-
+    
     void GetRoomSize()
     {
         float minX = 0f;

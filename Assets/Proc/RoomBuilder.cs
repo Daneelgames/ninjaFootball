@@ -21,21 +21,9 @@ public class RoomBuilder : MonoBehaviour {
     private GameObject circularSaw;
 
     [SerializeField]
-    private GameObject[] upPath;
+    private GameObject[] islands;
     [SerializeField]
-    private GameObject[] upWall;
-    [SerializeField]
-    private GameObject[] rightPath;
-    [SerializeField]
-    private GameObject[] rightWall;
-    [SerializeField]
-    private GameObject[] downPath;
-    [SerializeField]
-    private GameObject[] downWall;
-    [SerializeField]
-    private GameObject[] leftPath;
-    [SerializeField]
-    private GameObject[] leftWall;
+    private GameObject tile;
 
 
     private float roomWidth = 11f;
@@ -90,69 +78,29 @@ public class RoomBuilder : MonoBehaviour {
                 neighbourRoomCount += 1;
             }
 
+        BuildIsland();
+    }
+
+    void BuildIsland()
+    {
+        int chooseIsland = Random.Range(0, islands.Length);
+
+        Vector3 islandPosition = new Vector3(Random.Range(transform.position.x - 10f, transform.position.x + 10f), Random.Range(transform.position.y+4, transform.position.y+4));
+
+        GameObject lastIsland = Instantiate(islands[chooseIsland], islandPosition, transform.rotation) as GameObject;
+        lastIsland.transform.parent = gameObject.transform;
+
         BuildRoom();
     }
 
     void BuildRoom()
     {
-        //up
-        if (pathUp)
-        {
-            GameObject template = Instantiate(upPath[Random.Range(0,upPath.Length)], transform.position, transform.rotation) as GameObject;
-            template.transform.parent = gameObject.transform;
-        }
-        else
-        {
-            GameObject template = Instantiate(upWall[Random.Range(0, upWall.Length)], transform.position, transform.rotation) as GameObject;
-            template.transform.parent = gameObject.transform;
-        }
-
-        //right
-        if (pathRight)
-        {
-            GameObject template = Instantiate(rightPath[Random.Range(0, rightPath.Length)], transform.position, transform.rotation) as GameObject;
-            template.transform.parent = gameObject.transform;
-        }
-        else
-        {
-            GameObject template = Instantiate(rightWall[Random.Range(0, rightWall.Length)], transform.position, transform.rotation) as GameObject;
-            template.transform.parent = gameObject.transform;
-        }
-
-        //down
-        if (pathDown)
-        {
-            GameObject template = Instantiate(downPath[Random.Range(0, downPath.Length)], transform.position, transform.rotation) as GameObject;
-            template.transform.parent = gameObject.transform;
-        }
-        else
-        {
-            GameObject template = Instantiate(downWall[Random.Range(0, downWall.Length)], transform.position, transform.rotation) as GameObject;
-            template.transform.parent = gameObject.transform;
-        }
-
-        //left
-        if (pathLeft)
-        {
-            GameObject template = Instantiate(leftPath[Random.Range(0, leftPath.Length)], transform.position, transform.rotation) as GameObject;
-            template.transform.parent = gameObject.transform;
-        }
-        else
-        {
-            GameObject template = Instantiate(leftWall[Random.Range(0, leftWall.Length)], transform.position, transform.rotation) as GameObject;
-            template.transform.parent = gameObject.transform;
-        }
-
-        BuildContent();
         digger.roomBuilded += 1;
-    }
 
-    void BuildContent()
-    {
-        //get all tiles
+        // get tiles
         tiles = gameObject.GetComponentsInChildren<ProceduralTileController>();
 
-        //Enter room
+        // ENTER *********************************
         if (_roomType == RoomType.Enter)
         {
             FindEmptyTile();
@@ -182,7 +130,7 @@ public class RoomBuilder : MonoBehaviour {
             }
         }
 
-        //Exit room
+        // EXIT **********************************
         if (_roomType == RoomType.Exit)
         {
             FindEmptyTile();
@@ -213,7 +161,7 @@ public class RoomBuilder : MonoBehaviour {
             }
         }
 
-        // default
+        // DEFAULT *********************************
         if ( _roomType == RoomType.Default)
         {
             FindEmptyTile();
@@ -267,7 +215,7 @@ public class RoomBuilder : MonoBehaviour {
         List<Vector3> emptyTiles = new List<Vector3>();
         for (int i = 0; i < tiles.Length; i++)
         {
-            if (tiles[i].tileCode.x == 0 && tiles[i].gameObject.transform.position.y < transform.position.y - 1 && tiles[i].gameObject.transform.position.y > transform.position.y - roomHeigth + 1)
+            if (tiles[i].tileCode.x == 0 && tiles[i].gameObject.transform.position.y < transform.position.y + roomHeigth/2 && tiles[i].gameObject.transform.position.y > transform.position.y - roomHeigth/2)
             {
                 RaycastHit2D hitUp = Physics2D.Raycast(tiles[i].gameObject.transform.position, Vector2.up, 2, 1 << 8);
                 if (hitUp == false)
@@ -284,7 +232,7 @@ public class RoomBuilder : MonoBehaviour {
         List<Vector3> emptyWallTiles = new List<Vector3>();
         for (int i = 0; i < tiles.Length; i++)
         {
-            if (tiles[i].tileCode.x == 0 && tiles[i].gameObject.transform.position.y < transform.position.y && tiles[i].gameObject.transform.position.y > transform.position.y - roomHeigth)
+            if (tiles[i].tileCode.x == 0 && tiles[i].gameObject.transform.position.y < transform.position.y + roomHeigth/2 && tiles[i].gameObject.transform.position.y > transform.position.y - roomHeigth/2)
             {
                 if(checkEmptyonRight > 0.5f)
                 {
