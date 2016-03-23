@@ -26,10 +26,12 @@ public class Weapon : MonoBehaviour {
     private GameObject _lastAltInstance = null;
     private int _altWeaponCost;
     private Text ammoCounter;
+    private TimeScale timeScale;
 
     // Use this for initialization
     void Start ()
     {
+        timeScale = GetComponent<TimeScale>();
         shotPosition = transform.Find("PlayerSprites/Shot").gameObject;
         playerSound = transform.Find("PlayerSprites").GetComponent<PlayerSounds>();
         canvasAnimator = GameObject.Find("Canvas").GetComponent<Animator>();
@@ -56,6 +58,7 @@ public class Weapon : MonoBehaviour {
         {
             playerMovement.shoot = true;
             Instantiate(mainWeapon, new Vector2(shotPosition.transform.position.x, shotPosition.transform.position.y), gameObject.transform.rotation);
+            timeScale.Shoot();
             reloadTimeCur = reloadTimeMax;
         }
 
@@ -66,6 +69,7 @@ public class Weapon : MonoBehaviour {
                 altWeaponAmmo -= _altWeaponCost;
                 playerMovement.shoot = true;
                 _lastAltInstance = Instantiate(altWeapon, new Vector2(shotPosition.transform.position.x, shotPosition.transform.position.y), gameObject.transform.rotation) as GameObject;
+                timeScale.Shoot();
                 reloadTimeCurAlt = reloadTimeMaxAlt;
             }
             else if (altWeapon == null)

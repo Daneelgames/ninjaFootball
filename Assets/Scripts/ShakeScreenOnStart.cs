@@ -9,7 +9,7 @@ public class ShakeScreenOnStart : MonoBehaviour {
     void Start ()
     {
         timeScaleScript = GameObject.Find("Player").GetComponent<TimeScale>();
-        timeScaleScript.Pause();
+        timeScaleScript.ExplosionShake();
 
     }
 }

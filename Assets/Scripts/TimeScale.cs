@@ -24,24 +24,11 @@ public class TimeScale : MonoBehaviour {
         mainCamera = _camera.GetComponent<Camera>();
     }
 
-    public void Pause()
+    public void Shoot()
     {
-       // StartCoroutine(PauseForTime());
-        Shake();
+        ShootShake();
     }
-
-   /* IEnumerator PauseForTime()
-    {
-        Shake();
-        Time.timeScale = pauseScale;
-        float pauseEndTime = Time.realtimeSinceStartup + pauseWait;
-        while (Time.realtimeSinceStartup < pauseEndTime)
-        {
-            yield return 0;
-        }
-        Time.timeScale = 1;
-    } */
-
+    
     public void PlayerDead()
     {
         StartCoroutine(DeadForTime());
@@ -49,7 +36,7 @@ public class TimeScale : MonoBehaviour {
 
     IEnumerator DeadForTime()
     {
-        Shake();
+        ExplosionShake();
         Time.timeScale = deadScale;
         float pauseEndTime = Time.realtimeSinceStartup + deadWait;
         while (Time.realtimeSinceStartup < pauseEndTime)
@@ -59,28 +46,54 @@ public class TimeScale : MonoBehaviour {
         Time.timeScale = 1;
     }
 
-    void Shake()
+    public void ExplosionShake()
 
     {
-        InvokeRepeating("CameraShake", 0, .01f);
-        Invoke("StopShaking", 0.2f);
+        InvokeRepeating("CameraExplosionShake", 0, .01f);
+        Invoke("StopExplosionShaking", 0.2f);
     }
 
-    void CameraShake()
+    void CameraExplosionShake()
     {
         if (shakeAmt > 0)
         {
             originalCameraPosition = mainCamera.transform.position;
-            float quakeAmt = Random.value * shakeAmt * 2 - shakeAmt;
+            float quakeAmt = Random.Range(-1, 1) * shakeAmt * 2;
             Vector3 pp = mainCamera.transform.position;
-            pp.y += quakeAmt; // can also add to x and/or z
+            pp.y += quakeAmt;
+            pp.x += quakeAmt;
             mainCamera.transform.position = pp;
         }
     }
 
-    void StopShaking()
+    void StopExplosionShaking()
     {
-        CancelInvoke("CameraShake");
+        CancelInvoke("CameraExplosionShake");
+        mainCamera.transform.position = originalCameraPosition;
+    }
+
+    void ShootShake()
+
+    {
+        InvokeRepeating("CameraShootShake", 0, .01f);
+        Invoke("StopShootShaking", 0.1f);
+    }
+    void CameraShootShake()
+    {
+        if (shakeAmt > 0)
+        {
+            originalCameraPosition = mainCamera.transform.position;
+            float quakeAmt = Random.Range(-1, 1) * shakeAmt;
+            Vector3 pp = mainCamera.transform.position;
+            pp.y += quakeAmt;
+            pp.x += quakeAmt;
+            mainCamera.transform.position = pp;
+        }
+    }
+
+    void StopShootShaking()
+    {
+        CancelInvoke("CameraShootShake");
         mainCamera.transform.position = originalCameraPosition;
     }
 }
