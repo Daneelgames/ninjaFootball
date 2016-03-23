@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (Input.GetButtonDown("Restart"))
-            SceneManager.LoadScene("testScene");
+            SceneManager.LoadScene(0);
         
         if (fadeSpriteVisible && fadeSpriteColor.a < 1)
             fadeSpriteColor.a += 5 * Time.deltaTime;
@@ -87,5 +87,4 @@ public class GameManager : MonoBehaviour {
         fadeSpriteVisible = false;
         yield return new WaitForSeconds(0.2f);
     }
-    
 }
