@@ -5,7 +5,6 @@ public enum Direction {LEFT, RIGHT};
 public class PlayerMovement : MonoBehaviour
 {
     public int playerLives = 1;
-    [ReadOnly]
     public Transform activeCheckpoint;
     [ReadOnly]
     public bool isOnGround = false;

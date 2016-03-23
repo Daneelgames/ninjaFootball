@@ -9,7 +9,6 @@ public class DoorNextLevelLogic : MonoBehaviour {
     private AudioClip sound;
 
     private AudioSource _audio;
-    private Animator canvasAnimator;
     private bool inTrigger = false;
     private bool isInDialog = false;
     private GameObject player;
@@ -21,7 +20,6 @@ public class DoorNextLevelLogic : MonoBehaviour {
     void Start () {
         _audio = GameObject.Find("SceneManager").GetComponent<AudioSource>();
         sceneManager = GameObject.Find("SceneManager").GetComponent<GameManager>();
-        canvasAnimator = GameObject.Find("Canvas").GetComponent<Animator>();
         player = GameObject.Find("Player");
         playerScript = player.GetComponent<PlayerMovement>() as PlayerMovement;
     }
@@ -44,7 +42,6 @@ public class DoorNextLevelLogic : MonoBehaviour {
 
     IEnumerator Teleport()
     {
-        canvasAnimator.SetTrigger("Dead");
         Physics2D.IgnoreLayerCollision(10, 12, ignore: true);
         Physics2D.IgnoreLayerCollision(10, 11, ignore: true);
         Physics2D.IgnoreLayerCollision(10, 16, ignore: true);

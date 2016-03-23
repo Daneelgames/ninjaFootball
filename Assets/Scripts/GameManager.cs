@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     private Color fadeSpriteColor;
 
+    [SerializeField]
     private bool fadeSpriteVisible = false;
 
     private Canvas canvas;
@@ -39,16 +40,30 @@ public class GameManager : MonoBehaviour {
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         canvasAnimator = canvas.GetComponent<Animator>();
         canvas.worldCamera = GameObject.Find("RenderCamera").GetComponent<Camera>();
+        InvokeRepeating("FindCamera", 1f, 1f);
 	}
 	
+    void FindCamera()
+    {
+        if (canvas.worldCamera == null)
+            canvas.worldCamera = GameObject.Find("RenderCamera").GetComponent<Camera>();
+    }
+
 	void Update () {
         if (Input.GetButtonDown("Restart"))
             SceneManager.LoadScene(0);
         
         if (fadeSpriteVisible && fadeSpriteColor.a < 1)
+        {
             fadeSpriteColor.a += 5 * Time.deltaTime;
+            fadeSprite.color = fadeSpriteColor;
+        }
+            
         else if (!fadeSpriteVisible && fadeSpriteColor.a > 0)
+        {
             fadeSpriteColor.a -= 5 * Time.deltaTime;
+            fadeSprite.color = fadeSpriteColor;
+        }
 
     }
 
@@ -62,16 +77,17 @@ public class GameManager : MonoBehaviour {
 
         // Fade to black
         fadeSpriteVisible = true;
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.5f);
 
         // Load loading screen
         canvasAnimator.SetBool("Loading", true);
+        canvasAnimator.SetBool("NoInterface", false);
         yield return SceneManager.LoadSceneAsync("loadingScene");
         // !!! unload old screen (automatic)
 
         // Fade to loading screen
         fadeSpriteVisible = false;
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.5f);
 
         float endTime = Time.time + 0.5f;
 
@@ -83,12 +99,12 @@ public class GameManager : MonoBehaviour {
 
         // Fade to black
         fadeSpriteVisible = true;
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.5f);
 
         // !!! unload loading screen
         canvasAnimator.SetBool("Loading", false);
         // Fade to new screen
         fadeSpriteVisible = false;
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.5f);
     }
 }

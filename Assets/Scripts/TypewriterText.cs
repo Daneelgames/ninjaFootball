@@ -24,6 +24,8 @@ public class TypewriterText : MonoBehaviour {
     private Text textBox;
     private Image picBox;
 
+    private bool dialogToOver = false;
+
     void Start()
     {
         canvasAnimator = GameObject.Find("Canvas").GetComponent<Animator>();
@@ -50,7 +52,7 @@ public class TypewriterText : MonoBehaviour {
     }
 
     void Update () {
-		if (isInDialog && Input.anyKeyDown)
+		if (isInDialog && Input.anyKeyDown && !dialogToOver)
         {
             if (textBox.text == sourceText[currentlyDisplayingText - 1])
                 SkipToNextText();
@@ -61,7 +63,7 @@ public class TypewriterText : MonoBehaviour {
         if (inTrigger)
         {
             //Start dialog
-            if (!isInDialog && Input.GetAxisRaw("Vertical") > 0 && playerScript.isOnGround && !playerScript.dialog)
+            if (!isInDialog && !playerScript.dialog && Input.GetAxisRaw("Vertical") > 0 && playerScript.isOnGround)
                 StartDialog();
         }
 
@@ -71,6 +73,7 @@ public class TypewriterText : MonoBehaviour {
     {
         SkipToNextText();
         isInDialog = true;
+        dialogToOver = false;
         canvasAnimator.SetBool("Dialog", true);
         playerScript.DialogStart();
 
@@ -97,14 +100,21 @@ public class TypewriterText : MonoBehaviour {
 		//Reached the end of the array
 		else if (currentlyDisplayingText == sourceText.Length)
         {
-            inTrigger = false;  
-            StartCoroutine(IgnorePlayer());
-            currentlyDisplayingText = 0;
-			isInDialog = false;
-            canvasAnimator.SetBool("Dialog", false);
-            textBox.text = "";
-            playerScript.DialogOver();
+            StartCoroutine(DialogOver());
+            dialogToOver = true;
         }
+    }
+
+    IEnumerator DialogOver()
+    {
+        yield return new WaitForSeconds(0.2F);
+        inTrigger = false;
+        StartCoroutine(IgnorePlayer());
+        currentlyDisplayingText = 0;
+        isInDialog = false;
+        canvasAnimator.SetBool("Dialog", false);
+        textBox.text = "";
+        playerScript.DialogOver();
     }
 
     public void SkipAnimation()

@@ -39,6 +39,8 @@ public class CSCangRunsAway : MonoBehaviour {
         moveCang = true;
         cangAnimator.SetBool("Move", true);
         yield return new WaitForSeconds(waitBeforeStop);
+
+
         canvasAnimator.SetBool("NoInterface", false);
         Destroy(cangInstance);
         _pm.DialogOver();
