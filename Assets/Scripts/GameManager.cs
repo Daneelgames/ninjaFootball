@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
-    public static GameManager Instance { get; private set; }
+    public static GameManager instance { get; private set; }
 
     [SerializeField]
     private RawImage fadeSprite;
@@ -19,24 +19,28 @@ public class GameManager : MonoBehaviour {
 
     void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
+        //Check if instance already exists
+        if (instance == null)
+
+            //if not, set instance to this
+            instance = this;
+
+        //If instance already exists and it's not this:
+        else if (instance != this)
+
+            //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
             Destroy(gameObject);
-        }
 
-        Instance = this;
-
-        DontDestroyOnLoad(transform.gameObject);
+        //Sets this to not be destroyed when reloading scene
+        DontDestroyOnLoad(gameObject);
     }
-
-    // Use this for initialization
+    
     void Start () {
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         canvasAnimator = canvas.GetComponent<Animator>();
         canvas.worldCamera = GameObject.Find("RenderCamera").GetComponent<Camera>();
 	}
 	
-	// Update is called once per frame
 	void Update () {
         if (Input.GetButtonDown("Restart"))
             SceneManager.LoadScene(0);

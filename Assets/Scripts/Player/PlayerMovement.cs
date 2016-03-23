@@ -32,8 +32,7 @@ public class PlayerMovement : MonoBehaviour
 
     [HideInInspector] public float tJump = 0f;
     [HideInInspector] public bool shoot = false;
-
-    private bool hurt = false;
+    
     private GameObject playerSprite;
     private TimeScale timeScaleScript;
     private Rigidbody2D _rigidbody;
@@ -43,7 +42,6 @@ public class PlayerMovement : MonoBehaviour
     private float translate;
     private bool canLand = true;
     private Vector3 playerDropPos;
-    private new SpriteRenderer renderer;
     private Animator _animator;
     private PlayerSounds playerSound;
     private Animator canvasAnimator;
@@ -69,7 +67,6 @@ public class PlayerMovement : MonoBehaviour
         playerSound = transform.Find("PlayerSprites").GetComponent<PlayerSounds>();
         playerSprite = transform.Find("PlayerSprites").gameObject;
         canvasAnimator = GameObject.Find("Canvas").GetComponent<Animator>();
-        renderer = playerSprite.GetComponent<SpriteRenderer>();
     }
 
     void SetVariables()
@@ -231,14 +228,12 @@ public class PlayerMovement : MonoBehaviour
             {
                 playerSound.PlaySound(2);
                 StartCoroutine(Damage(0.5F));
-                StartCoroutine(Blinking(.1F));
             }
 
             else if (enemy.gameObject.tag == "Hazard")
             {
                 playerSound.PlaySound(2);
                 StartCoroutine(Damage(0.5F));
-                StartCoroutine(Blinking(.1F));
             }
         }
     }
@@ -250,13 +245,9 @@ public class PlayerMovement : MonoBehaviour
         _rigidbody.AddForce(new Vector2(0, jumpPower), ForceMode2D.Impulse);
         timeScaleScript.PlayerDead();
         Physics2D.IgnoreLayerCollision(10, 11, true);
-        hurt = true;
         playerLives = 0;
         yield return new WaitForSeconds(waitTime/2);
         canvasAnimator.SetTrigger("Dead");
-        hurt = false;
-        if (!renderer.enabled)
-            renderer.enabled = true;
         yield return new WaitForSeconds(waitTime/2);
         transform.position = activeCheckpoint.position;
         playerLives = 1;
@@ -267,19 +258,7 @@ public class PlayerMovement : MonoBehaviour
         drop.GetComponent<DropController>().amount = _weaponAmmo;
         GetComponent<Weapon>().altWeaponAmmo = 0;
     }
-
-    IEnumerator Blinking(float waitTime)
-    {
-        while (hurt)
-        {
-            renderer.enabled = false;
-            yield return new WaitForSeconds(waitTime);
-            renderer.enabled = true;
-            yield return new WaitForSeconds(waitTime);
-        }
-
-    }
-
+    
     void OnTriggerEnter2D(Collider2D coll)
     {
         if (coll.tag == "Checkpoint" && activeCheckpoint != coll.gameObject.transform)

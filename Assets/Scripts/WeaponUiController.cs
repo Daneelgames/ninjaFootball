@@ -15,35 +15,42 @@ public class WeaponUiController : MonoBehaviour {
     void Start()
     {
         weaponSprite = GetComponent<Image>();
-        player = GameObject.Find("Player");
-        if (player != null)
-            playerWeaponScript = player.GetComponent<Weapon>();
-
         InvokeRepeating("GetWeapon", 0.1f, 0.1f);
     }
 
     void GetWeapon()
     {
-        if (playerWeaponScript.altWeapon == null)
-            weaponSprite.sprite = spriteList[0];
-        else
+        if (player == null)
         {
-            playerAltWeapon = playerWeaponScript.altWeapon;
-            string altWeaponName = playerAltWeapon.name;
+            player = GameObject.Find("Player");
+        }
 
-            switch (altWeaponName)
+        else if(player != null)
+        {
+            if (playerWeaponScript == null)
+                playerWeaponScript = player.GetComponent<Weapon>();
+
+            if (playerWeaponScript.altWeapon == null)
+                weaponSprite.sprite = spriteList[0];
+            else
             {
-                case "Machinegun":
-                    weaponSprite.sprite = spriteList[1];
-                    break;
+                playerAltWeapon = playerWeaponScript.altWeapon;
+                string altWeaponName = playerAltWeapon.name;
 
-                case "Shotgun":
-                    weaponSprite.sprite = spriteList[2];
-                    break;
+                switch (altWeaponName)
+                {
+                    case "Machinegun":
+                        weaponSprite.sprite = spriteList[1];
+                        break;
 
-                case "TimeBomb":
-                    weaponSprite.sprite = spriteList[3];
-                    break;
+                    case "Shotgun":
+                        weaponSprite.sprite = spriteList[2];
+                        break;
+
+                    case "TimeBomb":
+                        weaponSprite.sprite = spriteList[3];
+                        break;
+                }
             }
         }
     }
