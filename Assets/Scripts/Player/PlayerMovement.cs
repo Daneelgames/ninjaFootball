@@ -60,6 +60,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        SetVariables();
+
         timeScaleScript = GetComponent<TimeScale>();
         _rigidbody = GetComponent(typeof(Rigidbody2D)) as Rigidbody2D;
         weapon = GetComponent<Weapon>() as Weapon;
@@ -68,6 +70,19 @@ public class PlayerMovement : MonoBehaviour
         playerSprite = transform.Find("PlayerSprites").gameObject;
         canvasAnimator = GameObject.Find("Canvas").GetComponent<Animator>();
         renderer = playerSprite.GetComponent<SpriteRenderer>();
+    }
+
+    void SetVariables()
+    {
+        playerLives = 1;
+        dialog = false;
+
+        Physics2D.IgnoreLayerCollision(10, 12, ignore: false);
+
+        Physics2D.IgnoreLayerCollision(10, 12, ignore: false);
+        Physics2D.IgnoreLayerCollision(10, 11, ignore: false);
+        Physics2D.IgnoreLayerCollision(10, 16, ignore: false);
+        Physics2D.IgnoreLayerCollision(10, 17, ignore: false);
     }
 
     void Update()

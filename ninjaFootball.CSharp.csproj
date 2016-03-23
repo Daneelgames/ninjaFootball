@@ -92,6 +92,7 @@
     <Compile Include="Assets\Scripts\Dev\ReadOnlyAttribute.cs" />
     <Compile Include="Assets\Scripts\DisableColliderOnTime.cs" />
     <Compile Include="Assets\Scripts\DoorLogic.cs" />
+    <Compile Include="Assets\Scripts\DoorNextLevelLogic.cs" />
     <Compile Include="Assets\Scripts\DropController.cs" />
     <Compile Include="Assets\Scripts\EnemySystem\BulletX3.cs" />
     <Compile Include="Assets\Scripts\EnemySystem\EnemyBullet.cs" />

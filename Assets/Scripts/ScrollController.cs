@@ -22,7 +22,8 @@ public class ScrollController : MonoBehaviour {
 
     void Start () {
         player = GameObject.Find("Player");
-        _pm = player.GetComponent<PlayerMovement>();
+        if (player != null)
+            _pm = player.GetComponent<PlayerMovement>();
     }
 
     public void SetActiveRoom()
@@ -33,7 +34,7 @@ public class ScrollController : MonoBehaviour {
 
     void Update()
     {
-        if (!_pm.dialog)
+        if (_pm != null && !_pm.dialog)
         {
             transform.position = Vector2.Lerp(transform.position,
                 new Vector2(

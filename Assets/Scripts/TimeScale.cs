@@ -58,7 +58,7 @@ public class TimeScale : MonoBehaviour {
         if (shakeAmt > 0)
         {
             originalCameraPosition = mainCamera.transform.position;
-            float quakeAmt = Random.Range(-1, 1) * shakeAmt * 2;
+            float quakeAmt = Random.Range(-1f, 1f) * shakeAmt * 2;
             Vector3 pp = mainCamera.transform.position;
             pp.y += quakeAmt;
             pp.x += quakeAmt;
@@ -83,7 +83,7 @@ public class TimeScale : MonoBehaviour {
         if (shakeAmt > 0)
         {
             originalCameraPosition = mainCamera.transform.position;
-            float quakeAmt = Random.Range(-1, 1) * shakeAmt;
+            float quakeAmt = Random.Range(-1f, 1f) * shakeAmt / 2f;
             Vector3 pp = mainCamera.transform.position;
             pp.y += quakeAmt;
             pp.x += quakeAmt;

@@ -7,6 +7,7 @@ public class WeaponUiController : MonoBehaviour {
     [SerializeField]
     private Sprite[] spriteList;
 
+    private GameObject player;
     private Weapon playerWeaponScript;
     private GameObject playerAltWeapon;
     private Image weaponSprite;
@@ -14,7 +15,10 @@ public class WeaponUiController : MonoBehaviour {
     void Start()
     {
         weaponSprite = GetComponent<Image>();
-        playerWeaponScript = GameObject.Find("Player").GetComponent<Weapon>();
+        player = GameObject.Find("Player");
+        if (player != null)
+            playerWeaponScript = player.GetComponent<Weapon>();
+
         InvokeRepeating("GetWeapon", 0.1f, 0.1f);
     }
 
