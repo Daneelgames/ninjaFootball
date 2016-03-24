@@ -4,7 +4,7 @@ using System.Collections;
 public class SpawnInstanceOnStart : MonoBehaviour {
 
     [SerializeField]
-    private GameObject gm;
+    private GameObject instance;
     [SerializeField]
     private float time;
     [SerializeField]
@@ -18,7 +18,7 @@ public class SpawnInstanceOnStart : MonoBehaviour {
     IEnumerator SpawnObject(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-        Instantiate(gm, position, transform.rotation);
+        Instantiate(instance, position, transform.rotation);
     }
 
 }
