@@ -51,8 +51,8 @@ public class CSCangRunsAway : MonoBehaviour {
 
         if (scaleSlide)
         {
-            slideScale.x += 1 * Time.deltaTime / 10;
-            slideScale.y += 1 * Time.deltaTime / 10;
+            slideScale.x += 1 * Time.deltaTime / 50;
+            slideScale.y += 1 * Time.deltaTime / 50;
             canvasSprite.rectTransform.localScale = slideScale;
         }
     }

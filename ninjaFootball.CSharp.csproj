@@ -111,6 +111,7 @@
     <Compile Include="Assets\Scripts\GetRightTopCorner.cs" />
     <Compile Include="Assets\Scripts\HUDConttroller.cs" />
     <Compile Include="Assets\Scripts\MainMenuManager.cs" />
+    <Compile Include="Assets\Scripts\PinkfaceTrigger.cs" />
     <Compile Include="Assets\Scripts\PlaySoundInTrigger.cs" />
     <Compile Include="Assets\Scripts\Player\ActiveRoom.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
