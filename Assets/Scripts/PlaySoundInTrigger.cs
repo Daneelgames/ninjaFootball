@@ -4,7 +4,7 @@ using System.Collections;
 public class PlaySoundInTrigger : MonoBehaviour {
     private AudioSource source;
     
-    void Start()
+    void Awake()
     {
         source = GetComponent<AudioSource>();
     }
