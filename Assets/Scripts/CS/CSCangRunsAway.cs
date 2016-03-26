@@ -91,7 +91,7 @@ public class CSCangRunsAway : MonoBehaviour {
 
         GameObject prof_1 = GameObject.Find("Professor_1_2(Clone)");
         Destroy(prof_1);
-        Instantiate(prof_2, new Vector3(115, 33.634f, 0), transform.rotation);
+        Instantiate(prof_2, new Vector3(116.5f, 33.634f, 0), transform.rotation);
 
         GameObject mother_1 = GameObject.Find("Mother_4(Clone)");
         Destroy(mother_1);
@@ -100,9 +100,9 @@ public class CSCangRunsAway : MonoBehaviour {
         TransBulbController transBulb = GameObject.Find("TransBulb").GetComponent<TransBulbController>() as TransBulbController;
         transBulb.bulbFixed = true;
         GameObject cam = GameObject.Find("_Camera");
-        cam.transform.position = new Vector3(113, 36.3f, 0f);
+        cam.transform.position = new Vector3(114, 36.3f, 0f);
         _pm.DialogOver();
-        player.transform.position = new Vector3(110f, 33.5f, 0f);
+        player.transform.position = new Vector3(114, 33.5f, 0f);
 
         Destroy(cangInstance);
         Destroy(gameObject);

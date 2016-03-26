@@ -32,7 +32,7 @@ public class DoorNextLevelLogic : MonoBehaviour {
 
         if (inTrigger)
         {
-            if (!isInDialog && Input.GetAxisRaw("Vertical") > 0 && playerScript.isOnGround)
+            if (!isInDialog && !playerScript.dialog && Input.GetAxisRaw("Vertical") > 0 && playerScript.isOnGround)
             {
                 isInDialog = true;
                 StartCoroutine(Teleport());

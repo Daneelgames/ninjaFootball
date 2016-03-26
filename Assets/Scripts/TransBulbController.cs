@@ -13,6 +13,7 @@ public class TransBulbController : MonoBehaviour {
     void Start()
     {
         InvokeRepeating("CheckIfFixed", 1f, 1f);
+        fixedBulb.SetActive(false);
     }
 
     void CheckIfFixed()
