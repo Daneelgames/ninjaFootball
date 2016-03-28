@@ -18,6 +18,12 @@ public class GameManager : MonoBehaviour {
     private Canvas canvas;
     private Animator canvasAnimator;
 
+    [SerializeField]
+    private Image quitSprite;
+    private float quitValue = 0f;
+    private bool exitGame = false;
+    
+
     void Awake()
     {
         //Check if instance already exists
@@ -41,6 +47,7 @@ public class GameManager : MonoBehaviour {
         canvasAnimator = canvas.GetComponent<Animator>();
         canvas.worldCamera = GameObject.Find("RenderCamera").GetComponent<Camera>();
         InvokeRepeating("FindCamera", 1f, 1f);
+        UnityEngine.Cursor.visible = false;
 	}
 	
     void FindCamera()
@@ -50,9 +57,8 @@ public class GameManager : MonoBehaviour {
     }
 
 	void Update () {
-        if (Input.GetButtonDown("Restart"))
-            SceneManager.LoadScene(0);
-        
+        QuitGameManager();
+
         if (fadeSpriteVisible && fadeSpriteColor.a < 1)
         {
             fadeSpriteColor.a += 5 * Time.deltaTime;
@@ -65,6 +71,38 @@ public class GameManager : MonoBehaviour {
             fadeSprite.color = fadeSpriteColor;
         }
 
+    }
+
+    void QuitGameManager()
+    {
+        if (!exitGame)
+        {
+            if (Input.GetButton("Cancel") && quitValue < 1)
+            {
+                quitValue += 1f * Time.deltaTime;
+            }
+
+            else if (!Input.GetButton("Cancel") && quitValue > 0)
+            {
+                quitValue -= 5f * Time.deltaTime;
+            }
+            else if (quitValue < 0)
+                quitValue = 0;
+
+            quitSprite.fillAmount = quitValue;
+
+            if (quitValue >= 1)
+            {
+                exitGame = true;
+                StartCoroutine( QuitGame());
+            }
+        }
+    }
+
+    IEnumerator QuitGame()
+    {
+        yield return new WaitForSeconds(2f);
+        Application.Quit();
     }
 
     public void ChangeScene(int nextLevel)
