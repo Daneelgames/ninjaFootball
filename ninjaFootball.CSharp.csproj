@@ -118,12 +118,14 @@
     <Compile Include="Assets\Scripts\Player\PlayerSounds.cs" />
     <Compile Include="Assets\Scripts\Player\Weapon.cs" />
     <Compile Include="Assets\Scripts\RandomizePitchOnStart.cs" />
+    <Compile Include="Assets\Scripts\SaveManager.cs" />
     <Compile Include="Assets\Scripts\ScrollController.cs" />
     <Compile Include="Assets\Scripts\SetAnimatorBoolInDialog.cs" />
     <Compile Include="Assets\Scripts\ShakeScreenOnStart.cs" />
     <Compile Include="Assets\Scripts\SpawnInstanceOnStart.cs" />
     <Compile Include="Assets\Scripts\StartCutSceneInTrigger.cs" />
     <Compile Include="Assets\Scripts\StartDrawnAnimation.cs" />
+    <Compile Include="Assets\Scripts\Statefull.cs" />
     <Compile Include="Assets\Scripts\TalkCursorController.cs" />
     <Compile Include="Assets\Scripts\TimeScale.cs" />
     <Compile Include="Assets\Scripts\TransBulbController.cs" />
