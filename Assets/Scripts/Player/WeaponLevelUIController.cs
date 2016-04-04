@@ -8,10 +8,11 @@ public class WeaponLevelUIController : MonoBehaviour
     [SerializeField]
     private Image content;
 
+    [HideInInspector]
     public int curExpForLvl = 0;
 
-    private int maxExpForLvl = 50;
-    private int minExpForLvl = 0;
+    public int maxExpForLvl = 50;
+    public int minExpForLvl = 0;
 
     private float minFill = 0f;
     private float maxFill = 1f;
@@ -24,7 +25,7 @@ public class WeaponLevelUIController : MonoBehaviour
     // Use this for initialization
     void Update()
     {
-        HandleBar();
+            HandleBar();
     }
 
     private void HandleBar()

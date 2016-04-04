@@ -7,8 +7,7 @@ public class Weapon : MonoBehaviour {
     public GameObject[] mainWeapon;
     [SerializeField]
     private GameObject _weaponDrop;
-
-    [HideInInspector]
+    
     public int[] weaponLevel;
 
     [HideInInspector]
@@ -42,17 +41,15 @@ public class Weapon : MonoBehaviour {
         shotPosition = transform.Find("PlayerSprites/Shot").gameObject;
         playerSound = transform.Find("PlayerSprites").GetComponent<PlayerSounds>();
         canvasAnimator = GameObject.Find("Canvas").GetComponent<Animator>();
-        ammoCounter = GameObject.Find("AmmoCounter").GetComponent<Text>();
         playerMovement = GetComponent<PlayerMovement>();
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        SetWeaponLevel();
-
         if (playerMovement.playerLives > 0)
         {
+            SetWeaponLevel();
             Shooting();
             Reload();
         }
@@ -62,7 +59,7 @@ public class Weapon : MonoBehaviour {
     {
         if (weaponLevel[activeWeapon] <= 50)
             lvl1.curExpForLvl = weaponLevel[activeWeapon];
-        else if (weaponLevel[activeWeapon] >= 50)
+        if (weaponLevel[activeWeapon] <= 100)
             lvl2.curExpForLvl = weaponLevel[activeWeapon];
     }
 
