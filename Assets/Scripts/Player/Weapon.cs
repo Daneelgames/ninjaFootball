@@ -4,21 +4,22 @@ using UnityEngine.UI;
 
 public class Weapon : MonoBehaviour {
 
-    [SerializeField]
-    private GameObject mainWeapon;
+    public GameObject[] mainWeapon;
     [SerializeField]
     private GameObject _weaponDrop;
 
+    [HideInInspector]
+    public int[] weaponLevel;
+
+    [HideInInspector]
+    public int activeWeapon = 0;
     [SerializeField]
     private float reloadTimeMax = 0.5f;
     [SerializeField]
     private float reloadTimeMaxAlt = 1f;
     private float reloadTimeCur = 0;
     private float reloadTimeCurAlt = 0;
-
-    public GameObject altWeapon;
-    public int altWeaponAmmo = 100;
-
+    
     private GameObject shotPosition;
     private PlayerSounds playerSound;
     private Animator canvasAnimator;
@@ -28,9 +29,15 @@ public class Weapon : MonoBehaviour {
     private Text ammoCounter;
     private TimeScale timeScale;
 
+    private WeaponLevelUIController lvl1;
+    private WeaponLevelUIController lvl2;
+
     // Use this for initialization
     void Start ()
     {
+        lvl1 = GameObject.Find("Lvl1WeaponBar").GetComponent<WeaponLevelUIController>();
+        lvl2 = GameObject.Find("Lvl2WeaponBar").GetComponent<WeaponLevelUIController>();
+
         timeScale = GetComponent<TimeScale>();
         shotPosition = transform.Find("PlayerSprites/Shot").gameObject;
         playerSound = transform.Find("PlayerSprites").GetComponent<PlayerSounds>();
@@ -40,48 +47,34 @@ public class Weapon : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
+        SetWeaponLevel();
+
         if (playerMovement.playerLives > 0)
         {
             Shooting();
             Reload();
         }
-        ammoCounter.text = "" + altWeaponAmmo.ToString("000");
+    }
+
+    void SetWeaponLevel()
+    {
+        if (weaponLevel[activeWeapon] <= 50)
+            lvl1.curExpForLvl = weaponLevel[activeWeapon];
+        else if (weaponLevel[activeWeapon] >= 50)
+            lvl2.curExpForLvl = weaponLevel[activeWeapon];
     }
 
     void Shooting()
     {
-        if (altWeapon != null)
-            _altWeaponCost = altWeapon.GetComponent<AlternativeWeaponCost>().cost;
 
         if (Input.GetButtonDown("Fire1") && reloadTimeCur == 0 && mainWeapon != null)
         {
             playerMovement.shoot = true;
-            Instantiate(mainWeapon, new Vector2(shotPosition.transform.position.x, shotPosition.transform.position.y), gameObject.transform.rotation);
+            Instantiate(mainWeapon[activeWeapon], new Vector2(shotPosition.transform.position.x, shotPosition.transform.position.y), gameObject.transform.rotation);
             timeScale.Shoot();
             reloadTimeCur = reloadTimeMax;
-        }
-
-        if (Input.GetButtonDown("Fire2") && reloadTimeCurAlt == 0)
-        {
-            if (altWeaponAmmo >= _altWeaponCost && _lastAltInstance == null && altWeapon != null)
-            {
-                altWeaponAmmo -= _altWeaponCost;
-                playerMovement.shoot = true;
-                _lastAltInstance = Instantiate(altWeapon, new Vector2(shotPosition.transform.position.x, shotPosition.transform.position.y), gameObject.transform.rotation) as GameObject;
-                timeScale.Shoot();
-                reloadTimeCurAlt = reloadTimeMaxAlt;
-            }
-            else if (altWeapon == null)
-            {
-                playerSound.PlaySound(5);
-                canvasAnimator.SetTrigger("GetWeapon");
-            }
-            else if (altWeaponAmmo < _altWeaponCost)
-            {
-                playerSound.PlaySound(5);
-                canvasAnimator.SetTrigger("GetAmmo");
-            }
         }
     }
 
@@ -100,17 +93,9 @@ public class Weapon : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        if (coll.gameObject.tag == "WeaponDrop")
-        {
-            altWeapon = coll.gameObject.GetComponent<WeaponDropController>().weapon;
-            Destroy(coll.gameObject);
-            playerSound.PlaySound(4);
-            canvasAnimator.SetTrigger("GetWeapon");
-        }
-
         if (coll.gameObject.tag == "PlayerAmmoDrop")
         {
-            altWeaponAmmo += coll.gameObject.GetComponent<DropController>().amount;
+            weaponLevel[activeWeapon] += coll.gameObject.GetComponent<DropController>().amount;
             Destroy(coll.gameObject);
             playerSound.PlaySound(4);
             canvasAnimator.SetTrigger("GetAmmo");

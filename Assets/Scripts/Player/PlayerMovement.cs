@@ -252,10 +252,11 @@ public class PlayerMovement : MonoBehaviour
         playerLives = 1;
         Physics2D.IgnoreLayerCollision(10, 11, false);
         _rigidbody.velocity = new Vector2(0, 0);
-        int _weaponAmmo = GetComponent<Weapon>().altWeaponAmmo;
+        Weapon weapon = GetComponent<Weapon>();
+        int _weaponAmmo = weapon.weaponLevel[weapon.activeWeapon];
         GameObject drop = Instantiate(playerAmmoDrop, playerDropPos, transform.rotation) as GameObject;
         drop.GetComponent<DropController>().amount = _weaponAmmo;
-        GetComponent<Weapon>().altWeaponAmmo = 0;
+        GetComponent<Weapon>().weaponLevel[weapon.activeWeapon] = 0;
     }
     
     void OnTriggerEnter2D(Collider2D coll)

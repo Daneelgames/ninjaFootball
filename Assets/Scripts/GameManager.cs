@@ -41,7 +41,6 @@ public class GameManager : MonoBehaviour {
         canvasAnimator = canvas.GetComponent<Animator>();
         canvas.worldCamera = GameObject.Find("RenderCamera").GetComponent<Camera>();
         InvokeRepeating("FindCamera", 1f, 1f);
-        UnityEngine.Cursor.visible = false;
 	}
 	
     void FindCamera()
