@@ -1,44 +1,49 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class Weapon : MonoBehaviour {
 
-    public GameObject[] mainWeapon;
-    [SerializeField]
-    private GameObject _weaponDrop;
+    public List<GameObject> weaponList;
     
     public int[] weaponLevel;
+
+    [SerializeField]
+    private Sprite[] weaponIcons;
+
+    private Image activeWeaponIcon;
 
     [HideInInspector]
     public int activeWeapon = 0;
     [SerializeField]
     private float reloadTimeMax = 0.5f;
-    [SerializeField]
-    private float reloadTimeMaxAlt = 1f;
     private float reloadTimeCur = 0;
     private float reloadTimeCurAlt = 0;
     
-    private GameObject shotPosition;
     private PlayerSounds playerSound;
     private Animator canvasAnimator;
     private PlayerMovement playerMovement;
-    private GameObject _lastAltInstance = null;
-    private int _altWeaponCost;
+    
     private Text ammoCounter;
     private TimeScale timeScale;
 
     private WeaponLevelUIController lvl1;
     private WeaponLevelUIController lvl2;
 
+    private WeaponLevelController activeWeaponLevelController;
+
     // Use this for initialization
     void Start ()
     {
+        activeWeaponIcon = GameObject.Find("WeaponIcon").GetComponent<Image>();
+
         lvl1 = GameObject.Find("Lvl1WeaponBar").GetComponent<WeaponLevelUIController>();
         lvl2 = GameObject.Find("Lvl2WeaponBar").GetComponent<WeaponLevelUIController>();
 
+        SetWeaponLevel();
+
         timeScale = GetComponent<TimeScale>();
-        shotPosition = transform.Find("PlayerSprites/Shot").gameObject;
         playerSound = transform.Find("PlayerSprites").GetComponent<PlayerSounds>();
         canvasAnimator = GameObject.Find("Canvas").GetComponent<Animator>();
         playerMovement = GetComponent<PlayerMovement>();
@@ -49,29 +54,76 @@ public class Weapon : MonoBehaviour {
     {
         if (playerMovement.playerLives > 0)
         {
-            SetWeaponLevel();
             Shooting();
             Reload();
+            ChangeWeapon();
         }
     }
 
     void SetWeaponLevel()
     {
+        for (int i = 0; i < weaponList.Count; i++)
+        {
+            if (weaponList[i] != weaponList[activeWeapon])
+                weaponList[i].SetActive(false);
+            else
+                weaponList[i].SetActive(true);
+        }
+
+        lvl1.curExpForLvl = weaponLevel[activeWeapon];
+        lvl2.curExpForLvl = weaponLevel[activeWeapon];
+
         if (weaponLevel[activeWeapon] <= 50)
-            lvl1.curExpForLvl = weaponLevel[activeWeapon];
-        if (weaponLevel[activeWeapon] <= 100)
-            lvl2.curExpForLvl = weaponLevel[activeWeapon];
+        {
+            weaponList[activeWeapon].GetComponent<WeaponLevelController>().level = 0;
+        }
+        else if (weaponLevel[activeWeapon] > 50)
+        {
+            weaponList[activeWeapon].GetComponent<WeaponLevelController>().level = 1;
+        }
+        else if (weaponLevel[activeWeapon] > 100)
+        {
+            weaponList[activeWeapon].GetComponent<WeaponLevelController>().level = 2;
+        }
     }
 
     void Shooting()
     {
 
-        if (Input.GetButtonDown("Fire1") && reloadTimeCur == 0 && mainWeapon != null)
+        if (Input.GetButtonDown("Fire1") && reloadTimeCur == 0)
         {
+            activeWeaponLevelController.Attack();
             playerMovement.shoot = true;
-            Instantiate(mainWeapon[activeWeapon], new Vector2(shotPosition.transform.position.x, shotPosition.transform.position.y), gameObject.transform.rotation);
             timeScale.Shoot();
             reloadTimeCur = reloadTimeMax;
+        }
+    }
+
+    void ChangeWeapon()
+    {
+        if (Input.GetButtonDown("WeaponNext"))
+        {
+            if (activeWeapon != weaponList.Count-1)
+                activeWeapon += 1;
+            else
+                activeWeapon = 0;
+
+            canvasAnimator.SetTrigger("GetWeapon");
+            activeWeaponIcon.sprite = weaponIcons[activeWeapon];
+            SetWeaponLevel();
+            activeWeaponLevelController = weaponList[activeWeapon].GetComponent<WeaponLevelController>();
+        }
+        else if (Input.GetButtonDown("WeaponPrev"))
+        {
+            if (activeWeapon != 0)
+                activeWeapon -= 1;
+            else
+                activeWeapon = weaponList.Count - 1;
+
+            canvasAnimator.SetTrigger("GetWeapon");
+            activeWeaponIcon.sprite = weaponIcons[activeWeapon];
+            SetWeaponLevel();
+            activeWeaponLevelController = weaponList[activeWeapon].GetComponent<WeaponLevelController>();
         }
     }
 
@@ -93,9 +145,10 @@ public class Weapon : MonoBehaviour {
         if (coll.gameObject.tag == "PlayerAmmoDrop")
         {
             weaponLevel[activeWeapon] += coll.gameObject.GetComponent<DropController>().amount;
+            SetWeaponLevel();
             Destroy(coll.gameObject);
             playerSound.PlaySound(4);
-            canvasAnimator.SetTrigger("GetAmmo");
+            canvasAnimator.SetTrigger("GetExp");
         }
     }
 }
