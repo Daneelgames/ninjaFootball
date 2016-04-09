@@ -134,6 +134,8 @@
     <Compile Include="Assets\Scripts\Weapons\BulletX2.cs" />
     <Compile Include="Assets\Scripts\Weapons\ExplosionEnemyDamage.cs" />
     <Compile Include="Assets\Scripts\Weapons\Machinegun.cs" />
+    <Compile Include="Assets\Scripts\Weapons\MeleeWeapon.cs" />
+    <Compile Include="Assets\Scripts\Weapons\RangeWeapon.cs" />
     <Compile Include="Assets\Scripts\Weapons\Shotgun.cs" />
     <Compile Include="Assets\Scripts\Weapons\TimeBomb.cs" />
     <Compile Include="Assets\Scripts\Weapons\WeaponLevelController.cs" />

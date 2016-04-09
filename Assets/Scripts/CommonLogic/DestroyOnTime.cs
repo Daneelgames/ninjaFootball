@@ -3,11 +3,28 @@ using System.Collections;
 
 public class DestroyOnTime : MonoBehaviour {
 
-    public float destroyTime;
+    [SerializeField]
+    private float destroyTime;
+    [SerializeField]
+    private SpriteRenderer spriteToFade = null;
 
-	// Use this for initialization
-	void Start () {
+    private Color spriteAlpha;
+
+    // Use this for initialization
+    void Start () {
         Destroy(gameObject, destroyTime);
+
+        if (spriteToFade != null)
+            spriteAlpha = spriteToFade.GetComponent<SpriteRenderer>().color;
 	}
 	
+    void Update()
+    {
+        if (spriteToFade != null)
+        {
+            spriteAlpha.a -= 1 * Time.deltaTime / destroyTime;
+        }
+
+    }
+
 }
