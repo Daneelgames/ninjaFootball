@@ -6,7 +6,11 @@ public class MeleeWeapon : MonoBehaviour {
     [SerializeField]
     private Collider2D _collider;
     [SerializeField]
-    private int damage = 5;
+    private int damage0 = 5;
+    [SerializeField]
+    private int damage1 = 10;
+    [SerializeField]
+    private int damage2 = 20;
     [SerializeField]
     private Animator _animator;
 
@@ -17,8 +21,20 @@ public class MeleeWeapon : MonoBehaviour {
     [SerializeField]
     private float coolDownB = 1.5f;
 
-    private float coolDownCur = 0.25f;
+    [SerializeField]
+    private GameObject swordHit;
+    private Transform hitHolder;
+
+
+    private float coolDownCur = 0f;
+
+    private int level = 0;
     
+    void Start()
+    {
+        hitHolder = transform.GetChild(0);
+    }
+
     void Update()
     {
         if (coolDownCur > 0f)
@@ -27,11 +43,19 @@ public class MeleeWeapon : MonoBehaviour {
             coolDownCur = 0f;
     }
 
+    public void CreateFlash()
+    {
+        GameObject swordFlash = Instantiate(swordHit, hitHolder.position, hitHolder.rotation) as GameObject;
+        swordFlash.transform.localScale = transform.localScale;
+    }
+
     public void Attack0()
     {
         if (coolDownCur <= 0)
         {
             int chance = Random.Range(0, 3);
+
+            level = 0;
 
             switch (chance)
                 {
@@ -55,6 +79,8 @@ public class MeleeWeapon : MonoBehaviour {
         {
             int chance = Random.Range(0, 3);
 
+            level = 1;
+
             switch (chance)
             {
                 case 0:
@@ -77,6 +103,8 @@ public class MeleeWeapon : MonoBehaviour {
         {
             int chance = Random.Range(0, 3);
 
+            level = 2;
+
             switch (chance)
             {
                 case 0:
@@ -97,7 +125,12 @@ public class MeleeWeapon : MonoBehaviour {
     {
         if (coll.tag == "Enemy")
         {
-            coll.GetComponent<EnemyHealth>().Damage(damage);
+            if (level == 0)
+                coll.GetComponent<EnemyHealth>().Damage(damage0);
+            else if (level == 1)
+                coll.GetComponent<EnemyHealth>().Damage(damage1);
+            else if (level == 2)
+                coll.GetComponent<EnemyHealth>().Damage(damage2);
         }
     }
 }

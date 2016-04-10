@@ -61,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
 
         timeScaleScript = GetComponent<TimeScale>();
         _rigidbody = GetComponent(typeof(Rigidbody2D)) as Rigidbody2D;
-        weapon = GetComponent<Weapon>() as Weapon;
+        weapon = GetComponent<Weapon>();
         _animator = transform.Find("PlayerSprites").GetComponent<Animator>();
         playerSound = transform.Find("PlayerSprites").GetComponent<PlayerSounds>();
         playerSprite = transform.Find("PlayerSprites").gameObject;
@@ -252,11 +252,11 @@ public class PlayerMovement : MonoBehaviour
         playerLives = 1;
         Physics2D.IgnoreLayerCollision(10, 11, false);
         _rigidbody.velocity = new Vector2(0, 0);
-        Weapon weapon = GetComponent<Weapon>();
         int _weaponAmmo = weapon.weaponLevel[weapon.activeWeapon];
         GameObject drop = Instantiate(playerAmmoDrop, playerDropPos, transform.rotation) as GameObject;
         drop.GetComponent<DropController>().amount = _weaponAmmo;
         GetComponent<Weapon>().weaponLevel[weapon.activeWeapon] = 0;
+        weapon.SetWeaponLevel();
     }
     
     void OnTriggerEnter2D(Collider2D coll)

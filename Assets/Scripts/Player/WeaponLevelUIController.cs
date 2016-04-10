@@ -8,7 +8,7 @@ public class WeaponLevelUIController : MonoBehaviour
     [SerializeField]
     private Image content;
 
-    [HideInInspector]
+    [ReadOnly]
     public int curExpForLvl = 0;
 
     public int maxExpForLvl = 50;
@@ -25,12 +25,16 @@ public class WeaponLevelUIController : MonoBehaviour
     // Use this for initialization
     void Update()
     {
-            HandleBar();
+        HandleBar();
     }
 
     private void HandleBar()
     {
         content.fillAmount = Map(curExpForLvl, minExpForLvl, maxExpForLvl, minFill, maxFill);
+        if (curExpForLvl >= maxExpForLvl)
+            content.color = new Color(0, 255, 0);
+        else
+            content.color = new Color(255, 164, 0);
     }
 
     private float Map(int curHealth, int inMin, int inMax, float outMin, float outMax)

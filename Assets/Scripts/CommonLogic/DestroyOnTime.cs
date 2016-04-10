@@ -8,21 +8,19 @@ public class DestroyOnTime : MonoBehaviour {
     [SerializeField]
     private SpriteRenderer spriteToFade = null;
 
-    private Color spriteAlpha;
+    private float spriteAlpha = 1;
 
     // Use this for initialization
     void Start () {
         Destroy(gameObject, destroyTime);
-
-        if (spriteToFade != null)
-            spriteAlpha = spriteToFade.GetComponent<SpriteRenderer>().color;
 	}
 	
     void Update()
     {
         if (spriteToFade != null)
         {
-            spriteAlpha.a -= 1 * Time.deltaTime / destroyTime;
+            spriteAlpha -= 1 * Time.deltaTime / destroyTime;
+            spriteToFade.color = new Color(1f, 1f, 1f, spriteAlpha);
         }
 
     }

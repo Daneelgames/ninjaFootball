@@ -27,9 +27,12 @@ public class Weapon : MonoBehaviour {
     
     private Text ammoCounter;
     private TimeScale timeScale;
-
+    
     private WeaponLevelUIController lvl1;
     private WeaponLevelUIController lvl2;
+
+    [SerializeField]
+    private PlayerFeedbackTextController feedbackController;
 
     private WeaponLevelController activeWeaponLevelController;
 
@@ -47,8 +50,21 @@ public class Weapon : MonoBehaviour {
         playerSound = transform.Find("PlayerSprites").GetComponent<PlayerSounds>();
         canvasAnimator = GameObject.Find("Canvas").GetComponent<Animator>();
         playerMovement = GetComponent<PlayerMovement>();
+
+        InvokeRepeating("GetExpBars", 1f, 1f);
 	}
 	
+    void GetExpBars()
+    {
+        if (lvl1 == null || lvl2 == null)
+        {
+            lvl1 = GameObject.Find("Lvl1WeaponBar").GetComponent<WeaponLevelUIController>();
+            lvl2 = GameObject.Find("Lvl2WeaponBar").GetComponent<WeaponLevelUIController>();
+
+            CancelInvoke("GetExpBars");
+        }
+    }
+
 	// Update is called once per frame
 	void Update ()
     {
@@ -60,7 +76,7 @@ public class Weapon : MonoBehaviour {
         }
     }
 
-    void SetWeaponLevel()
+    public void SetWeaponLevel()
     {
         for (int i = 0; i < weaponList.Count; i++)
         {
@@ -144,8 +160,12 @@ public class Weapon : MonoBehaviour {
     {
         if (coll.gameObject.tag == "PlayerAmmoDrop")
         {
-            weaponLevel[activeWeapon] += coll.gameObject.GetComponent<DropController>().amount;
             SetWeaponLevel();
+
+            int exp = coll.gameObject.GetComponent<DropController>().amount;
+            weaponLevel[activeWeapon] += exp;
+            feedbackController.GetExp(exp);
+
             Destroy(coll.gameObject);
             playerSound.PlaySound(4);
             canvasAnimator.SetTrigger("GetExp");
