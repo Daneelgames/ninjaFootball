@@ -160,12 +160,11 @@ public class Weapon : MonoBehaviour {
     {
         if (coll.gameObject.tag == "PlayerAmmoDrop")
         {
-            SetWeaponLevel();
-
             int exp = coll.gameObject.GetComponent<DropController>().amount;
             weaponLevel[activeWeapon] += exp;
             feedbackController.GetExp(exp);
-
+            SetWeaponLevel();
+            
             Destroy(coll.gameObject);
             playerSound.PlaySound(4);
             canvasAnimator.SetTrigger("GetExp");
