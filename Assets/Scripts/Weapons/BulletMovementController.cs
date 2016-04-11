@@ -1,18 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Bullet : MonoBehaviour {
+public class BulletMovementController : MonoBehaviour {
 
-    public float speed = 15.0f;
-    public int damage = 5;
+    public float speed = 10f;
+    public int damage = 2;
     public float hRandom = 1f;
-    [ReadOnly]
     public GameObject bulletParticles;
     [ReadOnly]
     public Collider2D playerActiveZone;
 
     [HideInInspector]
     public Direction bulletDirection = Direction.RIGHT;
+
+    [SerializeField]
+    private bool destroyOnWall = true;
 
     private Transform _transform;
     private float hSpeed;
@@ -21,8 +23,6 @@ public class Bullet : MonoBehaviour {
 
     void Start ()
     {
-        //hRandom = Random.Range(-1F, 1F);
-        speed += Random.Range(-3f, 3f);
         playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
         playerActiveZone = GameObject.Find("Zone").GetComponent<Collider2D>();
         hSpeed = Random.Range(-hRandom, hRandom);
@@ -49,20 +49,21 @@ public class Bullet : MonoBehaviour {
         {
             other.collider.gameObject.GetComponent<EnemyHealth>().Damage(damage);
         }
-        BulletDestroy();
+        if (destroyOnWall)
+            Destroy(gameObject);
 
     }
-    void OnTriggerExit2D(Collider2D zone)
+
+    void OnTriggerExit2D(Collider2D coll)
     {
-        if (zone.tag == "Zone")
+        if (coll.tag == "Zone")
         {
-                BulletDestroy();
+            Destroy(gameObject);
         }
     }
 
-    void BulletDestroy()
+    void OnDestroy()
     {
         Instantiate(bulletParticles, transform.position, transform.rotation);
-        Destroy(gameObject);
     }
 }

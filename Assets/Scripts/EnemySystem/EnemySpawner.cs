@@ -49,13 +49,13 @@ public class EnemySpawner : MonoBehaviour {
             canSpawn = false;
             spawnedMob = Instantiate(enemy, transform.position, transform.rotation) as GameObject;
         }
-
+        /*
         if (spawnerRoom != playerActiveRoom)
         {
             canSpawn = true;
             if (spawnedMob != null)
                 Destroy(spawnedMob);
-        }
+        } */
     }
 
     void MobReset()

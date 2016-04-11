@@ -28,9 +28,9 @@ public class Machinegun : MonoBehaviour {
         for (int i = 0; i < 6; i++)
         {
             var lastBullet = Instantiate(bullet, new Vector2(transform.position.x, transform.position.y - 0.1f), gameObject.transform.rotation) as GameObject;
-            lastBullet.GetComponent<Bullet>().hRandom = 5f;
+            lastBullet.GetComponent<BulletMovementController>().hRandom = 5f;
             var lastBullet2 = Instantiate(bullet, new Vector2(transform.position.x, transform.position.y - 0.1f), gameObject.transform.rotation) as GameObject;
-            lastBullet2.GetComponent<Bullet>().hRandom = 5f;
+            lastBullet2.GetComponent<BulletMovementController>().hRandom = 5f;
             PlayClipAtPoint(_audio.clip, new Vector3(transform.position.x, transform.position.y, 0), 1f, pitch);
             yield return new WaitForSeconds(waitTime);
             if (i == 5)

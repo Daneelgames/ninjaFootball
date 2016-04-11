@@ -16,17 +16,12 @@ public class Weapon : MonoBehaviour {
 
     [HideInInspector]
     public int activeWeapon = 0;
-    [SerializeField]
-    private float reloadTimeMax = 0.5f;
-    private float reloadTimeCur = 0;
-    private float reloadTimeCurAlt = 0;
     
     private PlayerSounds playerSound;
     private Animator canvasAnimator;
     private PlayerMovement playerMovement;
     
     private Text ammoCounter;
-    private TimeScale timeScale;
     
     private WeaponLevelUIController lvl1;
     private WeaponLevelUIController lvl2;
@@ -44,9 +39,11 @@ public class Weapon : MonoBehaviour {
         lvl1 = GameObject.Find("Lvl1WeaponBar").GetComponent<WeaponLevelUIController>();
         lvl2 = GameObject.Find("Lvl2WeaponBar").GetComponent<WeaponLevelUIController>();
 
-        SetWeaponLevel();
+        activeWeaponLevelController = weaponList[activeWeapon].GetComponent<WeaponLevelController>();
+        activeWeaponIcon.sprite = weaponIcons[activeWeapon];
 
-        timeScale = GetComponent<TimeScale>();
+        SetWeaponLevel();
+        
         playerSound = transform.Find("PlayerSprites").GetComponent<PlayerSounds>();
         canvasAnimator = GameObject.Find("Canvas").GetComponent<Animator>();
         playerMovement = GetComponent<PlayerMovement>();
@@ -71,7 +68,6 @@ public class Weapon : MonoBehaviour {
         if (playerMovement.playerLives > 0)
         {
             Shooting();
-            Reload();
             ChangeWeapon();
         }
     }
@@ -89,15 +85,15 @@ public class Weapon : MonoBehaviour {
         lvl1.curExpForLvl = weaponLevel[activeWeapon];
         lvl2.curExpForLvl = weaponLevel[activeWeapon];
 
-        if (weaponLevel[activeWeapon] <= 50)
+        if (weaponLevel[activeWeapon] < 50)
         {
             weaponList[activeWeapon].GetComponent<WeaponLevelController>().level = 0;
         }
-        else if (weaponLevel[activeWeapon] > 50)
+        else if (weaponLevel[activeWeapon] >= 50 && weaponLevel[activeWeapon] < 100)
         {
             weaponList[activeWeapon].GetComponent<WeaponLevelController>().level = 1;
         }
-        else if (weaponLevel[activeWeapon] > 100)
+        else if (weaponLevel[activeWeapon] >= 100)
         {
             weaponList[activeWeapon].GetComponent<WeaponLevelController>().level = 2;
         }
@@ -106,12 +102,10 @@ public class Weapon : MonoBehaviour {
     void Shooting()
     {
 
-        if (Input.GetButtonDown("Fire1") && reloadTimeCur == 0)
+        if (Input.GetButtonDown("Fire1"))
         {
             activeWeaponLevelController.Attack();
             playerMovement.shoot = true;
-            timeScale.Shoot();
-            reloadTimeCur = reloadTimeMax;
         }
     }
 
@@ -141,19 +135,6 @@ public class Weapon : MonoBehaviour {
             SetWeaponLevel();
             activeWeaponLevelController = weaponList[activeWeapon].GetComponent<WeaponLevelController>();
         }
-    }
-
-    void Reload()
-    {
-        if (reloadTimeCur > 0)
-            reloadTimeCur -= 1f * Time.deltaTime;
-        else if (reloadTimeCur < 0)
-            reloadTimeCur = 0;
-
-        if (reloadTimeCurAlt > 0)
-            reloadTimeCurAlt -= 1f * Time.deltaTime;
-        else if (reloadTimeCurAlt < 0)
-            reloadTimeCurAlt = 0;
     }
 
     void OnCollisionEnter2D(Collision2D coll)

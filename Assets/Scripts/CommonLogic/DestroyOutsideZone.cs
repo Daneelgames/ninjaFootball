@@ -5,21 +5,21 @@ public class DestroyOutsideZone : MonoBehaviour {
 
     [SerializeField]
     private Collider2D playerActiveRoom;
-
-    private GameObject player;
+    
 
     private Collider2D ownerRoom;
+    private ActiveRoom playerActiveRoomComponent;
 
     private bool canDestroy = false;
 
     void Start()
     {
-        player = GameObject.Find("Player");
+        playerActiveRoomComponent = GameObject.Find("Player").GetComponent<ActiveRoom>();
     }
 
     void Update()
     {
-        playerActiveRoom = player.GetComponent<ActiveRoom>().activeRoom.GetComponent<Collider2D>();
+        playerActiveRoom = playerActiveRoomComponent.activeRoom.GetComponent<Collider2D>();
     }
 
     void OnTriggerEnter2D(Collider2D coll)

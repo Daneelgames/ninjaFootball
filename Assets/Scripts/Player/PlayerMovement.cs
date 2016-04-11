@@ -13,6 +13,9 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector]
     public int hAxis;
 
+    [HideInInspector]
+    public Direction playerDirection = Direction.RIGHT;
+
     [SerializeField]
     private float speed = 2f;
     [SerializeField]
@@ -35,7 +38,6 @@ public class PlayerMovement : MonoBehaviour
     private GameObject playerSprite;
     private TimeScale timeScaleScript;
     private Rigidbody2D _rigidbody;
-    private Direction playerDirection = Direction.RIGHT;
     private Weapon weapon;
     private float jumpDirection = 0.0f;
     private float translate;

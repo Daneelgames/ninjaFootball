@@ -7,6 +7,9 @@ public class EnemyHealth : MonoBehaviour {
     public bool invincible = false;
 
     [SerializeField]
+    private EnemyFeedbackTextController damageFeedback;
+
+    [SerializeField]
     private Transform explosion;
     [SerializeField]
     private EnemyHealth syncHealth;
@@ -31,6 +34,7 @@ public class EnemyHealth : MonoBehaviour {
         {
             health -= dmg;
             StartCoroutine(Blink());
+            damageFeedback.GetDMG(dmg);
             if (health <= 0)
                 EnemyDestroy();
         }

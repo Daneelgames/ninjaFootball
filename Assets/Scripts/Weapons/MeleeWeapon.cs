@@ -15,6 +15,9 @@ public class MeleeWeapon : MonoBehaviour {
     private Animator _animator;
 
     [SerializeField]
+    private TimeScale timeScale;
+
+    [SerializeField]
     private float coolDownS = 0.25f;
     [SerializeField]
     private float coolDownM = 0.75f;
@@ -56,6 +59,7 @@ public class MeleeWeapon : MonoBehaviour {
             int chance = Random.Range(0, 3);
 
             level = 0;
+            timeScale.Shoot();
 
             switch (chance)
                 {
@@ -80,6 +84,7 @@ public class MeleeWeapon : MonoBehaviour {
             int chance = Random.Range(0, 3);
 
             level = 1;
+            timeScale.Shoot();
 
             switch (chance)
             {
@@ -104,6 +109,7 @@ public class MeleeWeapon : MonoBehaviour {
             int chance = Random.Range(0, 3);
 
             level = 2;
+            timeScale.Shoot();
 
             switch (chance)
             {
