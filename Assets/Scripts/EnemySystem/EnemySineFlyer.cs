@@ -19,14 +19,19 @@ public class EnemySineFlyer : MonoBehaviour {
 
     private GameObject sprite;
 
+    [SerializeField]
     private float curSpeedH = 0;
+    [SerializeField]
     private float curSpeedV = 0;
 
+    [SerializeField]
     private bool verticalAttack = false;
 
     void Start()
     {
         player = GameObject.Find("Player");
+
+        isVisible = false;
 
         if (canFlip)
             sprite = transform.Find("Sprite").gameObject;
@@ -45,8 +50,16 @@ public class EnemySineFlyer : MonoBehaviour {
         //Vertical attack
         if (!verticalAttack && transform.position.y > player.transform.position.y && Vector2.Distance(new Vector2(transform.position.x, 0), new Vector2(player.transform.position.x, 0)) < 0.25f)
         {
-            verticalAttack = true;
+            StartCoroutine("VerticalAttack");
         }
+    }
+
+    IEnumerator VerticalAttack()
+    {
+        verticalAttack = true;
+        yield return new WaitForSeconds(1F);
+        verticalAttack = false;
+        SetSpeedH();
     }
 
     void FixedUpdate()
