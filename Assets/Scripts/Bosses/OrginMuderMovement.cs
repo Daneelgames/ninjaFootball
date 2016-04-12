@@ -190,7 +190,15 @@ public class OrginMuderMovement : MonoBehaviour {
             _audioSource.Play();
             dead = true;
             _animator.SetBool("Dead", true);
+            StartCoroutine("GiveNewWeapon");
         }
+    }
+
+    IEnumerator GiveNewWeapon()
+    {
+        yield return new WaitForSeconds(1F);
+        Weapon playerWeapon = GameObject.Find("Player").GetComponent<Weapon>() as Weapon;
+        playerWeapon.GetNewWeapon("MUDERSWORD");
     }
 
     void OnDestroy()
