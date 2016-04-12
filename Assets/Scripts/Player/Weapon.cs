@@ -6,9 +6,11 @@ using UnityEngine.UI;
 public class Weapon : MonoBehaviour {
 
     public List<GameObject> weaponList;
-    
-    public int[] weaponLevel;
+    [SerializeField]
+    private List<GameObject> allWeapons;
 
+    public List<int> weaponLevel;
+    
     [SerializeField]
     private Sprite[] weaponIcons;
 
@@ -150,5 +152,25 @@ public class Weapon : MonoBehaviour {
             playerSound.PlaySound(4);
             canvasAnimator.SetTrigger("GetExp");
         }
+    }
+
+    public void GetNewWeapon(string weaponName)
+    {
+        GameObject newWeapon = null;
+
+        for (int i = 0; i < allWeapons.Count; i ++)
+        {
+            if (allWeapons[i].name == weaponName);
+                newWeapon = allWeapons[i];
+        }
+
+        weaponList.Add(newWeapon);
+        feedbackController.GetWeapon(newWeapon.name);
+        weaponLevel.Add(0);
+        activeWeapon = weaponList.Count - 1;
+        canvasAnimator.SetTrigger("GetWeapon");
+        activeWeaponIcon.sprite = weaponIcons[activeWeapon];
+        SetWeaponLevel();
+        activeWeaponLevelController = weaponList[activeWeapon].GetComponent<WeaponLevelController>();
     }
 }

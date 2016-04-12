@@ -18,7 +18,8 @@ public class DropController : MonoBehaviour {
         playerCollider = GameObject.Find("Player").GetComponent<BoxCollider2D>();
         Physics2D.IgnoreCollision(_collider, playerCollider, true);
         rb = GetComponent<Rigidbody2D>();
-        rb.AddForce(new Vector2(0, 7), ForceMode2D.Impulse);
+        rb.AddForce(new Vector2(Random.Range(-3, 3), 5), ForceMode2D.Impulse);
+        rb.AddTorque(Random.Range(-5, 5), ForceMode2D.Impulse);
         pm = GameObject.Find("Player").GetComponent<PlayerMovement>();
     }
 
