@@ -122,6 +122,7 @@
     <Compile Include="Assets\Scripts\EnemySystem\EnemyMoveInRange.cs" />
     <Compile Include="Assets\Scripts\EnemySystem\EnemyMoveToPlayer.cs" />
     <Compile Include="Assets\Scripts\EnemySystem\EnemyShootShielded.cs" />
+    <Compile Include="Assets\Scripts\EnemySystem\EnemySineFlyer.cs" />
     <Compile Include="Assets\Scripts\EnemySystem\EnemySpawner.cs" />
     <Compile Include="Assets\Scripts\EnemySystem\EnemySplathorsController.cs" />
     <Compile Include="Assets\Scripts\EnemySystem\EnemySplathorsMovementController.cs" />

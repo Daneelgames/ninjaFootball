@@ -13,7 +13,7 @@ public class EnemyMoveInRange : MonoBehaviour {
     private bool canFlip = true;
 
     private GameObject sprite;
-    [SerializeField]
+
     private bool visible = false;
 
     void Start()

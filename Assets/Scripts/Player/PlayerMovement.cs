@@ -239,6 +239,20 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter2D(Collider2D coll)
+    {
+        if (coll.tag == "Checkpoint" && activeCheckpoint != coll.gameObject.transform)
+        {
+            activeCheckpoint = coll.gameObject.transform;
+            coll.GetComponent<AudioSource>().Play();
+        }
+        if (coll.tag == "Enemy" && playerLives > 0)
+        {
+            playerSound.PlaySound(2);
+            StartCoroutine(Damage(0.5F));
+        }
+    }
+    
     IEnumerator Damage(float waitTime)
     {
         GameObject explode = Instantiate(explosionParticles, new Vector3(transform.position.x, transform.position.y, 0), transform.rotation) as GameObject;
@@ -260,16 +274,6 @@ public class PlayerMovement : MonoBehaviour
         GetComponent<Weapon>().weaponLevel[weapon.activeWeapon] = 0;
         weapon.SetWeaponLevel();
     }
-    
-    void OnTriggerEnter2D(Collider2D coll)
-    {
-        if (coll.tag == "Checkpoint" && activeCheckpoint != coll.gameObject.transform)
-        {
-            activeCheckpoint = coll.gameObject.transform;
-            coll.GetComponent<AudioSource>().Play();
-        }
-    }
-
     public void DialogStart()
     {
         dialog = true;
