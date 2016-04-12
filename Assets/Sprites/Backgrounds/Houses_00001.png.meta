@@ -40,7 +40,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   rGBM: 0
-  compressionQuality: 50
+  compressionQuality: -1
   allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
@@ -124,7 +124,7 @@ TextureImporter:
         - {x: 32.5, y: 14.5}
         - {x: 24.5, y: 17.5}
     outline: []
-  spritePackingTag: 
+  spritePackingTag: Sprites
   userData: 
   assetBundleName: 
   assetBundleVariant: 
