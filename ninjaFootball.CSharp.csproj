@@ -106,6 +106,8 @@
     <Compile Include="Assets\Scripts\CommonLogic\SpawnInstanceOnStart.cs" />
     <Compile Include="Assets\Scripts\CommonLogic\StartCutSceneInTrigger.cs" />
     <Compile Include="Assets\Scripts\CommonLogic\StartDrawnAnimation.cs" />
+    <Compile Include="Assets\Scripts\CommonLogic\StateManager.cs" />
+    <Compile Include="Assets\Scripts\CommonLogic\StatefulBehaviour.cs" />
     <Compile Include="Assets\Scripts\CommonLogic\TalkCursorController.cs" />
     <Compile Include="Assets\Scripts\CommonLogic\TimeScale.cs" />
     <Compile Include="Assets\Scripts\CommonLogic\TransBulbController.cs" />
