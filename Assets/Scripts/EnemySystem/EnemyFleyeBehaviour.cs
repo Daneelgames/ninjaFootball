@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemySineFlyer : MonoBehaviour {
+public class EnemyFleyeBehaviour : MonoBehaviour {
 
     [SerializeField]
     private float hSpeed = 2;
@@ -10,13 +10,12 @@ public class EnemySineFlyer : MonoBehaviour {
 
     [SerializeField]
     private Rigidbody2D _rb;
-
-    [SerializeField]
-    private bool canFlip = true;
+    
     private bool isVisible = false;
 
     private GameObject player;
 
+    [SerializeField]
     private GameObject sprite;
 
     [SerializeField]
@@ -32,20 +31,15 @@ public class EnemySineFlyer : MonoBehaviour {
         player = GameObject.Find("Player");
 
         isVisible = false;
-
-        if (canFlip)
-            sprite = transform.Find("Sprite").gameObject;
+        
     }
 
     void Update()
     {
-        if (canFlip)
-        {
             if (curSpeedH > 0)
                 sprite.transform.localRotation = Quaternion.Euler(0, 0, 0);
             else
                 sprite.transform.localRotation = Quaternion.Euler(0, 180, 0);
-        }
 
         //Vertical attack
         if (!verticalAttack && transform.position.y > player.transform.position.y && Vector2.Distance(new Vector2(transform.position.x, 0), new Vector2(player.transform.position.x, 0)) < 0.25f)
