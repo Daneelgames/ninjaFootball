@@ -7,24 +7,32 @@ public class StateManager : MonoBehaviour {
     
     static HashSet<string> liveObjects;
     static HashSet<string> deadObjects;
-    
+
+    private Vector3 playerSavedPosition;
+
     private static StateManager _instance;
     
     void Awake(){
         
         if (_instance == null){
-            //PlayerPrefs.DeleteAll();
+            //CLEAR PREFS
+            PlayerPrefs.DeleteAll();
+            //CLEAR PREFS
             _instance = this;
             GameObject.DontDestroyOnLoad(gameObject);
         } else if (_instance != this){
             GameObject.Destroy(gameObject);
             return;
         }
-        
         LoadState();
-        
     }
 
+    public static void SavePlayerPosition(GameObject player)
+    {
+        Debug.Log("Player position " + player.transform.position);
+        PlayerPrefs.SetString("Player.pos", Serialize(player.transform.position));
+        SaveState();
+    }
 
     public static void StartObject(StatefulBehaviour obj){
         Debug.Log("Start Object " + obj.path, obj);
@@ -45,6 +53,7 @@ public class StateManager : MonoBehaviour {
         PlayerPrefs.SetString("liveObjects", string.Join(":", liveObjects.ToArray()));
         PlayerPrefs.SetString("deadObjects", string.Join(":", deadObjects.ToArray()));
         Debug.Log("Save state for liveObjects: " + PlayerPrefs.GetString("liveObjects"));
+        SavePlayerWeapon();
         PlayerPrefs.Save();
     }
     
@@ -65,8 +74,20 @@ public class StateManager : MonoBehaviour {
                 deadObjects.Add(path);
             }
         }
+        LoadPlayer();
+    }
+
+    static void SavePlayerWeapon()
+    {
+        //$R@&*RRRRRRGOWGR%$&*12
     }
     
+    static void LoadPlayer()
+    {
+        GameObject player = GameObject.Find("Player");
+        player.transform.position = DeserializeVector3(PlayerPrefs.GetString("Player.pos"));
+    }
+
     public static bool IsObjectDead(StatefulBehaviour obj){
         return deadObjects.Contains(obj.path);
     }
@@ -74,6 +95,7 @@ public class StateManager : MonoBehaviour {
     static string Serialize(Vector3 vec){
         return vec.x.ToString("F2") + ":" + vec.y.ToString("F2") + ":" + vec.z.ToString("F2");
     }
+
     static Vector3 DeserializeVector3(string value){
         var values = value.Split(":".ToCharArray());
         return new Vector3(float.Parse(values[0]), float.Parse(values[1]), float.Parse(values[2]));

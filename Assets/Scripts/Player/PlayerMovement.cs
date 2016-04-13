@@ -243,6 +243,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (coll.tag == "Checkpoint" && activeCheckpoint != coll.gameObject.transform)
         {
+            SavePosition();
             activeCheckpoint = coll.gameObject.transform;
             coll.GetComponent<AudioSource>().Play();
         }
@@ -253,6 +254,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     
+    void SavePosition()
+    {
+        StateManager.SavePlayerPosition(this.gameObject);
+    }
+
     IEnumerator Damage(float waitTime)
     {
         GameObject explode = Instantiate(explosionParticles, new Vector3(transform.position.x, transform.position.y, 0), transform.rotation) as GameObject;
