@@ -131,6 +131,10 @@ public class MeleeWeapon : MonoBehaviour {
     {
         if (coll.tag == "Enemy")
         {
+            Rigidbody2D collRb = coll.gameObject.GetComponent<Rigidbody2D>();
+            if (collRb != null)
+                collRb.velocity = new Vector2(0,0);
+            
             if (level == 0)
                 coll.GetComponent<EnemyHealth>().Damage(damage0);
             else if (level == 1)

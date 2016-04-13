@@ -247,11 +247,12 @@ public class PlayerMovement : MonoBehaviour
             activeCheckpoint = coll.gameObject.transform;
             coll.GetComponent<AudioSource>().Play();
         }
+        /*
         if (coll.tag == "Enemy" && playerLives > 0)
         {
             playerSound.PlaySound(2);
             StartCoroutine(Damage(0.5F));
-        }
+        } */
     }
     
     void SavePosition()
