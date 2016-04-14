@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private GameObject explosionParticles;
     [SerializeField]
-    private GameObject playerAmmoDrop;
+    private GameObject expContainer;
 
 
     [HideInInspector] public float tJump = 0f;
@@ -276,7 +276,7 @@ public class PlayerMovement : MonoBehaviour
         Physics2D.IgnoreLayerCollision(10, 11, false);
         _rigidbody.velocity = new Vector2(0, 0);
         int _weaponAmmo = weapon.weaponLevel[weapon.activeWeapon];
-        GameObject drop = Instantiate(playerAmmoDrop, playerDropPos, transform.rotation) as GameObject;
+        GameObject drop = Instantiate(expContainer, playerDropPos, transform.rotation) as GameObject;
         drop.GetComponent<DropController>().amount = _weaponAmmo;
         GetComponent<Weapon>().weaponLevel[weapon.activeWeapon] = 0;
         weapon.SetWeaponLevel();

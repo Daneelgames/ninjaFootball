@@ -143,7 +143,7 @@ public class Weapon : MonoBehaviour {
     {
         if (coll.gameObject.tag == "PlayerAmmoDrop")
         {
-            int exp = coll.gameObject.GetComponent<DropController>().amount;
+            int exp = coll.gameObject.GetComponent<DropExpController>().amount;
             weaponLevel[activeWeapon] += exp;
             feedbackController.GetExp(exp);
             SetWeaponLevel();

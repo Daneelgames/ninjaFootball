@@ -5,43 +5,34 @@ public class DropController : MonoBehaviour {
 
     public int amount;
 
-    private PlayerMovement pm;
-    private Rigidbody2D rb;
-    private BoxCollider2D playerCollider;
-    private BoxCollider2D _collider;
-
-    private float ignoreT = 1f;
-
+    [SerializeField]
+    private GameObject[] expDrop;
+    
     void Start()
     {
-        _collider = GetComponent<BoxCollider2D>();
-        playerCollider = GameObject.Find("Player").GetComponent<BoxCollider2D>();
-        Physics2D.IgnoreCollision(_collider, playerCollider, true);
-        rb = GetComponent<Rigidbody2D>();
-        rb.AddForce(new Vector2(Random.Range(-3, 3), 5), ForceMode2D.Impulse);
-        rb.AddTorque(Random.Range(-5, 5), ForceMode2D.Impulse);
-        pm = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        int curAmount = amount;
+
+        for (int i = curAmount; i > 10; i -= 10)
+        {
+            Instantiate(expDrop[2], new Vector2(transform.position.x, transform.position.y + 1), transform.rotation);
+            print("drop 10");
+            curAmount = i;
+        }
+
+        for (int i = curAmount; i > 5; i -= 5)
+        {
+             Instantiate(expDrop[1], new Vector2(transform.position.x, transform.position.y + 1), transform.rotation);
+            print("drop 5");
+            curAmount = i;
+        }
+
+        for (int i = curAmount; i > 1; i -= 1)
+        {
+            Instantiate(expDrop[0], new Vector2(transform.position.x, transform.position.y + 1), transform.rotation);
+            print("drop 0");
+            curAmount = i;
+        }
+
+        Destroy(gameObject);
     }
-
-    void Update()
-    {
-
-        if (ignoreT > 0)
-            ignoreT -= 2 * Time.deltaTime;
-        else
-            Physics2D.IgnoreCollision(_collider, playerCollider, false);
-
-        if (amount <= 0)
-            Destroy(gameObject);
-
-        if (pm.playerLives <= 0)
-            Destroy(gameObject);
-    }
-
-    void OnTriggerEnter2D(Collider2D coll)
-    {
-        if (coll.tag == "Hazard")
-            Destroy(gameObject);
-    }
-
 }
