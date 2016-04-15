@@ -131,6 +131,7 @@
     <Compile Include="Assets\Scripts\EnemySystem\EnemySpawner.cs" />
     <Compile Include="Assets\Scripts\EnemySystem\EnemySplathorsController.cs" />
     <Compile Include="Assets\Scripts\EnemySystem\EnemySplathorsMovementController.cs" />
+    <Compile Include="Assets\Scripts\EnemySystem\TrapButtonController.cs" />
     <Compile Include="Assets\Scripts\Player\ActiveRoom.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerFeedbackTextController.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
