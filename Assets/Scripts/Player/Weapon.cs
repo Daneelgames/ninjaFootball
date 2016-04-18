@@ -139,11 +139,11 @@ public class Weapon : MonoBehaviour {
         }
     }
 
-    void OnCollisionEnter2D(Collision2D coll)
+    void OnTriggerEnter2D(Collider2D coll)
     {
-        if (coll.gameObject.tag == "PlayerAmmoDrop")
+        if (coll.tag == "PlayerAmmoDrop")
         {
-            int exp = coll.gameObject.GetComponent<DropExpController>().amount;
+            int exp = coll.GetComponent<DropExpController>().amount;
             weaponLevel[activeWeapon] += exp;
             feedbackController.GetExp(exp);
             SetWeaponLevel();

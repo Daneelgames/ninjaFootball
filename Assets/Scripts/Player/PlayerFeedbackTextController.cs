@@ -63,6 +63,18 @@ public class PlayerFeedbackTextController : MonoBehaviour {
         _text.color = new Color(255, 0, 0);
         yield return new WaitForSeconds(.5F);
         _text.color = new Color(255, 174, 0);
+        yield return new WaitForSeconds(.5F);
+        _text.color = new Color(255, 0, 0);
+        yield return new WaitForSeconds(.5F);
+        _text.color = new Color(255, 174, 0);
+        yield return new WaitForSeconds(.5F);
+        _text.color = new Color(255, 0, 0);
+        yield return new WaitForSeconds(.5F);
+        _text.color = new Color(255, 174, 0);
+        yield return new WaitForSeconds(.5F);
+        _text.color = new Color(255, 0, 0);
+        yield return new WaitForSeconds(.5F);
+        _text.color = new Color(255, 174, 0);
 
         getWeapon = false;
     }
