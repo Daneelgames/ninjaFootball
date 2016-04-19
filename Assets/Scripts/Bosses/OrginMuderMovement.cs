@@ -196,7 +196,7 @@ public class OrginMuderMovement : MonoBehaviour {
 
     IEnumerator GiveNewWeapon()
     {
-        yield return new WaitForSeconds(3F);
+        yield return new WaitForSeconds(2F);
         Weapon playerWeapon = GameObject.Find("Player").GetComponent<Weapon>() as Weapon;
         playerWeapon.GetNewWeapon("MUDERSWORD");
     }
