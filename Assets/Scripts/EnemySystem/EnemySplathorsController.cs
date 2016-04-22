@@ -28,7 +28,7 @@ public class EnemySplathorsController : MonoBehaviour {
         door1.SetActive(false);
         door2 = GameObject.Find("SplathorsDoor_2"); 
         door2.SetActive(false);
-        spawner = GameObject.Find("EnemySpawner Splathhors");
+        spawner = GameObject.Find("EnemySpawnerSplathhors");
     }
 	
 	// Update is called once per frame

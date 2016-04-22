@@ -186,6 +186,11 @@ public class OrginMuderMovement : MonoBehaviour {
         if (!dead)
         {
             Instantiate(darkCang2, darkCangPosition, transform.rotation);
+            GameObject spawner = GameObject.Find("OrginMuderSpawner");
+
+            if (spawner != null)
+                Destroy(spawner);
+
             _audioSource.clip = victoryTheme;
             _audioSource.Play();
             dead = true;
