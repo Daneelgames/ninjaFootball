@@ -46,7 +46,10 @@ public class GameManager : MonoBehaviour {
     void FindCamera()
     {
         if (canvas.worldCamera == null)
+        {
             canvas.worldCamera = GameObject.Find("RenderCamera").GetComponent<Camera>();
+            canvas.planeDistance = 1;
+        }
     }
 
 	void Update ()

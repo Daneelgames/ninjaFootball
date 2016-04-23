@@ -1,0 +1,139 @@
+fileFormatVersion: 2
+guid: efe0d51e259c23640a59213d5ed5d004
+timeCreated: 1461407311
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Bush1
+    21300002: Bush2
+    21300004: Bush3
+    21300006: Bush4
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 25
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Bush1
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 179
+        width: 90
+        height: 66
+      alignment: 9
+      pivot: {x: 0.4690905, y: 0.10485054}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -11.218143, y: 59.079865}
+        - {x: -20.218143, y: 54.079865}
+        - {x: -22.218143, y: 52.079865}
+        - {x: -28.218143, y: 54.079865}
+        - {x: -34.218143, y: 52.079865}
+        - {x: -42.218143, y: 48.079865}
+        - {x: -42.218143, y: -6.9201355}
+        - {x: 47.781857, y: -6.9201355}
+        - {x: 47.781857, y: 26.079865}
+        - {x: 30.781857, y: 59.079865}
+    - name: Bush2
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 177
+        width: 122
+        height: 66
+      alignment: 9
+      pivot: {x: 0.48004812, y: 0.110119216}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 16.434128, y: 58.732132}
+        - {x: -53.565872, y: 58.732132}
+        - {x: -58.565872, y: 44.732132}
+        - {x: -58.565872, y: 4.732132}
+        - {x: -56.565872, y: -1.267868}
+        - {x: -32.565872, y: -7.267868}
+        - {x: 55.434128, y: -7.267868}
+        - {x: 63.434128, y: -2.267868}
+        - {x: 63.434128, y: 34.732132}
+    - name: Bush3
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 5
+        width: 101
+        height: 68
+      alignment: 9
+      pivot: {x: 0.48622847, y: 0.13692729}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -43.109074, y: 58.688942}
+        - {x: -49.109074, y: 44.688942}
+        - {x: -49.109074, y: -9.311056}
+        - {x: 44.890926, y: -9.311056}
+        - {x: 51.890926, y: -5.311056}
+        - {x: 51.890926, y: 24.688944}
+        - {x: 22.890926, y: 58.688942}
+    - name: Bush4
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 0
+        width: 124
+        height: 121
+      alignment: 9
+      pivot: {x: 0.5084129, y: 0.112034954}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -59.043198, y: 107.44377}
+        - {x: -63.043198, y: 106.44377}
+        - {x: -63.043198, y: -13.556229}
+        - {x: 60.956802, y: -13.556229}
+        - {x: 60.956802, y: 49.44377}
+        - {x: 56.956802, y: 71.44377}
+        - {x: 28.956802, y: 96.44377}
+        - {x: 13.956802, y: 107.44377}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
