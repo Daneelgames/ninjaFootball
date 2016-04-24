@@ -63,7 +63,14 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
+      outline:
+      - - {x: -29.5, y: 31}
+        - {x: -29.5, y: -22}
+        - {x: -15.5, y: -31}
+        - {x: 11.5, y: -31}
+        - {x: 13.5, y: -30}
+        - {x: 29.5, y: -17}
+        - {x: 29.5, y: 31}
     - name: laugh
       rect:
         serializedVersion: 2
@@ -74,7 +81,13 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
+      outline:
+      - - {x: -29, y: 32.5}
+        - {x: -29, y: -26.5}
+        - {x: -14, y: -32.5}
+        - {x: 21, y: -32.5}
+        - {x: 29, y: -19.5}
+        - {x: 29, y: 32.5}
     - name: horny
       rect:
         serializedVersion: 2
@@ -85,9 +98,16 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
+      outline:
+      - - {x: -27, y: 31}
+        - {x: -29, y: 29}
+        - {x: -29, y: -27}
+        - {x: -21, y: -31}
+        - {x: 27, y: -31}
+        - {x: 29, y: -28}
+        - {x: 29, y: 31}
     outline: []
-  spritePackingTag: Sprites
+  spritePackingTag: SpritesCharacters
   userData: 
   assetBundleName: 
   assetBundleVariant: 

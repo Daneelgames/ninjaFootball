@@ -181,6 +181,7 @@
     <Compile Include="Assets\Scripts\Weapons\Shotgun.cs" />
     <Compile Include="Assets\Scripts\Weapons\TimeBomb.cs" />
     <Compile Include="Assets\Scripts\Weapons\WeaponLevelController.cs" />
+    <Compile Include="Assets\SetAnimBoolOnStart.cs" />
     <Compile Include="Assets\SetSpriteRandomOrderInLayer.cs" />
   </ItemGroup>
   <ItemGroup>

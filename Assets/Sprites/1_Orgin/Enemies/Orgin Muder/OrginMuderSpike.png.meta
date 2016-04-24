@@ -37,7 +37,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   rGBM: 0
-  compressionQuality: 50
+  compressionQuality: -1
   allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
@@ -63,7 +63,7 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     outline: []
-  spritePackingTag: Sprites
+  spritePackingTag: SpritesEnemies
   userData: 
   assetBundleName: 
   assetBundleVariant: 

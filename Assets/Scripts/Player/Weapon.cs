@@ -33,10 +33,15 @@ public class Weapon : MonoBehaviour {
 
     private WeaponLevelController activeWeaponLevelController;
 
+    private float expFeedbackCooldownMax = 0.1f;
+    private float expFeedbackCooldownCur = 0.5f;
+
     // Use this for initialization
     void Start ()
     {
         activeWeaponIcon = GameObject.Find("WeaponIcon").GetComponent<Image>();
+
+        expFeedbackCooldownCur = expFeedbackCooldownMax;
 
         lvl1 = GameObject.Find("Lvl1WeaponBar").GetComponent<WeaponLevelUIController>();
         lvl2 = GameObject.Find("Lvl2WeaponBar").GetComponent<WeaponLevelUIController>();
@@ -71,6 +76,9 @@ public class Weapon : MonoBehaviour {
         {
             Shooting();
             ChangeWeapon();
+
+            if (expFeedbackCooldownCur > 0)
+                expFeedbackCooldownCur -= 1 * Time.deltaTime;
         }
     }
 
@@ -141,13 +149,24 @@ public class Weapon : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        if (coll.tag == "PlayerAmmoDrop")
+        GetExp(coll);
+    }
+
+    void OnTriggerStay2D(Collider2D coll)
+    {
+        GetExp(coll);
+    }
+
+    void GetExp(Collider2D coll)
+    {
+        if (coll.tag == "PlayerAmmoDrop" && expFeedbackCooldownCur <= 0)
         {
             int exp = coll.GetComponent<DropExpController>().amount;
             weaponLevel[activeWeapon] += exp;
             feedbackController.GetExp(exp);
             SetWeaponLevel();
-            
+
+            expFeedbackCooldownCur = expFeedbackCooldownMax;
             Destroy(coll.gameObject);
             playerSound.PlaySound(4);
             canvasAnimator.SetTrigger("GetExp");
