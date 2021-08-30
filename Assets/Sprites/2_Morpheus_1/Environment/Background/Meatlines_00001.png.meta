@@ -1,22 +1,33 @@
 fileFormatVersion: 2
 guid: 91af6bacc73252a449921a0756b19fe1
-timeCreated: 1461485913
-licenseType: Free
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Meatlines_00001_0
-    21300002: Meatlines_00001_1
-    21300004: Meatlines_00001_2
-    21300006: Meatlines_00001_4
-    21300008: Meatlines_00001_3
-  serializedVersion: 2
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: Meatlines_00001_0
+  - first:
+      213: 21300002
+    second: Meatlines_00001_1
+  - first:
+      213: 21300004
+    second: Meatlines_00001_2
+  - first:
+      213: 21300006
+    second: Meatlines_00001_4
+  - first:
+      213: 21300008
+    second: Meatlines_00001_3
+  externalObjects: {}
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
+    sRGBTexture: 1
     linearTexture: 0
-    correctGamma: 0
     fadeOut: 0
     borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
     mipMapFadeDistanceStart: 1
     mipMapFadeDistanceEnd: 3
   bumpmap:
@@ -25,37 +36,65 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
   grayScaleToAlpha: 0
-  generateCubemap: 0
+  generateCubemap: 6
   cubemapConvolution: 0
-  cubemapConvolutionSteps: 7
-  cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -1
   maxTextureSize: 2048
   textureSettings:
+    serializedVersion: 2
     filterMode: 0
     aniso: 16
-    mipBias: -1
-    wrapMode: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
-  rGBM: 0
   compressionQuality: 50
-  allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 25
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
   alphaIsTransparency: 1
+  spriteTessellationDetail: -1
   textureType: 8
-  buildTargetSettings: []
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
+    serializedVersion: 2
     sprites:
-    - name: Meatlines_00001_0
+    - serializedVersion: 2
+      name: Meatlines_00001_0
       rect:
         serializedVersion: 2
         x: 7
@@ -65,29 +104,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 29, y: 10.5}
-        - {x: 30, y: 1.5}
-        - {x: 34, y: -2.5}
-        - {x: 36, y: -3.5}
-        - {x: 42, y: 11.5}
-        - {x: 42, y: 37.5}
-        - {x: -40, y: 37.5}
-        - {x: -42, y: 35.5}
-        - {x: -42, y: -36.5}
-        - {x: -39, y: -37.5}
-        - {x: -27, y: -37.5}
-        - {x: -24, y: -32.5}
-        - {x: -25, y: -30.5}
-        - {x: -21, y: -26.5}
-        - {x: -21, y: -24.5}
-        - {x: -22, y: -32.5}
-        - {x: -22, y: -37.5}
-        - {x: -16, y: -37.5}
-        - {x: -14, y: -36.5}
-        - {x: 14, y: -8.5}
-        - {x: 28, y: 7.5}
-    - name: Meatlines_00001_1
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02305410000000000800000000000000
+      internalID: 21300000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Meatlines_00001_1
       rect:
         serializedVersion: 2
         x: 10
@@ -97,23 +125,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -18, y: -28.5}
-        - {x: -21, y: -28.5}
-        - {x: -27, y: -24.5}
-        - {x: -25, y: -21.5}
-        - {x: -25, y: -19.5}
-        - {x: -22, y: -26.5}
-        - {x: -19, y: -28.5}
-        - {x: -10, y: -23.5}
-        - {x: -43, y: 73.5}
-        - {x: -53, y: 73.5}
-        - {x: -53, y: -43.5}
-        - {x: -51, y: -73.5}
-        - {x: 53, y: -73.5}
-        - {x: 53, y: -58.5}
-        - {x: -9, y: -24.5}
-    - name: Meatlines_00001_2
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22305410000000000800000000000000
+      internalID: 21300002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Meatlines_00001_2
       rect:
         serializedVersion: 2
         x: 81
@@ -123,14 +146,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -84.5, y: 21}
-        - {x: -84.5, y: 11}
-        - {x: -32.5, y: -21}
-        - {x: 55.5, y: -21}
-        - {x: 84.5, y: -14}
-        - {x: 84.5, y: 21}
-    - name: Meatlines_00001_3
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42305410000000000800000000000000
+      internalID: 21300004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Meatlines_00001_3
       rect:
         serializedVersion: 2
         x: 132
@@ -140,49 +167,29 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 16, y: -10}
-        - {x: 18, y: -8}
-        - {x: 18, y: -11}
-        - {x: 19, y: -12}
-        - {x: 19, y: -23}
-        - {x: 18, y: -36}
-        - {x: 27, y: -58}
-        - {x: 32, y: -52}
-        - {x: 26, y: -10}
-        - {x: 24, y: -10}
-        - {x: 24, y: -4}
-        - {x: 22, y: -1}
-        - {x: 23, y: 7}
-        - {x: 23, y: 18}
-        - {x: 23, y: 5}
-        - {x: 24, y: 0}
-        - {x: 24, y: -5}
-        - {x: 28, y: -10}
-        - {x: 29, y: -10}
-        - {x: 33, y: -8}
-        - {x: 53, y: 46}
-        - {x: 53, y: 58}
-        - {x: -53, y: 58}
-        - {x: -53, y: 37}
-        - {x: -8, y: -42}
-        - {x: -1, y: -43}
-        - {x: 1, y: -41}
-        - {x: 3, y: -31}
-        - {x: 10, y: -17}
-        - {x: 10, y: -8}
-        - {x: 11, y: -7}
-        - {x: 10, y: -15}
-        - {x: 10, y: -23}
-        - {x: 7, y: -28}
-        - {x: 4, y: -54}
-        - {x: 6, y: -58}
-        - {x: 12, y: -58}
-        - {x: 15, y: -56}
-        - {x: 19, y: -16}
-        - {x: 19, y: -15}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82305410000000000800000000000000
+      internalID: 21300008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
   spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

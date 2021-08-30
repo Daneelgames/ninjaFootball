@@ -1,31 +1,60 @@
 fileFormatVersion: 2
 guid: d70af0efa4f9bbf4cbcb81f0e3ab1dbf
-timeCreated: 1455451161
-licenseType: Free
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: RedSoilProps_2_00001_0
-    21300002: RedSoilProps_2_00001_1
-    21300004: RedSoilProps_2_00001_2
-    21300006: RedSoilProps_2_00001_3
-    21300008: RedSoilProps_2_00001_4
-    21300010: RedSoilProps_2_00001_5
-    21300012: RedSoilProps_2_00001_6
-    21300014: RedSoilProps_2_00001_7
-    21300016: RedSoilProps_2_00001_8
-    21300018: RedSoilProps_2_00001_9
-    21300020: RedSoilProps_2_00001_10
-    21300022: RedSoilProps_2_00001_11
-    21300024: RedSoilProps_2_00001_12
-    21300026: RedSoilProps_2_00001_13
-  serializedVersion: 2
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: RedSoilProps_2_00001_0
+  - first:
+      213: 21300002
+    second: RedSoilProps_2_00001_1
+  - first:
+      213: 21300004
+    second: RedSoilProps_2_00001_2
+  - first:
+      213: 21300006
+    second: RedSoilProps_2_00001_3
+  - first:
+      213: 21300008
+    second: RedSoilProps_2_00001_4
+  - first:
+      213: 21300010
+    second: RedSoilProps_2_00001_5
+  - first:
+      213: 21300012
+    second: RedSoilProps_2_00001_6
+  - first:
+      213: 21300014
+    second: RedSoilProps_2_00001_7
+  - first:
+      213: 21300016
+    second: RedSoilProps_2_00001_8
+  - first:
+      213: 21300018
+    second: RedSoilProps_2_00001_9
+  - first:
+      213: 21300020
+    second: RedSoilProps_2_00001_10
+  - first:
+      213: 21300022
+    second: RedSoilProps_2_00001_11
+  - first:
+      213: 21300024
+    second: RedSoilProps_2_00001_12
+  - first:
+      213: 21300026
+    second: RedSoilProps_2_00001_13
+  externalObjects: {}
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
+    sRGBTexture: 1
     linearTexture: 0
-    correctGamma: 0
     fadeOut: 0
     borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
     mipMapFadeDistanceStart: 1
     mipMapFadeDistanceEnd: 3
   bumpmap:
@@ -34,37 +63,65 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
   grayScaleToAlpha: 0
-  generateCubemap: 0
+  generateCubemap: 6
   cubemapConvolution: 0
-  cubemapConvolutionSteps: 7
-  cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -2
   maxTextureSize: 512
   textureSettings:
+    serializedVersion: 2
     filterMode: 0
     aniso: 16
-    mipBias: -1
-    wrapMode: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
-  rGBM: 0
   compressionQuality: 50
-  allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 50
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
   alphaIsTransparency: 1
+  spriteTessellationDetail: -1
   textureType: 8
-  buildTargetSettings: []
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
+    serializedVersion: 2
     sprites:
-    - name: RedSoilProps_2_00001_0
+    - serializedVersion: 2
+      name: RedSoilProps_2_00001_0
       rect:
         serializedVersion: 2
         x: 7
@@ -74,21 +131,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -9.5, y: 16}
-        - {x: -21.5, y: 2}
-        - {x: -21.5, y: -15}
-        - {x: -20.5, y: -17}
-        - {x: 13.5, y: -17}
-        - {x: 21.5, y: -15}
-        - {x: 21.5, y: -4}
-        - {x: 5.5, y: 16}
-      - - {x: 5.5, y: 7}
-        - {x: 8.5, y: 8}
-        - {x: 9.5, y: 17}
-        - {x: 4.5, y: 17}
-        - {x: 3.5, y: 9}
-    - name: RedSoilProps_2_00001_1
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02305410000000000800000000000000
+      internalID: 21300000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedSoilProps_2_00001_1
       rect:
         serializedVersion: 2
         x: 59
@@ -98,16 +152,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -17.5, y: 21}
-        - {x: -26.5, y: 2}
-        - {x: -26.5, y: -15}
-        - {x: -9.5, y: -21}
-        - {x: 17.5, y: -21}
-        - {x: 26.5, y: -13}
-        - {x: 26.5, y: 10}
-        - {x: 15.5, y: 21}
-    - name: RedSoilProps_2_00001_2
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22305410000000000800000000000000
+      internalID: 21300002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedSoilProps_2_00001_2
       rect:
         serializedVersion: 2
         x: 8
@@ -118,7 +174,17 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: RedSoilProps_2_00001_3
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42305410000000000800000000000000
+      internalID: 21300004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedSoilProps_2_00001_3
       rect:
         serializedVersion: 2
         x: 38
@@ -129,7 +195,17 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: RedSoilProps_2_00001_4
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62305410000000000800000000000000
+      internalID: 21300006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedSoilProps_2_00001_4
       rect:
         serializedVersion: 2
         x: 72
@@ -140,7 +216,17 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: RedSoilProps_2_00001_5
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82305410000000000800000000000000
+      internalID: 21300008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedSoilProps_2_00001_5
       rect:
         serializedVersion: 2
         x: 110
@@ -151,7 +237,17 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: RedSoilProps_2_00001_6
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2305410000000000800000000000000
+      internalID: 21300010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedSoilProps_2_00001_6
       rect:
         serializedVersion: 2
         x: 14
@@ -162,7 +258,17 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: RedSoilProps_2_00001_7
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2305410000000000800000000000000
+      internalID: 21300012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedSoilProps_2_00001_7
       rect:
         serializedVersion: 2
         x: 41
@@ -173,7 +279,17 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: RedSoilProps_2_00001_8
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2305410000000000800000000000000
+      internalID: 21300014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedSoilProps_2_00001_8
       rect:
         serializedVersion: 2
         x: 60
@@ -184,7 +300,17 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: RedSoilProps_2_00001_9
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03305410000000000800000000000000
+      internalID: 21300016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedSoilProps_2_00001_9
       rect:
         serializedVersion: 2
         x: 102
@@ -195,7 +321,17 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: RedSoilProps_2_00001_10
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23305410000000000800000000000000
+      internalID: 21300018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedSoilProps_2_00001_10
       rect:
         serializedVersion: 2
         x: 16
@@ -206,7 +342,17 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: RedSoilProps_2_00001_11
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43305410000000000800000000000000
+      internalID: 21300020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedSoilProps_2_00001_11
       rect:
         serializedVersion: 2
         x: 38
@@ -217,7 +363,17 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: RedSoilProps_2_00001_12
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63305410000000000800000000000000
+      internalID: 21300022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedSoilProps_2_00001_12
       rect:
         serializedVersion: 2
         x: 68
@@ -228,7 +384,17 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: RedSoilProps_2_00001_13
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83305410000000000800000000000000
+      internalID: 21300024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedSoilProps_2_00001_13
       rect:
         serializedVersion: 2
         x: 12
@@ -239,8 +405,28 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3305410000000000800000000000000
+      internalID: 21300026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
   spritePackingTag: Sprites
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
